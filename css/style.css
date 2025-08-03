@@ -843,3 +843,434 @@ nav.nav2:hover {
     justify-content: center;
     flex-direction: column;
 }
+.loader h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-top: 20px
+}
+
+.batareya {
+    width: 25px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.bat {
+    width: 100px;
+    height: 200px;
+    border: 1px solid white;
+    border-radius: 5px;
+    position: relative;
+}
+
+.bat::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100px;
+    height: 200px;
+    border-radius: 5px;
+    animation: zar 2s linear infinite;
+}
+
+@keyframes zar {
+    0% {
+        height: 0;
+        background: red;
+    }
+
+    100% {
+        height: 200px;
+        background: var(--green-y);
+    }
+}
+
+.web {
+    display: none;
+}
+
+.button {
+    width: 120px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin: 20px 10px 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 5px 5px 5px rgb(147, 147, 147);
+}
+
+.button:hover {
+    box-shadow: none;
+}
+
+.N1 {
+    background: #000;
+    color: #fff;
+}
+
+.addButton {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.4s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.addButton:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.iconBox {
+    width: 60px;
+    height: 60px;
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blackBg {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    opacity: 0;
+    transition: 0.5s;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+.addBox {
+    width: 600px;
+    padding-top: 30px;
+    min-height: 400px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 7px 7px rgba(137, 137, 137, 0.622) inset;
+}
+
+.Tinp {
+    width: 90%;
+    height: 30px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 3px 3px rgba(137, 137, 137, 0.622) inset;
+    border-radius: 5px;
+    padding: 7px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Tarea {
+    width: 90%;
+    height: 150px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 3px 3px rgba(137, 137, 137, 0.622) inset;
+    border-radius: 5px;
+    padding: 7px;
+    resize: none;
+}
+
+.addb {
+    width: 150px;
+    height: 50px;
+    background: #000;
+    color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addc {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.addc img {
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    transition: 0.5s ease;
+}
+
+.addc:hover img {
+    background: rgb(0, 0, 255);
+    border-radius: 50%;
+}
+
+.containerd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 550px;
+}
+
+.aboutDev {
+    overflow: hidden;
+    height: 550px;
+    background: #152052;
+}
+
+.ssppaann {
+    position: absolute;
+    background: #F00;
+    width: 5px;
+    height: 5px;
+    animation: ee3 2s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes ee3 {
+    0% {
+        background: #F00;
+    }
+
+    25% {
+        background: #00ff00;
+    }
+
+    50% {
+        background: rgb(0, 0, 255);
+    }
+
+    75% {
+        background: rgb(255, 255, 255);
+    }
+
+    100% {
+        background: yellow;
+    }
+}
+
+/* .ssppaann::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    animation: movessppaann 2s linear infinite;
+}
+.ssppaann::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    animation: movesspaann 2s linear infinite;
+} */
+
+@keyframes movesspaann {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(-300px);
+    }
+}
+
+@keyframes movessppaann {
+    0% {
+        transform: translate(0);
+    }
+
+    100% {
+        transform: translate(300px);
+    }
+}
+
+.devBox {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background: rgb(0, 0, 0, 0.5);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.devBox::before {
+    content: '';
+    position: absolute;
+    inset: -10px 140px;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    transition: 0.4s;
+    animation: mww 4s linear infinite;
+}
+
+.devBox:hover::before {
+    inset: -20px 0px;
+}
+
+@keyframes mww {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.devBox::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    background: #152052;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.devContent {
+    position: absolute;
+    inset: 30px;
+    border: 6px solid #070a1c;
+    z-index: 3;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.asdfg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.devBox:hover .asdfg {
+    opacity: 0;
+}
+
+.devContent h2 {
+    position: relative;
+    font-size: 1.5em;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.devContent h2 span {
+    font-weight: 300;
+    font-size: 0.75em;
+}
+
+.alar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.alar a img {
+    width: 60px;
+    height: 60px;
+    color: #fff;
+}
+
+.alar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFCC70;
+    border-bottom-left-radius: 40px;
+    border-top-left-radius: 40px;
+    width: 200px;
+    height: 70px;
+}
+
+.calll img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+.dawdawd {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.formDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.sfkjndgb {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.teleg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFCC70;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    width: 200px;
+    height: 70px;
+}
+
+.teleg img {
+    width: 40px;
+    height: 40px;
+    margin-left: 25px;
+}
