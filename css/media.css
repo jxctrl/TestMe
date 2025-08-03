@@ -1,0 +1,310 @@
+/*
+
+0px - 576px -> phone
+576px - 768px -> tab
+768px - 992px -> desktop
+992px - 1200px -> lg-desktop
+1200px - ... -> normal style
+
+*/
+
+@media(max-width: 1200px) {
+    .container-sc2 img {
+        width: 600px;
+        margin-top: 40px;
+    }
+}
+
+@media(max-width: 1050px) {
+    .nav_link {
+        font-size: 18px;
+    }
+
+    .header_title {
+        font-size: 58px;
+    }
+}
+
+@media(max-width: 1010px) {
+    .test_bosh{
+        margin-top: 14%;
+    }
+    .dawdawd, .sfkjndgb{
+        display: none;
+    }
+    .container-sc2 img {
+        width: 500px;
+        margin-top: 30px;
+    }
+
+    .nav_link {
+        font-size: 17px;
+    }
+
+    .nav_list li {
+        padding: 10px;
+    }
+
+    .nav {
+        padding: 15px 80px;
+    }
+
+    nav.nav2 {
+        background: var(--red);
+        padding: 8px 80px;
+    }
+
+    nav.nav3 {
+        background: var(--blue);
+        padding: 8px 80px;
+    }
+
+    nav.nav4 {
+        background: yellowgreen;
+        padding: 8px 80px;
+    }
+
+    .header_title {
+        font-size: 55px;
+    }
+
+    .about h3 {
+        font-size: 50px;
+    }
+
+}
+
+@media(max-width: 880px) {
+    .nav_list {
+        display: none;
+    }
+
+    .menuBtn {
+        background: url('../images/menu.png') no-repeat center / cover;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        transition: 0.5s ease;
+    }
+
+    .menuBtn.active {
+        z-index: 999;
+        filter: invert(1);
+        transition: 0.5s ease;
+        background: url('../images/cancel.png') no-repeat center / cover;
+    }
+
+    .nav_list.active {
+        z-index: 888;
+        position: fixed;
+        background: #fff;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 100%;
+        display: flex;
+        transition: 0.5s ease;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-shadow: 0 5px 25px rgb(0, 0, 0);
+    }
+
+    .nav_link {
+        color: black;
+        font-size: 22px;
+    }
+
+    .nav_list li {
+        margin: 20px;
+    }
+
+    .sign {
+        margin-top: 30px;
+    }
+
+    .container-sc2 img {
+        display: none;
+    }
+    .section-3{
+        background: #00fbff;
+    }
+}
+
+@media(max-width: 670px) {
+    .asdfg{
+        display: none;
+        opacity: 0;
+    }
+    .topBox{
+        display: none;
+        opacity: 0;
+    }
+    .web{
+        display: none;
+    }
+    .oq {
+        width: 70%;
+    }
+
+    .nav {
+        padding: 15px 70px;
+    }
+
+    .nav.nav2 {
+        padding: 10px 70px;
+    }
+
+    .test_bosh {
+        margin-top: 40%;
+    }
+
+    .top_cards,
+    .bot_cards {
+        flex-direction: column;
+    }
+
+    .container-32 {
+        display: none;
+    }
+
+    .copy {
+        display: flex;
+    }
+
+    .inp_name input, .inp_emails input, .mas textarea {
+        width: 300px;
+    }
+    .addButton{
+        margin-bottom: 40px;
+    }
+}
+
+@media(max-width: 450px) {
+
+    .alar a{
+        width: 40px;
+        height: 40px;
+    }
+
+    .alar a img {
+        width: 40px;
+        height: 40px;
+        color: #fff;
+    }
+    
+
+    .devBox{
+        width: 300px;
+        height: 300px;
+    }
+
+    .devContent h2{
+        font-size: 1em;
+    }
+
+    .nav {
+        padding: 15px 60px;
+    }
+
+    .nav.nav2 {
+        padding: 10px 60px;
+    }
+
+    .header_title {
+        font-size: 45px;
+    }
+
+    .submit_button {
+        width: 240px;
+        height: 60px;
+    }
+    .minSSS{
+        width: 235px;
+        height: 55px;
+    }
+
+    .button_link {
+        font-size: 20px;
+    }
+}
+
+@media(max-width: 360px) {
+    .oq {
+        width: 85%;
+    }
+
+    .conta_title {
+        font-size: 20px;
+    }
+
+    .logo h2 {
+        font-size: 20px;
+    }
+
+    .nav {
+        padding: 15px 40px;
+    }
+
+    .nav.nav2 {
+        padding: 10px 40px;
+    }
+
+    .about h3 {
+        font-size: 40px;
+    }
+
+    .section-2 {
+        display: none;
+    }
+
+    .main_card {
+        width: 270px;
+        min-height: 550px;
+        margin: 20px;
+    }
+
+}
+
+@media(max-width: 310px) {
+    .main_card {
+        width: 250px;
+        min-height: 400px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main_card img {
+        display: none;
+    }
+
+    .section-3 {
+        display: none;
+    }
+
+    .buttonslar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .submit-btn {
+        margin: 0 0 20px 0;
+    }
+
+    .header_title {
+        font-size: 35px;
+    }
+
+    .submit_buttond {
+        width: 200px;
+        height: 40px;
+    }
+
+    .quiz_title {
+        font-size: 24px;
+    }
+}
