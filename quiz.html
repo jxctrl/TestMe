@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestMe — Quiz</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+</head>
+<body style="display:flex; flex-direction:column; min-height:100vh;">
+
+<header class="quiz-header">
+  <a href="index.html" class="nav-logo">Test<span>Me</span></a>
+  <div class="header-right">
+    <span class="subject-badge" id="subjectBadge">Select Subject</span>
+    <a href="index.html" class="back-btn">← Back</a>
+  </div>
+</header>
+
+<main class="quiz-main">
+  <div class="quiz-container">
+
+    <!-- Subject selector -->
+    <div class="subject-select" id="subjectSelect">
+      <h1>Choose a subject.</h1>
+      <p>Pick a topic and start immediately.</p>
+      <div class="subject-pills">
+        <div class="subject-pill" onclick="startQuiz('mathematics')">📐 Mathematics</div>
+        <div class="subject-pill" onclick="startQuiz('english')">📖 English</div>
+        <div class="subject-pill" onclick="startQuiz('science')">🔬 Natural Science</div>
+        <div class="subject-pill" onclick="startQuiz('history')">🏛️ History</div>
+        <div class="subject-pill" onclick="startQuiz('geography')">🌍 Geography</div>
+        <div class="subject-pill" onclick="startQuiz('cs')">💻 Computer Science</div>
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quizArea" style="display:none">
+      <div class="progress-text">
+        <span id="questionCounter">Question 1 of 10</span>
+        <span id="scoreCounter">Score: 0</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:10%"></div>
+      </div>
+      <div class="question-card" id="questionCard">
+        <div class="question-num" id="questionNum">Question 01</div>
+        <div class="question-text" id="questionText"></div>
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+    </div>
+
+    <!-- Result -->
+    <div class="result-screen" id="resultScreen">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-label" id="resultLabel"></div>
+      <div class="result-grade" id="resultGrade"></div>
+      <div class="result-actions">
+        <button class="result-btn primary" onclick="restartQuiz()">Try Again</button>
+        <a href="index.html" class="result-btn secondary">Back to Home</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="./js/quiz.js"></script>
+</body>
+</html>
