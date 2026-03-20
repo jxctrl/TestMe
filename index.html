@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/media.css">
+  <script src="./js/lang.js"></script>
 </head>
 <body>
 
@@ -17,21 +18,24 @@
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#home">Home</a>
-  <a href="#subjects">Subjects</a>
-  <a href="#modes">Modes</a>
-  <a href="#contact">Contact</a>
+  <a href="#home" data-i18n="navHome">Home</a>
+  <a href="#subjects" data-i18n="navSubjects">Subjects</a>
+  <a href="#modes" data-i18n="navModes">Modes</a>
+  <a href="#contact" data-i18n="navContact">Contact</a>
 </div>
 
 <nav id="navbar">
   <a href="#home" class="nav-logo">Test<span>Me</span></a>
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#subjects">Subjects</a></li>
-    <li><a href="#modes">Modes</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#home" data-i18n="navHome">Home</a></li>
+    <li><a href="#subjects" data-i18n="navSubjects">Subjects</a></li>
+    <li><a href="#modes" data-i18n="navModes">Modes</a></li>
+    <li><a href="#contact" data-i18n="navContact">Contact</a></li>
   </ul>
-  <a href="#subjects" class="nav-cta">Start Test →</a>
+  <div>
+    <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+    <a href="#subjects" class="nav-cta" data-i18n="navCta">Start Test →</a>
+  </div>
   <div class="menu-btn" id="menuBtn">
     <span></span><span></span><span></span>
   </div>
@@ -39,25 +43,26 @@
 
 <section class="hero" id="home">
   <div class="hero-content">
-    <div class="hero-badge">Now with Competition Mode</div>
+    <div class="hero-badge" data-i18n="heroBadge">Now with Competition Mode</div>
+    <!-- <h1><span data-i18n="heroTitle1">Test your</span><br><em data-i18n="heroTitle2">knowledge.</em><br><span data-i18n="heroTitle3">Beat the clock.</span></h1> -->
     <h1>Test your<br><em>knowledge.</em><br>Beat the clock.</h1>
-    <p>Challenge yourself across subjects. Compete against the timer. Track your score. Built for students who want to actually prepare — not just feel like they are.</p>
+    <p data-i18n="heroDesc">Challenge yourself across subjects. Compete against the timer. Track your score. Built for students who want to actually prepare — not just feel like they are.</p>
     <div class="hero-actions">
-      <a href="#subjects" class="btn-primary">Start a Test →</a>
-      <a href="#modes" class="btn-secondary">View Modes</a>
+      <a href="#subjects" class="btn-primary" data-i18n="heroBtn1">Start a Test →</a>
+      <a href="#modes" class="btn-secondary" data-i18n="heroBtn2">View Modes</a>
     </div>
     <div class="hero-stats">
       <div>
         <div class="stat-num">10+</div>
-        <div class="stat-label">Subjects</div>
+        <div class="stat-label" data-i18n="heroStat1">Subjects</div>
       </div>
       <div>
         <div class="stat-num">30s</div>
-        <div class="stat-label">Per Question</div>
+        <div class="stat-label" data-i18n="heroStat2">Per Question</div>
       </div>
       <div>
         <div class="stat-num">Free</div>
-        <div class="stat-label">Always</div>
+        <div class="stat-label" data-i18n="heroStat3">Always</div>
       </div>
     </div>
   </div>
@@ -65,16 +70,61 @@
 
 <section class="section" id="subjects">
   <div class="section-header fade-in">
-    <div class="section-label">Subjects</div>
-    <h2 class="section-title">Pick your subject.<br>Start immediately.</h2>
+    <div class="section-label" data-i18n="subjectsLabel">Subjects</div>
+    <h2 class="section-title" data-i18n="subjectsTitle">Pick your subject.<br>Start immediately.</h2>
   </div>
   <div class="subjects-grid">
     <a href="quiz.html?subject=mathematics" class="subject-card fade-in">
       <span class="subject-icon">📐</span>
-      <div class="subject-name">Mathematics</div>
-      <div class="subject-desc">Numbers, structures, logic. From arithmetic to algebra — test your calculation speed.</div>
+      <div class="subject-name" data-i18n="subjectMath">Mathematics</div>
+      <div class="subject-desc" data-i18n="subjectMathDesc">Numbers, structures, logic. From arithmetic to algebra — test your calculation speed.</div>
       <div class="subject-meta">
-        <span class="subject-count">10 questions</span>
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
+        <div class="subject-arrow">→</div>
+      </div>
+    </a>
+    <a href="quiz.html?subject=english" class="subject-card fade-in">
+      <span class="subject-icon">📖</span>
+      <div class="subject-name" data-i18n="subjectEnglish">English</div>
+      <div class="subject-desc" data-i18n="subjectEnglishDesc">Grammar, vocabulary, comprehension. Strengthen your language foundation.</div>
+      <div class="subject-meta">
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
+        <div class="subject-arrow">→</div>
+      </div>
+    </a>
+    <a href="quiz.html?subject=science" class="subject-card fade-in">
+      <span class="subject-icon">🔬</span>
+      <div class="subject-name" data-i18n="subjectScience">Natural Science</div>
+      <div class="subject-desc" data-i18n="subjectScienceDesc">Biology, chemistry, physics fundamentals. Explore the natural world through questions.</div>
+      <div class="subject-meta">
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
+        <div class="subject-arrow">→</div>
+      </div>
+    </a>
+    <a href="quiz.html?subject=history" class="subject-card fade-in">
+      <span class="subject-icon">🏛️</span>
+      <div class="subject-name" data-i18n="subjectHistory">History</div>
+      <div class="subject-desc" data-i18n="subjectHistoryDesc">Key events, dates, figures. How well do you actually know the past?</div>
+      <div class="subject-meta">
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
+        <div class="subject-arrow">→</div>
+      </div>
+    </a>
+    <a href="quiz.html?subject=geography" class="subject-card fade-in">
+      <span class="subject-icon">🌍</span>
+      <div class="subject-name" data-i18n="subjectGeo">Geography</div>
+      <div class="subject-desc" data-i18n="subjectGeoDesc">Countries, capitals, physical features. Test your knowledge of the world.</div>
+      <div class="subject-meta">
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
+        <div class="subject-arrow">→</div>
+      </div>
+    </a>
+    <a href="quiz.html?subject=cs" class="subject-card fade-in">
+      <span class="subject-icon">💻</span>
+      <div class="subject-name" data-i18n="subjectCS">Computer Science</div>
+      <div class="subject-desc" data-i18n="subjectCSDesc">Algorithms, logic, fundamentals. For the next generation of developers.</div>
+      <div class="subject-meta">
+        <span class="subject-count" data-i18n="subjectQuestions">10 questions</span>
         <div class="subject-arrow">→</div>
       </div>
     </a>
@@ -83,22 +133,22 @@
 
 <section class="section modes-section" id="modes">
   <div class="section-header fade-in">
-    <div class="section-label">Game Modes</div>
-    <h2 class="section-title">Two ways to play.</h2>
+    <div class="section-label" data-i18n="modesLabel">Game Modes</div>
+    <h2 class="section-title" data-i18n="modesTitle">Two ways to play.</h2>
   </div>
   <div class="modes-grid">
     <a href="quiz.html" class="mode-card classic fade-in">
-      <div class="mode-tag">Classic</div>
-      <div class="mode-title">Practice Mode</div>
-      <div class="mode-desc">No timer pressure. Work through questions at your own pace. See correct answers immediately. Best for learning and revision.</div>
-      <div class="mode-btn">Start Practice →</div>
+      <div class="mode-tag" data-i18n="classicTag">Classic</div>
+      <div class="mode-title" data-i18n="classicTitle">Practice Mode</div>
+      <div class="mode-desc" data-i18n="classicDesc">No timer pressure. Work through questions at your own pace. See correct answers immediately. Best for learning and revision.</div>
+      <div class="mode-btn" data-i18n="classicBtn">Start Practice →</div>
       <div class="mode-decoration">📝</div>
     </a>
     <a href="competition.html" class="mode-card competition fade-in">
-      <div class="mode-tag">Competition</div>
-      <div class="mode-title">Speed Mode</div>
-      <div class="mode-desc">30 seconds per question. Points for correct answers. Score as high as you can before time runs out.</div>
-      <div class="mode-btn">Compete Now →</div>
+      <div class="mode-tag" data-i18n="compTag">Competition</div>
+      <div class="mode-title" data-i18n="compTitle">Speed Mode</div>
+      <div class="mode-desc" data-i18n="compDesc">10 seconds per question. Points for correct answers. Score as high as you can before time runs out.</div>
+      <div class="mode-btn" data-i18n="compBtn">Compete Now →</div>
       <div class="mode-decoration">⚡</div>
     </a>
   </div>
@@ -107,21 +157,21 @@
 <section class="section" id="contact">
   <div class="contact-grid">
     <div class="contact-info fade-in">
-      <div class="section-label">Contact</div>
-      <h2>Get in touch.</h2>
-      <p>Found a bug? Have a subject suggestion? Want to contribute questions? Reach out directly.</p>
+      <div class="section-label" data-i18n="contactLabel">Contact</div>
+      <h2 data-i18n="contactTitle">Get in touch.</h2>
+      <p data-i18n="contactDesc">Found a bug? Have a subject suggestion? Want to contribute questions? Reach out directly.</p>
       <div class="contact-links">
         <a href="https://t.me/jxctrl" target="_blank" class="contact-link">
           <div class="contact-link-icon">✈️</div>
-          Telegram — @jxctrl
+          <span>Telegram — @jxctrl</span>
         </a>
         <a href="mailto:dasturchisaidabror@gmail.com" class="contact-link">
           <div class="contact-link-icon">✉️</div>
-          dasturchisaidabror@gmail.com
+          <span>dasturchisaidabror@gmail.com</span>
         </a>
         <a href="https://github.com/jxctrl" target="_blank" class="contact-link">
           <div class="contact-link-icon">⬡</div>
-          GitHub — @jxctrl
+          <span>GitHub — @jxctrl</span>
         </a>
       </div>
     </div>
@@ -129,23 +179,23 @@
       <form class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group">
-            <label>First Name</label>
+            <label data-i18n="contactName">First Name</label>
             <input type="text" placeholder="John" required>
           </div>
           <div class="form-group">
-            <label>Last Name</label>
+            <label data-i18n="contactSurname">Last Name</label>
             <input type="text" placeholder="Doe" required>
           </div>
         </div>
         <div class="form-group">
-          <label>Email</label>
+          <label data-i18n="contactEmail">Email</label>
           <input type="email" placeholder="john@example.com" required>
         </div>
         <div class="form-group">
-          <label>Message</label>
+          <label data-i18n="contactMessage">Message</label>
           <textarea rows="5" placeholder="Your message..." required></textarea>
         </div>
-        <button type="submit" class="form-submit">Send Message</button>
+        <button type="submit" class="form-submit" data-i18n="contactSend">Send Message</button>
       </form>
     </div>
   </div>

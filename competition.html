@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestMe - Competition</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <script src="./js/lang.js"></script>
+</head>
+<body style="display:flex; flex-direction:column; min-height:100vh;">
+
+<header class="quiz-header">
+  <a href="index.html" class="nav-logo">Test<span>Me</span></a>
+  <div class="mode-badge">⚡ Competition</div>
+  <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">O'Z</button>
+  <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
+</header>
+
+<main class="quiz-main">
+  <div class="quiz-container">
+
+    <!-- Lobby -->
+    <div class="lobby" id="lobby">
+      <div class="lobby-icon">⚡</div>
+      <h1 data-i18n="compPageTitle">Speed <span>Mode</span></h1>
+      <p data-i18n="compDescLobby">10 seconds per question. Answer fast. Answer right. Your score is your rank.</p>
+      <div class="rules">
+        <div class="rule">
+          <div class="rule-icon" style="background:rgba(200,241,53,0.1)">✅</div>
+          <span data-i18n="compRule1">Correct answer: <strong>+1000 points</strong></span>
+        </div>
+        <div class="rule">
+          <div class="rule-icon" style="background:rgba(255,79,79,0.1)">❌</div>
+          <span data-i18n="compRule2">Wrong answer: <strong>0 points</strong></span>
+        </div>
+        <div class="rule">
+          <div class="rule-icon" style="background:rgba(255,180,0,0.1)">⏱️</div>
+          <span data-i18n="compRule3">Time runs out: auto-counted as wrong</span>
+        </div>
+        <div class="rule">
+          <div class="rule-icon" style="background:rgba(200,100,255,0.1)">🎯</div>
+          <span data-i18n="compRule4">10 questions, all subjects mixed</span>
+        </div>
+      </div>
+      <button class="start-btn" onclick="startCompetition()" data-i18n="startComp">Start Competition →</button>
+    </div>
+
+    <!-- Quiz Area -->
+    <div id="quizArea" style="display:none">
+      <div class="timer-row">
+        <div style="flex:1; margin-right:20px;">
+          <div class="timer-bar">
+            <div class="timer-fill" id="timerFill" style="width:100%"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px;">
+            <span class="timer-num" id="timerNum">10</span>
+            <span class="q-counter" id="qCounter">1/10</span>
+          </div>
+        </div>
+        <div class="score-display" data-i18n="scoreLabel">Score: <span id="liveScore">0</span></div>
+      </div>
+      <div class="question-card" id="questionCard">
+        <div class="question-text" id="questionText"></div>
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+
+    <!-- Result -->
+    <div class="result-screen" id="resultScreen">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-points" id="resultPoints"></div>
+      <div class="result-label" id="pointsEarnedLabel" data-i18n="pointsEarned">points earned</div>
+      <div class="result-breakdown">
+        <div class="breakdown-item">
+          <div class="breakdown-num" id="bdCorrect" style="color:var(--accent)">0</div>
+          <div class="breakdown-label" id="correctLabel" data-i18n="correctLabel">Correct</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-num" id="bdWrong" style="color:var(--danger)">0</div>
+          <div class="breakdown-label" id="wrongLabel" data-i18n="wrongLabel">Wrong</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-num" id="bdTime" style="color:#ffb400">0</div>
+          <div class="breakdown-label" id="timedOutLabel" data-i18n="timedOut">Timed Out</div>
+        </div>
+      </div>
+      <div class="result-grade" id="resultGrade"></div>
+      <div class="result-actions">
+        <button id="playAgainBtn" class="result-btn primary" onclick="startCompetition()" data-i18n="playAgain">Play Again</button>
+        <a id="backHomeBtnComp" href="index.html" class="result-btn secondary" data-i18n="backHome">Back to Home</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div class="flash" id="flash"></div>
+
+<script src="./js/competition.js"></script>
+</body>
+</html>

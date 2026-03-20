@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TestMe — Quiz</title>
+  <title>TestMe - Quiz</title>
   <link rel="icon" href="./favicon/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/quiz.css">
+  <script src="./js/lang.js"></script>
 </head>
 <body style="display:flex; flex-direction:column; min-height:100vh;">
 
 <header class="quiz-header">
   <a href="index.html" class="nav-logo">Test<span>Me</span></a>
   <div class="header-right">
-    <span class="subject-badge" id="subjectBadge">Select Subject</span>
-    <a href="index.html" class="back-btn">← Back</a>
+    <span class="subject-badge" id="subjectBadge" data-i18n="selectSubject">Select Subject</span>
+    <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">O'Z</button>
+    <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
   </div>
 </header>
 
@@ -25,15 +27,15 @@
 
     <!-- Subject selector -->
     <div class="subject-select" id="subjectSelect">
-      <h1>Choose a subject.</h1>
-      <p>Pick a topic and start immediately.</p>
+      <h1 data-i18n="selectSubject">Choose a subject.</h1>
+      <p data-i18n="selectSubjectSub">Pick a topic and start immediately.</p>
       <div class="subject-pills">
-        <div class="subject-pill" onclick="startQuiz('mathematics')">📐 Mathematics</div>
-        <div class="subject-pill" onclick="startQuiz('english')">📖 English</div>
-        <div class="subject-pill" onclick="startQuiz('science')">🔬 Natural Science</div>
-        <div class="subject-pill" onclick="startQuiz('history')">🏛️ History</div>
-        <div class="subject-pill" onclick="startQuiz('geography')">🌍 Geography</div>
-        <div class="subject-pill" onclick="startQuiz('cs')">💻 Computer Science</div>
+        <div class="subject-pill" onclick="startQuiz('mathematics')" data-i18n="badgeMath">📐 Mathematics</div>
+        <div class="subject-pill" onclick="startQuiz('english')" data-i18n="badgeEnglish">📖 English</div>
+        <div class="subject-pill" onclick="startQuiz('science')" data-i18n="badgeScience">🔬 Natural Science</div>
+        <div class="subject-pill" onclick="startQuiz('history')" data-i18n="badgeHistory">🏛️ History</div>
+        <div class="subject-pill" onclick="startQuiz('geography')" data-i18n="badgeGeo">🌍 Geography</div>
+        <div class="subject-pill" onclick="startQuiz('cs')" data-i18n="badgeCS">💻 Computer Science</div>
       </div>
     </div>
 
@@ -60,8 +62,8 @@
       <div class="result-label" id="resultLabel"></div>
       <div class="result-grade" id="resultGrade"></div>
       <div class="result-actions">
-        <button class="result-btn primary" onclick="restartQuiz()">Try Again</button>
-        <a href="index.html" class="result-btn secondary">Back to Home</a>
+        <button id="tryAgainBtn" class="result-btn primary" onclick="restartQuiz()" data-i18n="tryAgain">Try Again</button>
+        <a id="backHomeBtn" href="index.html" class="result-btn secondary" data-i18n="backHome">Back to Home</a>
       </div>
     </div>
 
