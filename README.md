@@ -1,55 +1,122 @@
-# QuizArena
+<div align="center">
 
-A browser-based quiz platform with practice and competitive modes.
+<h1>🎯 QuizArena</h1>
 
-## Overview
-QuizArena allows users to solve quizzes individually or compete in timed sessions. The current version focuses on frontend interaction, with a backend system in development.
+<p><strong>A bilingual quiz platform for students — built in English and Uzbek</strong></p>
 
-## Features (Current)
-- Multiple quiz pages
-- Question navigation system
-- Score tracking (client-side)
-- Responsive UI
+<p>
+  <img src="https://img.shields.io/badge/status-active-c8f135?style=flat-square"/>
+  <img src="https://img.shields.io/badge/frontend-complete-c8f135?style=flat-square"/>
+  <img src="https://img.shields.io/badge/backend-in%20progress-orange?style=flat-square"/>
+  <img src="https://img.shields.io/badge/languages-EN%20%2F%20UZ-4a9eff?style=flat-square"/>
+</p>
 
-## Planned Features
-- REST API (Python backend using FastAPI or Flask)
-- Database integration (PostgreSQL or SQLite)
-- User authentication (login/register)
-- Persistent scores and history
-- Real-time or timed competition mode
+</div>
+
+---
+
+## What is this
+
+QuizArena is a quiz platform I built for students preparing for exams. It started as a small project in 2022 and has been rebuilt several times since. The current version is the cleanest and most complete one.
+
+It runs fully in the browser with no backend yet. A Python/FastAPI backend with user accounts, a leaderboard, and an admin panel is in development for late 2026.
+
+---
+
+## Features
+
+**Practice Mode**
+- Choose from 6 subjects
+- Answer 10 questions at your own pace
+- Correct answers shown immediately after each question
+- Score summary at the end
+
+**Competition Mode**
+- 10 seconds per question
+- 1000 points per correct answer
+- Automatic timeout if you don't answer in time
+- Breakdown of correct, wrong, and timed-out answers at the end
+
+**Bilingual Support**
+- Full English and Uzbek language support
+- Language toggle on every page
+- Saves your language preference across sessions
+- Questions, UI, and results all translated
+
+---
+
+## Subjects
+
+| Subject | Questions | Languages |
+|---|---|---|
+| Mathematics | 10 | EN / UZ |
+| English | 10 | EN / UZ |
+| Natural Science | 10 | EN / UZ |
+| History | 10 | EN / UZ |
+| Geography | 10 | EN / UZ |
+| Computer Science | 10 | EN / UZ |
+
+---
 
 ## Tech Stack
-Frontend:
-- HTML
-- CSS
-- JavaScript (vanilla)
 
-Backend (planned):
-- Python
-- FastAPI / Flask
-- SQL database
+**Current (frontend)**
+- HTML, CSS, JavaScript — no frameworks, no dependencies
+- Custom i18n system using `localStorage` for language persistence
+- 3 pages, 3 CSS files, 4 JS modules
+
+**Planned (backend)**
+- Python + FastAPI
+- PostgreSQL or SQLite
+- User authentication (register/login)
+- Leaderboard with real scores
+- Admin panel to add/remove questions without touching code
+
+---
 
 ## Project Structure
-- /pages → quiz and UI pages
-- /styles → CSS files
-- /scripts → JavaScript logic
 
-## Design Decisions
-- Started with vanilla JS to fully control logic without framework abstraction
-- Separated UI and logic to keep code maintainable
-- Building frontend first to define interaction before backend integration
+```
+QuizArena/
+├── index.html          # Landing page
+├── quiz.html           # Practice mode
+├── competition.html    # Competition mode
+├── css/
+│   ├── style.css       # Main styles
+│   ├── quiz.css        # Quiz and competition UI
+│   └── media.css       # Responsive breakpoints
+├── js/
+│   ├── app.js          # Loader, navbar, contact form
+│   ├── lang.js         # Translation system (EN/UZ)
+│   ├── quiz.js         # Quiz logic + all question data
+│   └── competition.js  # Competition logic + timer
+└── favicon/
+```
 
-## Current Limitations
-- No backend (no data persistence)
-- No authentication
-- Scores reset on refresh
+---
 
 ## Roadmap
-1. Build backend API (questions, users, scores)
-2. Connect frontend to API
-3. Add authentication system
-4. Implement persistent scoring
-5. Add competition logic
 
-## Status
-Active development. This project is being expanded into a full-stack application.
+- [x] Practice mode with subject selection
+- [x] Competition mode with 10-second timer
+- [x] Bilingual support (English + Uzbek)
+- [x] Language persistence across pages
+- [x] Score summary and grade on completion
+- [ ] Python/FastAPI backend
+- [ ] User registration and login
+- [ ] Persistent score history
+- [ ] Leaderboard (all-time + weekly)
+- [ ] Admin panel for managing questions
+- [ ] Deploy publicly
+
+---
+
+## Why I built this
+
+My mother is a teacher. Watching her manage the stress of Teacher Certification while her students struggled with a lack of digital practice tools was my original motivation. Most existing platforms are either in Russian or English, not Uzbek. QuizArena is being built to change that.
+
+---
+
+## Author
+
+Built by [jxctrl](https://github.com/jxctrl) — Andijan, Uzbekistan
