@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TestMe - Quiz</title>
+  <title>QuizArena - Quiz</title>
   <link rel="icon" href="./favicon/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,10 +14,10 @@
 <body style="display:flex; flex-direction:column; min-height:100vh;">
 
 <header class="quiz-header">
-  <a href="index.html" class="nav-logo">Test<span>Me</span></a>
+  <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
   <div class="header-right">
-    <span class="subject-badge" id="subjectBadge" data-i18n="selectSubject">Select Subject</span>
-    <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">O'Z</button>
+    <span class="subject-badge" id="subjectBadge">Select Subject</span>
+    <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
     <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
   </div>
 </header>
@@ -30,12 +30,12 @@
       <h1 data-i18n="selectSubject">Choose a subject.</h1>
       <p data-i18n="selectSubjectSub">Pick a topic and start immediately.</p>
       <div class="subject-pills">
-        <div class="subject-pill" onclick="startQuiz('mathematics')" data-i18n="badgeMath">📐 Mathematics</div>
-        <div class="subject-pill" onclick="startQuiz('english')" data-i18n="badgeEnglish">📖 English</div>
-        <div class="subject-pill" onclick="startQuiz('science')" data-i18n="badgeScience">🔬 Natural Science</div>
-        <div class="subject-pill" onclick="startQuiz('history')" data-i18n="badgeHistory">🏛️ History</div>
-        <div class="subject-pill" onclick="startQuiz('geography')" data-i18n="badgeGeo">🌍 Geography</div>
-        <div class="subject-pill" onclick="startQuiz('cs')" data-i18n="badgeCS">💻 Computer Science</div>
+        <div class="subject-pill" onclick="startQuiz('mathematics')">📐 <span data-i18n="badgeMath">Mathematics</span></div>
+        <div class="subject-pill" onclick="startQuiz('english')">📖 <span data-i18n="badgeEnglish">English</span></div>
+        <div class="subject-pill" onclick="startQuiz('science')">🔬 <span data-i18n="badgeScience">Natural Science</span></div>
+        <div class="subject-pill" onclick="startQuiz('history')">🏛️ <span data-i18n="badgeHistory">History</span></div>
+        <div class="subject-pill" onclick="startQuiz('geography')">🌍 <span data-i18n="badgeGeo">Geography</span></div>
+        <div class="subject-pill" onclick="startQuiz('cs')">💻 <span data-i18n="badgeCS">Computer Science</span></div>
       </div>
     </div>
 

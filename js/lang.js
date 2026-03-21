@@ -21,7 +21,8 @@ const TRANSLATIONS = {
     heroBtn2: "View Modes",
     heroStat1: "Subjects",
     heroStat2: "Per Question",
-    heroStat3: "Always",
+    heroStat3: "Free",
+    heroStat4: "Always",
 
     // SUBJECTS SECTION
     subjectsLabel: "Subjects",
@@ -97,8 +98,28 @@ const TRANSLATIONS = {
     wrongLabel: "Wrong",
     timedOut: "Timed Out",
     playAgain: "Play Again",
+
+    // HOW IT WORKS
+    howLabel: "How it works",
+    howTitle: "Three steps.\nThat's it.",
+    howStep1Title: "Choose a subject",
+    howStep1Desc: "Pick from Mathematics, Science, History, Geography, English, or Computer Science.",
+    howStep2Title: "Answer questions",
+    howStep2Desc: "Practice at your own pace or race the clock in Competition mode. 10 questions per session.",
+    howStep3Title: "Get your score",
+    howStep3Desc: "See your result instantly. Know exactly what you got right and where you need work.",
+
+    // PREVIEW
+    previewLabel: "Try it now",
+    previewTitle: "See how it feels.",
+    previewTag: "💡 Sample Question — Computer Science",
+    previewQ: "What is the time complexity of binary search?",
+    previewCtaText: "Want the full experience?",
+    previewCtaBtn: "Start a Real Quiz →",
+
     backBtn: "← Back",
     backHome: "Back to Home",
+    compMode: "⚡ Competition",
 
     // COMP GRADES
     gradeUnstoppable: "🔥 Unstoppable",
@@ -107,12 +128,12 @@ const TRANSLATIONS = {
     gradeTrain: "💀 Train harder",
 
     // SUBJECT BADGE NAMES
-    badgeMath: "📐 Mathematics",
-    badgeEnglish: "📖 English",
-    badgeScience: "🔬 Natural Science",
-    badgeHistory: "🏛️ History",
-    badgeGeo: "🌍 Geography",
-    badgeCS: "💻 Computer Science",
+    badgeMath: "Mathematics",
+    badgeEnglish: "English",
+    badgeScience: "Natural Science",
+    badgeHistory: "History",
+    badgeGeo: "Geography",
+    badgeCS: "Computer Science",
   },
 
   uz: {
@@ -134,6 +155,7 @@ const TRANSLATIONS = {
     heroStat1: "Fan",
     heroStat2: "Har savol",
     heroStat3: "Bepul",
+    heroStat4: "Har doim",
 
     // SUBJECTS SECTION
     subjectsLabel: "Fanlar",
@@ -209,7 +231,27 @@ const TRANSLATIONS = {
     wrongLabel: "Noto'g'ri",
     timedOut: "Vaqt tugadi",
     playAgain: "Qayta o'ynash",
+
+    // HOW IT WORKS
+    howLabel: "Qanday ishlaydi",
+    howTitle: "Uch qadam.\nXolos.",
+    howStep1Title: "Fan tanlang",
+    howStep1Desc: "Matematika, Fan, Tarix, Geografiya, Ingliz tili yoki Informatikadan tanlang.",
+    howStep2Title: "Savollarga javob bering",
+    howStep2Desc: "O'z sur'atingizda mashq qiling yoki Musobaqa rejimida vaqt bilan raqobatlashing.",
+    howStep3Title: "Natijangizni ko'ring",
+    howStep3Desc: "Natijangizni darhol ko'ring. Nima to'g'ri, nimani o'rganish kerakligini bilib oling.",
+
+    // PREVIEW
+    previewLabel: "Hozir sinab ko'ring",
+    previewTitle: "Qanday his ekanini ko'ring.",
+    previewTag: "💡 Namuna savol — Informatika",
+    previewQ: "Ikkilik qidiruvning vaqt murakkabligi qancha?",
+    previewCtaText: "To'liq tajriba xohlaysizmi?",
+    previewCtaBtn: "Haqiqiy testni boshlash →",
+
     backBtn: "← Orqaga",
+    compMode: "⚡ Musobaqa",
 
     // COMP GRADES
     gradeUnstoppable: "🔥 To'xtatib bo'lmas",
@@ -218,12 +260,12 @@ const TRANSLATIONS = {
     gradeTrain: "💀 Ko'proq mashq qiling",
 
     // SUBJECT BADGE NAMES
-    badgeMath: "📐 Mathematics",
-    badgeEnglish: "📖 English",
-    badgeScience: "🔬 Natural Science",
-    badgeHistory: "🏛️ History",
-    badgeGeo: "🌍 Geography",
-    badgeCS: "💻 Computer Science",
+    badgeMath: "Matematika",
+    badgeEnglish: "Ingliz tili",
+    badgeScience: "Tabiat fanlari",
+    badgeHistory: "Tarix",
+    badgeGeo: "Geografiya",
+    badgeCS: "Informatika",
   }
 };
 
@@ -244,6 +286,20 @@ function setLanguage(lang) {
   // Update toggle button text
   const btn = document.getElementById('langBtn');
   if (btn) btn.textContent = lang === 'en' ? "🇺🇿 O'Z" : "🇬🇧 EN";
+
+  // If quiz is active, re-render current question in new language
+  if (typeof renderQuestion === 'function' && typeof questions !== 'undefined' && questions.length > 0) {
+    if (typeof currentSubject !== 'undefined' && currentSubject) {
+      questions = shuffle([...QUESTIONS[currentLang][currentSubject]]);
+      if (currentIndex >= questions.length) currentIndex = 0;
+      renderQuestion();
+    } else if (typeof ALL_QUESTIONS !== 'undefined') {
+      // competition mode — only re-render if question not yet answered
+      if (typeof answered !== 'undefined' && !answered) {
+        renderQuestion();
+      }
+    }
+  }
 }
 
 function toggleLanguage() {

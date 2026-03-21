@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TestMe - Competition</title>
+  <title>QuizArena - Competition</title>
   <link rel="icon" href="./favicon/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -14,10 +14,12 @@
 <body style="display:flex; flex-direction:column; min-height:100vh;">
 
 <header class="quiz-header">
-  <a href="index.html" class="nav-logo">Test<span>Me</span></a>
-  <div class="mode-badge">⚡ Competition</div>
-  <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">O'Z</button>
-  <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
+  <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
+  <div class="mode-badge" data-i18n="compMode">⚡ Competition</div>
+  <div class="header-right">
+    <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+    <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
+  </div>
 </header>
 
 <main class="quiz-main">
@@ -61,7 +63,7 @@
             <span class="q-counter" id="qCounter">1/10</span>
           </div>
         </div>
-        <div class="score-display" data-i18n="scoreLabel">Score: <span id="liveScore">0</span></div>
+        <div class="score-display">Score: <span id="liveScore">0</span></div>
       </div>
       <div class="question-card" id="questionCard">
         <div class="question-text" id="questionText"></div>

@@ -26,7 +26,7 @@ mobileMenu.querySelectorAll('a').forEach(a => {
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      setTimeout(() => entry.target.classList.add('visible'), i * 75);
     }
   });
 }, { threshold: 0.1 });
@@ -37,13 +37,36 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 document.getElementById('contactForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Sent ✓';
+  btn.textContent = t('contactSent');
   btn.style.background = '#2a4a00';
   btn.style.color = 'var(--accent)';
   setTimeout(() => {
-    btn.textContent = 'Send Message';
+    btn.textContent = t('contactSend');
     btn.style.background = '';
     btn.style.color = '';
     e.target.reset();
   }, 3000);
 });
+
+// Sample question preview
+function handlePreview(el) {
+  const options = document.querySelectorAll('.preview-option');
+  if (el.classList.contains('done')) return;
+
+  options.forEach(o => o.classList.add('done'));
+
+  const isCorrect = el.getAttribute('data-correct') === 'true';
+  const feedback = document.getElementById('previewFeedback');
+  const correctEl = document.querySelector('.preview-option[data-correct="true"]');
+
+  if (isCorrect) {
+    el.classList.add('correct');
+    feedback.textContent = '✓ Correct! Binary search halves the search space each step → O(log n)';
+    feedback.className = 'preview-feedback correct';
+  } else {
+    el.classList.add('wrong');
+    correctEl.classList.add('correct');
+    feedback.textContent = '✗ Not quite. The answer is D — O(log n).';
+    feedback.className = 'preview-feedback wrong';
+  }
+}
