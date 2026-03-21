@@ -84,6 +84,37 @@
   color: var(--accent);
   margin-bottom: 16px;
 }
+
+/* =====================
+   RESPONSIVE QUIZ PAGE
+   ===================== */
+@media (max-width: 900px) {
+  .quiz-header { padding: 16px 18px; flex-wrap: wrap; gap: 12px; }
+  .header-right { gap: 12px; width: 100%; justify-content: flex-end; }
+  .subject-badge { display: none; }
+  .quiz-main { padding: 30px 16px; }
+  .quiz-container { max-width: 100%; }
+  .question-card { padding: 24px; margin-bottom: 20px; }
+  .options-grid { grid-template-columns: 1fr; }
+  .option { padding: 16px; }
+  .progress-text { font-size: 12px; }
+  .lobby h1 { font-size: 34px; }
+  .lobby p { max-width: 100%; margin-bottom: 28px; }
+  .rules { padding: 18px; }
+  .start-btn { padding: 16px; font-size: 16px; }
+  .timer-row { flex-direction: column; gap: 12px; align-items: stretch; }
+  .score-display { font-size: 16px; }
+}
+
+@media (max-width: 520px) {
+  .quiz-header { justify-content: center; }
+  .back-btn { font-size: 13px; }
+  .question-text { font-size: 20px; }
+  .result-score { font-size: 58px; }
+  .result-actions { flex-direction: column; }
+  .result-btn { width: 100%; }
+}
+
 .question-text {
   font-family: 'Syne', sans-serif;
   font-size: clamp(20px, 3vw, 26px);

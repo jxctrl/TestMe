@@ -11,14 +11,27 @@ window.addEventListener('scroll', () => {
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
-menuBtn.addEventListener('click', () => {
-  menuBtn.classList.toggle('active');
-  mobileMenu.classList.toggle('open');
+function toggleMobileMenu() {
+  const isOpen = menuBtn.classList.toggle('active');
+  mobileMenu.classList.toggle('open', isOpen);
+  document.body.classList.toggle('no-scroll', isOpen);
+  menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+menuBtn.addEventListener('click', toggleMobileMenu);
+
+menuBtn.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+    event.preventDefault();
+    toggleMobileMenu();
+  }
 });
+
 mobileMenu.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     menuBtn.classList.remove('active');
     mobileMenu.classList.remove('open');
+    document.body.classList.remove('no-scroll');
   });
 });
 
