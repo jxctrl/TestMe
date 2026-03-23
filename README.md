@@ -19,6 +19,8 @@
 
 QuizArena is a quiz platform I built for students preparing for exams. It started as a small project in 2022 and has been rebuilt several times since. The current version is the cleanest and most complete one.
 
+🔗 **Live demo:** [quizarena-jxctrl.netlify.app](https://quizarena-jxctrl.netlify.app)
+
 It runs fully in the browser with no backend yet. A Python/FastAPI backend with user accounts, a leaderboard, and an admin panel is in development for late 2026.
 
 ---
@@ -45,25 +47,12 @@ It runs fully in the browser with no backend yet. A Python/FastAPI backend with 
 
 ---
 
-## Subjects
-
-| Subject | Questions | Languages |
-|---|---|---|
-| Mathematics | 10 | EN / UZ |
-| English | 10 | EN / UZ |
-| Natural Science | 10 | EN / UZ |
-| History | 10 | EN / UZ |
-| Geography | 10 | EN / UZ |
-| Computer Science | 10 | EN / UZ |
-
----
 
 ## Tech Stack
 
 **Current (frontend)**
 - HTML, CSS, JavaScript — no frameworks, no dependencies
 - Custom i18n system using `localStorage` for language persistence
-- 3 pages, 3 CSS files, 4 JS modules
 
 **Planned (backend)**
 - Python + FastAPI
@@ -107,7 +96,7 @@ QuizArena/
 - [ ] Persistent score history
 - [ ] Leaderboard (all-time + weekly)
 - [ ] Admin panel for managing questions
-- [ ] Deploy publicly
+- [x] Deploy publicly
 
 ---
 
