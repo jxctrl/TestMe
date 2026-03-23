@@ -69,6 +69,7 @@ const TRANSLATIONS = {
     // QUIZ PAGE
     selectSubject: "Choose a subject.",
     selectSubjectSub: "Pick a topic and start immediately.",
+    subjectBadgeDefault: "Select Subject",
     questionOf: "Question",
     of: "of",
     scoreLabel: "Score:",
@@ -87,9 +88,15 @@ const TRANSLATIONS = {
 
     // COMPETITION PAGE
     compPageTitle: "Speed Mode",
+    compPageTitle1: "Speed",
+    compPageTitle2: "Mode",
     compDescLobby: "10 seconds per question. Answer fast. Answer right. Your score is your rank.",
     compRule1: "Correct answer: +1000 points",
+    compRule1Label: "Correct answer:",
+    compRule1Value: "+1000 points",
     compRule2: "Wrong answer: 0 points",
+    compRule2Label: "Wrong answer:",
+    compRule2Value: "0 points",
     compRule3: "Time runs out: auto-counted as wrong",
     compRule4: "10 questions, all subjects mixed",
     startComp: "Start Competition →",
@@ -102,6 +109,8 @@ const TRANSLATIONS = {
     // HOW IT WORKS
     howLabel: "How it works",
     howTitle: "Three steps.\nThat's it.",
+    howTitle1: "Three steps.",
+    howTitle2: "That's it.",
     howStep1Title: "Choose a subject",
     howStep1Desc: "Pick from Mathematics, Science, History, Geography, English, or Computer Science.",
     howStep2Title: "Answer questions",
@@ -114,6 +123,8 @@ const TRANSLATIONS = {
     previewTitle: "See how it feels.",
     previewTag: "💡 Sample Question — Computer Science",
     previewQ: "What is the time complexity of binary search?",
+    previewCorrectFeedback: "✓ Correct! Binary search halves the search space each step → O(log n)",
+    previewWrongFeedback: "✗ Not quite. The answer is D — O(log n).",
     previewCtaText: "Want the full experience?",
     previewCtaBtn: "Start a Real Quiz →",
 
@@ -134,6 +145,8 @@ const TRANSLATIONS = {
     badgeHistory: "History",
     badgeGeo: "Geography",
     badgeCS: "Computer Science",
+    subjectsTitle1: "Pick your subject.",
+    subjectsTitle2: "Start immediately.",
   },
 
   uz: {
@@ -148,7 +161,7 @@ const TRANSLATIONS = {
     heroBadge: "Musobaqa rejimi mavjud",
     heroTitle1: "Bilimingizni",
     heroTitle2: "sinab ko'ring.",
-    heroTitle3: "Vaqtdan ustun bo'l.",
+    heroTitle3: "Vaqtdan ustun bo'ling.",
     heroDesc: "Fanlar bo'yicha o'zingizni sinab ko'ring. Taymer bilan raqobatlashing. Natijangizni kuzating. Haqiqatan tayyorlanmoqchi bo'lgan talabalar uchun.",
     heroBtn1: "Testni boshlash →",
     heroBtn2: "Rejimlarni ko'rish",
@@ -202,6 +215,7 @@ const TRANSLATIONS = {
     // QUIZ PAGE
     selectSubject: "Fan tanlang.",
     selectSubjectSub: "Mavzuni tanlang va hoziroq boshlang.",
+    subjectBadgeDefault: "Fan tanlang",
     questionOf: "Savol",
     of: "/",
     scoreLabel: "Ball:",
@@ -220,9 +234,15 @@ const TRANSLATIONS = {
 
     // COMPETITION PAGE
     compPageTitle: "Tezlik rejimi",
+    compPageTitle1: "Tezlik",
+    compPageTitle2: "rejimi",
     compDescLobby: "Har savolga 10 soniya. Tez javob bering. To'g'ri javob bering. Natijangiz sizning reytingingiz.",
     compRule1: "To'g'ri javob: +1000 ball",
+    compRule1Label: "To'g'ri javob:",
+    compRule1Value: "+1000 ball",
     compRule2: "Noto'g'ri javob: 0 ball",
+    compRule2Label: "Noto'g'ri javob:",
+    compRule2Value: "0 ball",
     compRule3: "Vaqt tugasa: noto'g'ri hisoblanadi",
     compRule4: "10 ta savol, barcha fanlardan aralash",
     startComp: "Musobaqani boshlash →",
@@ -235,6 +255,8 @@ const TRANSLATIONS = {
     // HOW IT WORKS
     howLabel: "Qanday ishlaydi",
     howTitle: "Uch qadam.\nXolos.",
+    howTitle1: "Uch qadam.",
+    howTitle2: "Xolos.",
     howStep1Title: "Fan tanlang",
     howStep1Desc: "Matematika, Fan, Tarix, Geografiya, Ingliz tili yoki Informatikadan tanlang.",
     howStep2Title: "Savollarga javob bering",
@@ -247,6 +269,8 @@ const TRANSLATIONS = {
     previewTitle: "Qanday his ekanini ko'ring.",
     previewTag: "💡 Namuna savol — Informatika",
     previewQ: "Ikkilik qidiruvning vaqt murakkabligi qancha?",
+    previewCorrectFeedback: "✓ To'g'ri! Ikkilik qidiruv har qadamda qidiruv maydonini ikki baravar qisqartiradi → O(log n)",
+    previewWrongFeedback: "✗ Unchalik emas. To'g'ri javob D — O(log n).",
     previewCtaText: "To'liq tajriba xohlaysizmi?",
     previewCtaBtn: "Haqiqiy testni boshlash →",
 
@@ -266,6 +290,8 @@ const TRANSLATIONS = {
     badgeHistory: "Tarix",
     badgeGeo: "Geografiya",
     badgeCS: "Informatika",
+    subjectsTitle1: "Fanni tanlang.",
+    subjectsTitle2: "Hoziroq boshlang.",
   }
 };
 
@@ -287,18 +313,8 @@ function setLanguage(lang) {
   const btn = document.getElementById('langBtn');
   if (btn) btn.textContent = lang === 'en' ? "🇺🇿 O'Z" : "🇬🇧 EN";
 
-  // If quiz is active, re-render current question in new language
-  if (typeof renderQuestion === 'function' && typeof questions !== 'undefined' && questions.length > 0) {
-    if (typeof currentSubject !== 'undefined' && currentSubject) {
-      questions = shuffle([...QUESTIONS[currentLang][currentSubject]]);
-      if (currentIndex >= questions.length) currentIndex = 0;
-      renderQuestion();
-    } else if (typeof ALL_QUESTIONS !== 'undefined') {
-      // competition mode — only re-render if question not yet answered
-      if (typeof answered !== 'undefined' && !answered) {
-        renderQuestion();
-      }
-    }
+  if (typeof handleLanguageChange === 'function') {
+    handleLanguageChange();
   }
 }
 

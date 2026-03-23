@@ -62,6 +62,16 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
 });
 
 // Sample question preview
+function resetPreviewState() {
+  document.querySelectorAll('.preview-option').forEach(option => {
+    option.classList.remove('done', 'correct', 'wrong');
+  });
+
+  const feedback = document.getElementById('previewFeedback');
+  feedback.textContent = '';
+  feedback.className = 'preview-feedback';
+}
+
 function handlePreview(el) {
   const options = document.querySelectorAll('.preview-option');
   if (el.classList.contains('done')) return;
@@ -74,12 +84,16 @@ function handlePreview(el) {
 
   if (isCorrect) {
     el.classList.add('correct');
-    feedback.textContent = '✓ Correct! Binary search halves the search space each step → O(log n)';
+    feedback.textContent = t('previewCorrectFeedback');
     feedback.className = 'preview-feedback correct';
   } else {
     el.classList.add('wrong');
     correctEl.classList.add('correct');
-    feedback.textContent = '✗ Not quite. The answer is D — O(log n).';
+    feedback.textContent = t('previewWrongFeedback');
     feedback.className = 'preview-feedback wrong';
   }
 }
+
+window.handleLanguageChange = function handleHomeLanguageChange() {
+  resetPreviewState();
+};

@@ -151,10 +151,10 @@ nav.scrolled {
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface);
+  border-radius: 6px;
+  background: transparent;
 }
 .menu-btn span {
   display: block;

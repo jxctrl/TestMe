@@ -153,10 +153,19 @@ const QUESTIONS = {
 };
 
 let currentSubject = '';
-let questions = [];
+let questionOrder = [];
 let currentIndex = 0;
 let score = 0;
 let answered = false;
+
+const badgeKeys = {
+  mathematics: 'badgeMath',
+  english: 'badgeEnglish',
+  science: 'badgeScience',
+  history: 'badgeHistory',
+  geography: 'badgeGeo',
+  cs: 'badgeCS'
+};
 
 function shuffle(arr) {
   const a = [...arr];
@@ -171,17 +180,43 @@ function getSubjectFromURL() {
   return new URLSearchParams(window.location.search).get('subject');
 }
 
+function getQuestionIds(subject) {
+  return QUESTIONS.en[subject].map((_, index) => index);
+}
+
+function getCurrentQuestion() {
+  return QUESTIONS[currentLang][currentSubject][questionOrder[currentIndex]];
+}
+
+function updateQuizProgress() {
+  const total = questionOrder.length;
+  document.getElementById('questionCounter').textContent = `${t('questionOf')} ${currentIndex + 1} ${t('of')} ${total}`;
+  document.getElementById('scoreCounter').textContent = `${t('scoreLabel')} ${score}`;
+  document.getElementById('progressFill').style.width = `${((currentIndex + 1) / total) * 100}%`;
+  document.getElementById('questionNum').textContent = `${t('questionOf')} ${String(currentIndex + 1).padStart(2, '0')}`;
+}
+
+function syncQuestionText() {
+  if (!currentSubject || questionOrder.length === 0) return;
+
+  const q = getCurrentQuestion();
+  updateQuizProgress();
+  document.getElementById('questionText').textContent = q.q;
+  document.querySelectorAll('#optionsGrid .option-text').forEach((optionText, index) => {
+    optionText.textContent = q.options[index];
+  });
+
+  const isLast = currentIndex === questionOrder.length - 1;
+  document.getElementById('nextBtn').textContent = isLast ? t('seeResults') : t('nextBtn');
+}
+
 function startQuiz(subject) {
   currentSubject = subject;
-  questions = shuffle([...QUESTIONS[currentLang][subject]]);
+  questionOrder = shuffle(getQuestionIds(subject));
   currentIndex = 0;
   score = 0;
   answered = false;
 
-  const badgeKeys = {
-    mathematics: 'badgeMath', english: 'badgeEnglish', science: 'badgeScience',
-    history: 'badgeHistory', geography: 'badgeGeo', cs: 'badgeCS'
-  };
   document.getElementById('subjectBadge').textContent = t(badgeKeys[subject]);
   document.getElementById('subjectSelect').style.display = 'none';
   document.getElementById('resultScreen').classList.remove('visible');
@@ -192,13 +227,8 @@ function startQuiz(subject) {
 
 function renderQuestion() {
   answered = false;
-  const q = questions[currentIndex];
-  const total = questions.length;
-
-  document.getElementById('questionCounter').textContent = `${t('questionOf')} ${currentIndex + 1} ${t('of')} ${total}`;
-  document.getElementById('scoreCounter').textContent = `${t('scoreLabel')} ${score}`;
-  document.getElementById('progressFill').style.width = `${((currentIndex + 1) / total) * 100}%`;
-  document.getElementById('questionNum').textContent = `${t('questionOf')} ${String(currentIndex + 1).padStart(2, '0')}`;
+  const q = getCurrentQuestion();
+  updateQuizProgress();
   document.getElementById('questionText').textContent = q.q;
   document.getElementById('nextBtn').classList.remove('visible');
 
@@ -210,7 +240,7 @@ function renderQuestion() {
     const div = document.createElement('div');
     div.className = 'option';
     div.innerHTML = `<div class="option-letter">${letters[i]}</div><div class="option-text">${opt}</div>`;
-    div.addEventListener('click', () => selectAnswer(i, q.answer));
+    div.addEventListener('click', () => selectAnswer(i));
     grid.appendChild(div);
   });
 
@@ -220,9 +250,11 @@ function renderQuestion() {
   card.style.animation = 'slideIn 0.3s ease';
 }
 
-function selectAnswer(selected, correct) {
+function selectAnswer(selected) {
   if (answered) return;
   answered = true;
+
+  const correct = getCurrentQuestion().answer;
 
   const options = document.querySelectorAll('.option');
   options.forEach(o => o.classList.add('answered'));
@@ -238,13 +270,13 @@ function selectAnswer(selected, correct) {
   document.getElementById('scoreCounter').textContent = `${t('scoreLabel')} ${score}`;
   document.getElementById('nextBtn').classList.add('visible');
 
-  const isLast = currentIndex === questions.length - 1;
+  const isLast = currentIndex === questionOrder.length - 1;
   document.getElementById('nextBtn').textContent = isLast ? t('seeResults') : t('nextBtn');
 }
 
 function nextQuestion() {
   currentIndex++;
-  if (currentIndex >= questions.length) {
+  if (currentIndex >= questionOrder.length) {
     showResults();
   } else {
     renderQuestion();
@@ -255,7 +287,7 @@ function showResults() {
   document.getElementById('quizArea').style.display = 'none';
   document.getElementById('resultScreen').classList.add('visible');
 
-  const total = questions.length;
+  const total = questionOrder.length;
   const pct = Math.round((score / total) * 100);
 
   document.getElementById('resultScore').textContent = `${score}/${total}`;
@@ -277,6 +309,21 @@ function showResults() {
 function restartQuiz() {
   startQuiz(currentSubject);
 }
+
+window.handleLanguageChange = function handleQuizLanguageChange() {
+  if (currentSubject) {
+    document.getElementById('subjectBadge').textContent = t(badgeKeys[currentSubject]);
+  }
+
+  if (document.getElementById('resultScreen').classList.contains('visible')) {
+    showResults();
+    return;
+  }
+
+  if (document.getElementById('quizArea').style.display !== 'none' && questionOrder.length > 0) {
+    syncQuestionText();
+  }
+};
 
 const urlSubject = getSubjectFromURL();
 if (urlSubject && QUESTIONS['en'][urlSubject]) {

@@ -48,7 +48,7 @@ const ALL_QUESTIONS = {
 };
 
 const TIME_PER_QUESTION = 10;
-let questions = [];
+let questionOrder = [];
 let currentIndex = 0;
 let score = 0;
 let correctCount = 0;
@@ -67,8 +67,27 @@ function shuffle(arr) {
   return a;
 }
 
+function getQuestionIds() {
+  return ALL_QUESTIONS.en.map((_, index) => index);
+}
+
+function getCurrentQuestion() {
+  return ALL_QUESTIONS[currentLang][questionOrder[currentIndex]];
+}
+
+function syncQuestionText() {
+  if (questionOrder.length === 0) return;
+
+  const q = getCurrentQuestion();
+  document.getElementById('questionText').textContent = q.q;
+  document.getElementById('liveScore').textContent = score.toLocaleString();
+  document.querySelectorAll('#optionsGrid .option-text').forEach((optionText, index) => {
+    optionText.textContent = q.options[index];
+  });
+}
+
 function startCompetition() {
-  questions = shuffle(ALL_QUESTIONS[currentLang]).slice(0, 10);
+  questionOrder = shuffle(getQuestionIds()).slice(0, 10);
   currentIndex = 0;
   score = 0;
   correctCount = 0;
@@ -87,7 +106,7 @@ function renderQuestion() {
   clearInterval(timer);
   timeLeft = TIME_PER_QUESTION;
 
-  const q = questions[currentIndex];
+  const q = getCurrentQuestion();
   document.getElementById('questionText').textContent = q.q;
   document.getElementById('qCounter').textContent = `${currentIndex + 1}/10`;
   document.getElementById('liveScore').textContent = score.toLocaleString();
@@ -141,7 +160,7 @@ function handleTimeout() {
 
   const options = document.querySelectorAll('.option');
   options.forEach(o => o.classList.add('answered'));
-  options[questions[currentIndex].answer].classList.add('timeout');
+  options[getCurrentQuestion().answer].classList.add('timeout');
 
   showFlash('⏱️');
   setTimeout(advanceQuestion, 1800);
@@ -152,7 +171,7 @@ function selectAnswer(selected) {
   answered = true;
   clearInterval(timer);
 
-  const correct = questions[currentIndex].answer;
+  const correct = getCurrentQuestion().answer;
   const options = document.querySelectorAll('.option');
   options.forEach(o => o.classList.add('answered'));
 
@@ -181,7 +200,7 @@ function showFlash(icon) {
 
 function advanceQuestion() {
   currentIndex++;
-  if (currentIndex >= questions.length) {
+  if (currentIndex >= questionOrder.length) {
     showResults();
   } else {
     renderQuestion();
@@ -216,3 +235,14 @@ function showResults() {
   gradeEl.textContent = grade;
   gradeEl.style.cssText = gradeStyle;
 }
+
+window.handleLanguageChange = function handleCompetitionLanguageChange() {
+  if (document.getElementById('resultScreen').classList.contains('visible')) {
+    showResults();
+    return;
+  }
+
+  if (document.getElementById('quizArea').style.display !== 'none' && questionOrder.length > 0) {
+    syncQuestionText();
+  }
+};

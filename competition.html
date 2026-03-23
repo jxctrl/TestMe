@@ -28,16 +28,16 @@
     <!-- Lobby -->
     <div class="lobby" id="lobby">
       <div class="lobby-icon">⚡</div>
-      <h1 data-i18n="compPageTitle">Speed <span>Mode</span></h1>
+      <h1><span data-i18n="compPageTitle1">Speed</span> <span data-i18n="compPageTitle2">Mode</span></h1>
       <p data-i18n="compDescLobby">10 seconds per question. Answer fast. Answer right. Your score is your rank.</p>
       <div class="rules">
         <div class="rule">
           <div class="rule-icon" style="background:rgba(200,241,53,0.1)">✅</div>
-          <span data-i18n="compRule1">Correct answer: <strong>+1000 points</strong></span>
+          <span data-i18n="compRule1Label">Correct answer:</span> <strong data-i18n="compRule1Value">+1000 points</strong>
         </div>
         <div class="rule">
           <div class="rule-icon" style="background:rgba(255,79,79,0.1)">❌</div>
-          <span data-i18n="compRule2">Wrong answer: <strong>0 points</strong></span>
+          <span data-i18n="compRule2Label">Wrong answer:</span> <strong data-i18n="compRule2Value">0 points</strong>
         </div>
         <div class="rule">
           <div class="rule-icon" style="background:rgba(255,180,0,0.1)">⏱️</div>
@@ -63,7 +63,7 @@
             <span class="q-counter" id="qCounter">1/10</span>
           </div>
         </div>
-        <div class="score-display">Score: <span id="liveScore">0</span></div>
+        <div class="score-display"><span data-i18n="scoreLabel">Score:</span> <span id="liveScore">0</span></div>
       </div>
       <div class="question-card" id="questionCard">
         <div class="question-text" id="questionText"></div>
