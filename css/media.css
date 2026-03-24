@@ -19,6 +19,7 @@
   .section { padding: 80px 24px; }
   .contact-grid, .how-grid, .modes-grid, .live-shell { gap: 20px; }
   .subjects-grid { gap: 16px; }
+  .hero-content { max-width: 100%; }
 }
 
 @media (max-width: 900px) {

@@ -235,7 +235,7 @@ body.no-scroll {
   top: 400px;
   background: radial-gradient(circle, rgba(201, 100, 255, 0.1) 0%, transparent 70%);
 }
-.hero-content { max-width: 55%; }
+.hero-content { max-width: 60%; }
 
 .hero-badge {
   display: inline-flex;
