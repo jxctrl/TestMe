@@ -24,6 +24,25 @@ const TRANSLATIONS = {
     heroStat3: "Free",
     heroStat4: "Always",
 
+    // LIVE STATS
+    liveStatus: "System Snapshot",
+    liveTitle: "See the board. Know the rules.",
+    liveDesc: "Clear scopes for the numbers, a ranked competition board, and a direct path into play.",
+    liveTotalQuizzes: "Total quizzes taken",
+    liveTotalScope: "All-time",
+    liveAverageScore: "Average score",
+    liveAverageScope: "Last 24h",
+    liveActiveUsers: "Active users",
+    liveActiveScope: "Today",
+    liveBoardLabel: "Competition Leaderboard",
+    liveBoardTitle: "Who's #1 right now?",
+    liveBoardDesc: "1,000 points per correct answer in Speed Mode. Ranked by total points across completed runs.",
+    liveBoardBadge: "Top 5",
+    liveRuns: "completed runs",
+    livePoints: "points",
+    livePrimaryCta: "Join Leaderboard →",
+    liveSecondaryCta: "Start Practice",
+
     // SUBJECTS SECTION
     subjectsLabel: "Subjects",
     subjectsTitle: "Pick your subject.\nStart immediately.",
@@ -170,6 +189,25 @@ const TRANSLATIONS = {
     heroStat3: "Bepul",
     heroStat4: "Har doim",
 
+    // LIVE STATS
+    liveStatus: "Tizim ko'rinishi",
+    liveTitle: "Reytingni ko'ring. Qoidani biling.",
+    liveDesc: "Raqamlar uchun aniq scope, musobaqa reytingi va o'yinga darhol kirish yo'li.",
+    liveTotalQuizzes: "Yechilgan testlar",
+    liveTotalScope: "Umumiy",
+    liveAverageScore: "O'rtacha natija",
+    liveAverageScope: "So'nggi 24 soat",
+    liveActiveUsers: "Faol foydalanuvchilar",
+    liveActiveScope: "Bugun",
+    liveBoardLabel: "Musobaqa reytingi",
+    liveBoardTitle: "Hozir #1 kim?",
+    liveBoardDesc: "Tezlik rejimida har bir to'g'ri javob uchun 1 000 ball. Reyting yakunlangan urinishlardagi jami ball bo'yicha tuziladi.",
+    liveBoardBadge: "Top 5",
+    liveRuns: "yakunlangan urinish",
+    livePoints: "ball",
+    livePrimaryCta: "Reytingga qo'shiling →",
+    liveSecondaryCta: "Mashqni boshlash",
+
     // SUBJECTS SECTION
     subjectsLabel: "Fanlar",
     subjectsTitle: "Fanni tanlang.\nHoziroq boshlang.",
@@ -187,7 +225,7 @@ const TRANSLATIONS = {
     subjectGeo: "Geografiya",
     subjectGeoDesc: "Mamlakatlar, poytaxtlar, geografik xususiyatlar. Dunyo haqidagi bilimingizni sinang.",
     subjectCS: "Informatika",
-    subjectCSDesc: "Algoritmlar, mantiq, asoslar. Kelajak dasturchilar uchun.",
+    subjectCSDesc: "Algoritmlar, mantiq, asoslar. Kelajak dasturchilari uchun.",
 
     // MODES SECTION
     modesLabel: "O'yin rejimlari",

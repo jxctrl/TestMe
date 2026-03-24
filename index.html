@@ -67,6 +67,110 @@
   </div>
 </section>
 
+<section class="section live-section" id="liveStats">
+  <div class="live-shell">
+    <div class="live-overview fade-in">
+      <div class="live-status" data-i18n="liveStatus">System Snapshot</div>
+      <h2 class="section-title live-title" data-i18n="liveTitle">See the board. Know the rules.</h2>
+      <p class="live-desc" data-i18n="liveDesc">Clear scopes for the numbers, a ranked competition board, and a direct path into play.</p>
+      <div class="live-metrics">
+        <div class="live-metric">
+          <div class="live-metric-value" id="liveTotalCount">12,864</div>
+          <div class="live-metric-label" data-i18n="liveTotalQuizzes">Total quizzes taken</div>
+          <div class="live-metric-context" data-i18n="liveTotalScope">All-time</div>
+        </div>
+        <div class="live-metric">
+          <div class="live-metric-value" id="liveAverageCount">78.4%</div>
+          <div class="live-metric-label" data-i18n="liveAverageScore">Average score</div>
+          <div class="live-metric-context" data-i18n="liveAverageScope">Last 24h</div>
+        </div>
+        <div class="live-metric">
+          <div class="live-metric-value" id="liveActiveCount">143</div>
+          <div class="live-metric-label" data-i18n="liveActiveUsers">Active users</div>
+          <div class="live-metric-context" data-i18n="liveActiveScope">Today</div>
+        </div>
+      </div>
+      <div class="live-actions">
+        <a href="competition.html" class="btn-primary" data-i18n="livePrimaryCta">Join Leaderboard →</a>
+        <a href="quiz.html" class="btn-secondary" data-i18n="liveSecondaryCta">Start Practice</a>
+      </div>
+    </div>
+
+    <div class="live-board fade-in">
+      <div class="live-board-head">
+        <div>
+          <div class="live-board-label" data-i18n="liveBoardLabel">Competition Leaderboard</div>
+          <div class="live-board-title" data-i18n="liveBoardTitle">Who's #1 right now?</div>
+          <p class="live-board-desc" data-i18n="liveBoardDesc">1,000 points per correct answer in Speed Mode. Ranked by total points across completed runs.</p>
+        </div>
+        <div class="live-board-badge" data-i18n="liveBoardBadge">Top 5</div>
+      </div>
+
+      <div class="leaderboard">
+        <div class="leader-row top">
+          <div class="leader-rank top">1</div>
+          <div class="leader-user">
+            <div class="leader-name">CodeNomad</div>
+            <div class="leader-meta"><span>32</span> <span data-i18n="liveRuns">completed runs</span></div>
+          </div>
+          <div class="leader-score">
+            <div class="leader-score-value">9,840</div>
+            <div class="leader-score-label" data-i18n="livePoints">points</div>
+          </div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-rank">2</div>
+          <div class="leader-user">
+            <div class="leader-name">Nodira</div>
+            <div class="leader-meta"><span>29</span> <span data-i18n="liveRuns">completed runs</span></div>
+          </div>
+          <div class="leader-score">
+            <div class="leader-score-value">9,320</div>
+            <div class="leader-score-label" data-i18n="livePoints">points</div>
+          </div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-rank">3</div>
+          <div class="leader-user">
+            <div class="leader-name">AzizDev</div>
+            <div class="leader-meta"><span>27</span> <span data-i18n="liveRuns">completed runs</span></div>
+          </div>
+          <div class="leader-score">
+            <div class="leader-score-value">8,900</div>
+            <div class="leader-score-label" data-i18n="livePoints">points</div>
+          </div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-rank">4</div>
+          <div class="leader-user">
+            <div class="leader-name">Madina</div>
+            <div class="leader-meta"><span>24</span> <span data-i18n="liveRuns">completed runs</span></div>
+          </div>
+          <div class="leader-score">
+            <div class="leader-score-value">8,540</div>
+            <div class="leader-score-label" data-i18n="livePoints">points</div>
+          </div>
+        </div>
+
+        <div class="leader-row">
+          <div class="leader-rank">5</div>
+          <div class="leader-user">
+            <div class="leader-name">ByteBek</div>
+            <div class="leader-meta"><span>22</span> <span data-i18n="liveRuns">completed runs</span></div>
+          </div>
+          <div class="leader-score">
+            <div class="leader-score-value">8,110</div>
+            <div class="leader-score-label" data-i18n="livePoints">points</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section how-section">
   <div class="section-header fade-in">
     <div class="section-label" data-i18n="howLabel">How it works</div>
@@ -223,9 +327,9 @@
           <div class="contact-link-icon">✈️</div>
           <span>Telegram — @jxctrl</span>
         </a>
-        <a href="mailto:dasturchisaidabror@gmail.com" class="contact-link">
+        <a href="mailto:jacsaidabror@gmail.com" class="contact-link">
           <div class="contact-link-icon">✉️</div>
-          <span>dasturchisaidabror@gmail.com</span>
+          <span>jacsaidabror@gmail.com</span>
         </a>
         <a href="https://github.com/jxctrl" target="_blank" class="contact-link">
           <div class="contact-link-icon">⬡</div>
@@ -237,21 +341,21 @@
       <form class="contact-form" id="contactForm">
         <div class="form-row">
           <div class="form-group">
-            <label data-i18n="contactName">First Name</label>
-            <input type="text" placeholder="John" required>
+            <label for="contactFirstName" data-i18n="contactName">First Name</label>
+            <input id="contactFirstName" name="firstName" type="text" placeholder="John" autocomplete="given-name" required>
           </div>
           <div class="form-group">
-            <label data-i18n="contactSurname">Last Name</label>
-            <input type="text" placeholder="Doe" required>
+            <label for="contactLastName" data-i18n="contactSurname">Last Name</label>
+            <input id="contactLastName" name="lastName" type="text" placeholder="Doe" autocomplete="family-name" required>
           </div>
         </div>
         <div class="form-group">
-          <label data-i18n="contactEmail">Email</label>
-          <input type="email" placeholder="john@example.com" required>
+          <label for="contactEmail" data-i18n="contactEmail">Email</label>
+          <input id="contactEmail" name="email" type="email" placeholder="john@example.com" autocomplete="email" required>
         </div>
         <div class="form-group">
-          <label data-i18n="contactMessage">Message</label>
-          <textarea rows="5" placeholder="Your message..." required></textarea>
+          <label for="contactMessage" data-i18n="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" rows="5" placeholder="Your message..." autocomplete="off" required></textarea>
         </div>
         <button type="submit" class="form-submit" data-i18n="contactSend">Send Message</button>
       </form>
@@ -261,11 +365,11 @@
 
 <footer>
   <a href="#home" class="footer-logo">Quiz<span>Arena</span></a>
-  <div class="footer-copy">© 2026 TestMe. Built by Saidabror Asronov.</div>
+  <div class="footer-copy">© 2026 QuizArena. Built by Saidabror Asronov.</div>
   <div class="footer-links">
     <a href="https://github.com/jxctrl" target="_blank">GitHub</a>
     <a href="https://t.me/jxctrl" target="_blank">Telegram</a>
-    <a href="mailto:dasturchisaidabror@gmail.com">Email</a>
+    <a href="mailto:jacsaidabror@gmail.com">Email</a>
   </div>
 </footer>
 

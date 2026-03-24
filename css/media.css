@@ -12,3 +12,67 @@
   .hero h1 { letter-spacing: -1px; }
   .stat-num { font-size: 24px; }
 }
+
+@media (max-width: 1100px) {
+  nav { padding: 14px 22px; }
+  .hero { padding: 100px 24px 70px; }
+  .section { padding: 80px 24px; }
+  .contact-grid, .how-grid, .modes-grid, .live-shell { gap: 20px; }
+  .subjects-grid { gap: 16px; }
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .menu-btn { display: flex; }
+  .nav-cta { display: none; }
+  .nav-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-actions .lang-btn { margin-right: 0; }
+  .mobile-menu { display: none; }
+
+  .hero { padding: 90px 18px 60px; }
+  .hero-stats { flex-direction: column; gap: 12px; }
+  .how-grid, .modes-grid, .live-shell { grid-template-columns: 1fr; }
+  .subjects-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+  .contact-form .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .footer-links { flex-wrap: wrap; gap: 12px; }
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: clamp(34px, 10vw, 54px); }
+  .hero p { font-size: 16px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+  .preview-wrapper, .quiz-container { width: 100%; padding: 0 12px; }
+  .preview-options { grid-template-columns: 1fr; }
+  .live-overview, .live-board { padding: 24px; }
+  .live-metrics { grid-template-columns: 1fr; }
+  .live-board-head { flex-direction: column; align-items: flex-start; }
+  .leader-row { grid-template-columns: 42px minmax(0, 1fr) auto; padding: 12px 14px; }
+  .leader-rank { width: 42px; height: 42px; }
+  .leader-score-value { font-size: 24px; }
+  .how-step, .mode-card, .subject-card { padding: 24px; }
+  .how-step { min-height: auto; }
+}
+
+@media (max-width: 520px) {
+  nav { padding: 10px 14px; }
+  .hero { padding: 80px 12px 56px; }
+  .hero-badge { font-size: 11px; padding: 5px 10px; }
+  .hero h1 { line-height: 1.1; }
+  .live-section { padding-top: 16px; }
+  .live-status { font-size: 10px; }
+  .live-board-title { font-size: 24px; }
+  .leader-name { font-size: 16px; }
+  .subjects-grid, .modes-grid { grid-template-columns: 1fr; }
+  .subject-card { padding: 20px; }
+  .contact-form .form-group input, .contact-form .form-group textarea { font-size: 14px; padding: 12px; }
+  .form-submit { padding: 14px; }
+  .mobile-menu { padding: 90px 16px 30px; }
+}
