@@ -1,0 +1,6 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+quiz_arena.db
+backend/.alembic_cache/

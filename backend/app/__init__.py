@@ -1,0 +1,1 @@
+"""QuizArena backend package."""

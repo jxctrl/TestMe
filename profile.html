@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizArena - Profile</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/account.css">
+  <script src="./js/lang.js"></script>
+</head>
+<body>
+  <header class="quiz-header">
+    <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
+    <div class="header-right">
+      <div class="header-user-actions" id="headerUserActions"></div>
+      <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+      <a href="index.html" class="back-btn" data-i18n="backHome">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-hero">
+      <div class="profile-hero-left">
+        <div class="profile-avatar" id="profileAvatar" aria-hidden="true">?</div>
+        <div class="profile-hero-meta">
+          <div class="account-kicker" data-i18n="navProfile">Profile</div>
+          <h1 id="profileUsername">...</h1>
+          <p class="account-copy"><span id="profileEmail"></span> • <span data-i18n="profileMemberSince">Member since</span> <span id="profileMemberSince"></span></p>
+          <div class="profile-level-row">
+            <span class="profile-level-badge" id="profileLevel">Newcomer</span>
+            <span class="profile-top-subject" id="profileTopSubject">No stats yet</span>
+          </div>
+
+          <div class="profile-progress">
+            <div class="progress-track" aria-label="Progress to next level">
+              <div class="progress-fill" id="profileProgressFill" style="width: 0%;"></div>
+            </div>
+            <p class="progress-text" id="profileProgressText">Complete your first quiz to level up!</p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-actions">
+        <a href="quiz.html" class="result-btn primary" data-i18n="profileStartQuiz">Start Practice</a>
+        <a href="admin.html" class="result-btn secondary" id="profileAdminLink" style="display:none" data-i18n="navAdmin">Admin</a>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="stat-caption" data-i18n="profileTotalQuizzes">Total quizzes taken</div>
+        <div class="dashboard-value" id="totalQuizzesCount">0</div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="section-subtitle" data-i18n="profileBestScores">Best score per subject</div>
+        <div class="stat-list" id="bestScoresList"></div>
+      </div>
+    </section>
+
+    <section class="dashboard-card full-width">
+      <div class="section-subtitle" data-i18n="profileHistory">Score history</div>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th data-i18n="profileSubjectHeader">Subject</th>
+              <th data-i18n="profileModeHeader">Mode</th>
+              <th data-i18n="profileScoreHeader">Score</th>
+              <th data-i18n="profileDateHeader">Completed</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/profile.js"></script>
+</body>
+</html>

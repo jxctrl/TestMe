@@ -1,0 +1,35 @@
+[build-system]
+requires = [
+  "setuptools>=68.0.0",
+  "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quizarena"
+version = "1.0.0"
+description = "QuizArena full-stack web application"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "alembic>=1.14.0",
+  "fastapi>=0.115.0",
+  "sqlalchemy>=2.0.36",
+  "uvicorn>=0.34.0",
+  "psycopg[binary]>=3.2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.28.0",
+  "pytest>=8.3.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "backend",
+]
+
+[tool.setuptools]
+package-dir = {"" = "backend"}
+packages = ["app"]

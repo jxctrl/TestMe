@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizArena - Login</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/account.css">
+  <script src="./js/lang.js"></script>
+</head>
+<body>
+  <header class="quiz-header">
+    <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
+    <div class="header-right">
+      <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+      <a href="index.html" class="back-btn" data-i18n="backHome">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="account-main">
+    <section class="account-card">
+      <div class="account-kicker" data-i18n="navLogin">Log In</div>
+      <h1 data-i18n="loginTitle">Welcome back.</h1>
+      <p class="account-copy" data-i18n="loginDesc">Log in to save quiz scores, compete on the leaderboard, and track your progress.</p>
+
+      <form id="authForm" class="account-form" data-auth-page="login">
+        <label for="email" data-i18n="authEmailLabel">Email</label>
+        <input id="email" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+
+        <label for="password" data-i18n="authPasswordLabel">Password</label>
+        <input id="password" name="password" type="password" required placeholder="••••••••" autocomplete="current-password">
+
+        <div class="form-message" id="authMessage"></div>
+        <button type="submit" class="form-submit" data-i18n="loginSubmit">Log In</button>
+      </form>
+
+      <p class="account-switch">
+        <span data-i18n="loginSwitchText">Need an account?</span>
+        <a href="register.html" data-i18n="loginSwitchLink">Register</a>
+      </p>
+    </section>
+  </main>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/auth-pages.js"></script>
+</body>
+</html>

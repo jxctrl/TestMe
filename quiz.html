@@ -17,6 +17,7 @@
   <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
   <div class="header-right">
     <span class="subject-badge" id="subjectBadge" data-i18n="subjectBadgeDefault">Select Subject</span>
+    <div class="header-user-actions" id="headerUserActions"></div>
     <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
     <a href="index.html" class="back-btn" data-i18n="backBtn">← Back</a>
   </div>
@@ -24,9 +25,20 @@
 
 <main class="quiz-main">
   <div class="quiz-container">
+    <div class="auth-guard" id="authPrompt" style="display:none">
+      <h2 data-i18n="quizAuthTitle">Log in to start a real quiz.</h2>
+      <p data-i18n="quizAuthDesc">Your account is required so your scores and leaderboard progress can be saved.</p>
+      <div class="guard-actions">
+        <a href="login.html?redirect=quiz.html" class="result-btn primary" id="quizLoginLink" data-i18n="quizAuthLogin">Log In</a>
+        <a href="register.html?redirect=quiz.html" class="result-btn secondary" id="quizRegisterLink" data-i18n="quizAuthRegister">Create Account</a>
+      </div>
+    </div>
+
+    <div class="page-message" id="quizMessage"></div>
+    <div class="loading-box" id="quizLoading" style="display:none" data-i18n="quizLoading">Loading questions...</div>
 
     <!-- Subject selector -->
-    <div class="subject-select" id="subjectSelect">
+    <div class="subject-select" id="subjectSelect" style="display:none">
       <h1 data-i18n="selectSubject">Choose a subject.</h1>
       <p data-i18n="selectSubjectSub">Pick a topic and start immediately.</p>
       <div class="subject-pills">
@@ -61,6 +73,7 @@
       <div class="result-score" id="resultScore"></div>
       <div class="result-label" id="resultLabel"></div>
       <div class="result-grade" id="resultGrade"></div>
+      <div class="result-save-status" id="resultSaveStatus"></div>
       <div class="result-actions">
         <button id="tryAgainBtn" class="result-btn primary" onclick="restartQuiz()" data-i18n="tryAgain">Try Again</button>
         <a id="backHomeBtn" href="index.html" class="result-btn secondary" data-i18n="backHome">Back to Home</a>
@@ -70,6 +83,8 @@
   </div>
 </main>
 
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/quiz.js"></script>
 </body>
 </html>

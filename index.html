@@ -33,6 +33,7 @@
     <li><a href="#contact" data-i18n="navContact">Contact</a></li>
   </ul>
   <div class="nav-actions">
+    <div class="nav-user-links" id="navUserActions"></div>
     <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
     <a href="#subjects" class="nav-cta" data-i18n="navCta">Start Test →</a>
   </div>
@@ -106,67 +107,7 @@
         <div class="live-board-badge" data-i18n="liveBoardBadge">Top 5</div>
       </div>
 
-      <div class="leaderboard">
-        <div class="leader-row top">
-          <div class="leader-rank top">1</div>
-          <div class="leader-user">
-            <div class="leader-name">CodeNomad</div>
-            <div class="leader-meta"><span>32</span> <span data-i18n="liveRuns">completed runs</span></div>
-          </div>
-          <div class="leader-score">
-            <div class="leader-score-value">9,840</div>
-            <div class="leader-score-label" data-i18n="livePoints">points</div>
-          </div>
-        </div>
-
-        <div class="leader-row">
-          <div class="leader-rank">2</div>
-          <div class="leader-user">
-            <div class="leader-name">Nodira</div>
-            <div class="leader-meta"><span>29</span> <span data-i18n="liveRuns">completed runs</span></div>
-          </div>
-          <div class="leader-score">
-            <div class="leader-score-value">9,320</div>
-            <div class="leader-score-label" data-i18n="livePoints">points</div>
-          </div>
-        </div>
-
-        <div class="leader-row">
-          <div class="leader-rank">3</div>
-          <div class="leader-user">
-            <div class="leader-name">AzizDev</div>
-            <div class="leader-meta"><span>27</span> <span data-i18n="liveRuns">completed runs</span></div>
-          </div>
-          <div class="leader-score">
-            <div class="leader-score-value">8,900</div>
-            <div class="leader-score-label" data-i18n="livePoints">points</div>
-          </div>
-        </div>
-
-        <div class="leader-row">
-          <div class="leader-rank">4</div>
-          <div class="leader-user">
-            <div class="leader-name">Madina</div>
-            <div class="leader-meta"><span>24</span> <span data-i18n="liveRuns">completed runs</span></div>
-          </div>
-          <div class="leader-score">
-            <div class="leader-score-value">8,540</div>
-            <div class="leader-score-label" data-i18n="livePoints">points</div>
-          </div>
-        </div>
-
-        <div class="leader-row">
-          <div class="leader-rank">5</div>
-          <div class="leader-user">
-            <div class="leader-name">ByteBek</div>
-            <div class="leader-meta"><span>22</span> <span data-i18n="liveRuns">completed runs</span></div>
-          </div>
-          <div class="leader-score">
-            <div class="leader-score-value">8,110</div>
-            <div class="leader-score-label" data-i18n="livePoints">points</div>
-          </div>
-        </div>
-      </div>
+      <div class="leaderboard" id="leaderboardRows"></div>
     </div>
   </div>
 </section>
@@ -373,6 +314,8 @@
   </div>
 </footer>
 
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
 <script src="./js/app.js"></script>
 </body>
 </html>

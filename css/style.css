@@ -128,6 +128,44 @@ nav.scrolled {
   gap: 12px;
 }
 
+.nav-user-links,
+.header-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nav-user-link,
+.nav-user-pill,
+.nav-user-button {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.nav-user-pill {
+  color: var(--accent);
+  border-color: rgba(200, 241, 53, 0.3);
+  background: rgba(200, 241, 53, 0.08);
+}
+
+.nav-user-link:hover,
+.nav-user-pill:hover,
+.nav-user-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
 /* LANG TOGGLE */
 .lang-btn {
   background: transparent;
@@ -170,6 +208,9 @@ nav.scrolled {
 .menu-btn:focus-visible,
 button:focus-visible,
 a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
 .subject-pill:focus-visible,
 .nav-cta:focus-visible,
 .lang-btn:focus-visible,
@@ -202,6 +243,14 @@ body.no-scroll {
   font-family: 'Syne', sans-serif;
   font-size: 32px;
   font-weight: 800;
+}
+
+.leader-empty {
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 32px 24px;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* =====================

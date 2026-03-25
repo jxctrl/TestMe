@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizArena - Admin</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/account.css">
+  <script src="./js/lang.js"></script>
+</head>
+<body>
+  <header class="quiz-header">
+    <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
+    <div class="header-right">
+      <div class="header-user-actions" id="headerUserActions"></div>
+      <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+      <a href="index.html" class="back-btn" data-i18n="backHome">Back to Home</a>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-hero">
+      <div>
+        <div class="account-kicker" data-i18n="navAdmin">Admin</div>
+        <h1 data-i18n="adminTitle">Question and user management.</h1>
+        <p class="account-copy" data-i18n="adminDesc">Add bilingual questions, remove outdated ones, and monitor user activity from one panel.</p>
+      </div>
+    </section>
+
+    <section class="dashboard-grid admin-grid">
+      <div class="dashboard-card">
+        <div class="section-subtitle" data-i18n="adminAddQuestion">Add question</div>
+        <form id="questionForm" class="account-form stacked-form">
+          <label for="subject" data-i18n="adminSubjectLabel">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="mathematics">Mathematics</option>
+            <option value="english">English</option>
+            <option value="science">Science</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            <option value="cs">Computer Science</option>
+          </select>
+
+          <label for="questionTextEn" data-i18n="adminQuestionEn">Question text (EN)</label>
+          <textarea id="questionTextEn" name="question_text_en" rows="3" required></textarea>
+
+          <label for="questionTextUz" data-i18n="adminQuestionUz">Question text (UZ)</label>
+          <textarea id="questionTextUz" name="question_text_uz" rows="3" required></textarea>
+
+          <div class="options-columns">
+            <div>
+              <label for="optionEn1" data-i18n="adminOptionsEn">Options (EN)</label>
+              <input id="optionEn1" name="option_en_1" type="text" required>
+              <input name="option_en_2" type="text" required>
+              <input name="option_en_3" type="text" required>
+              <input name="option_en_4" type="text" required>
+            </div>
+            <div>
+              <label for="optionUz1" data-i18n="adminOptionsUz">Options (UZ)</label>
+              <input id="optionUz1" name="option_uz_1" type="text" required>
+              <input name="option_uz_2" type="text" required>
+              <input name="option_uz_3" type="text" required>
+              <input name="option_uz_4" type="text" required>
+            </div>
+          </div>
+
+          <label for="correctAnswer" data-i18n="adminCorrectOption">Correct answer</label>
+          <select id="correctAnswer" name="correct_answer_index" required>
+            <option value="0">A</option>
+            <option value="1">B</option>
+            <option value="2">C</option>
+            <option value="3">D</option>
+          </select>
+
+          <div class="form-message" id="adminMessage"></div>
+          <button type="submit" class="form-submit" data-i18n="adminSaveQuestion">Save Question</button>
+        </form>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="section-subtitle" data-i18n="adminQuestionBank">Question bank</div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th data-i18n="adminSubjectLabel">Subject</th>
+                <th data-i18n="adminQuestionEnShort">EN</th>
+                <th data-i18n="adminQuestionUzShort">UZ</th>
+                <th data-i18n="adminActions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="questionsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-card full-width">
+      <div class="section-subtitle" data-i18n="adminUsersTitle">Users</div>
+      <div class="table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th data-i18n="adminUserHeader">User</th>
+              <th data-i18n="authEmailLabel">Email</th>
+              <th data-i18n="profileDateHeader">Created</th>
+              <th data-i18n="adminTotalQuizzes">Quizzes</th>
+              <th data-i18n="adminBestScore">Best score</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/admin.js"></script>
+</body>
+</html>
