@@ -238,6 +238,61 @@
   border-bottom: 1px solid var(--border);
 }
 
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.badge-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(200, 241, 53, 0.14);
+  background:
+    radial-gradient(circle at top right, rgba(200, 241, 53, 0.08), transparent 50%),
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+.badge-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(200, 241, 53, 0.12);
+  border: 1px solid rgba(200, 241, 53, 0.18);
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.badge-copy {
+  min-width: 0;
+}
+
+.badge-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.badge-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.badge-date {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
 .full-width {
   margin-top: 20px;
 }
