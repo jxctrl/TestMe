@@ -17,7 +17,6 @@
     <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
     <div class="header-right">
       <div class="header-user-actions" id="headerUserActions"></div>
-      <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
       <a href="profile.html" class="back-btn" data-i18n="settingsBackToProfile">← Back</a>
     </div>
   </header>
@@ -25,7 +24,7 @@
   <main class="dashboard-main dashboard-theme settings-main">
     <section class="settings-grid">
       <article class="dashboard-card settings-preview-card">
-        <div class="section-subtitle" data-i18n="settingsAvatarLabel">Profile picture</div>
+        <div class="section-subtitle" data-i18n="settingsOverviewTitle">Account overview</div>
         <div class="settings-preview-stack">
           <div class="profile-avatar settings-avatar" id="settingsAvatar" aria-hidden="true">
             <img id="settingsAvatarImage" class="profile-avatar-img" alt="" />
@@ -36,29 +35,84 @@
             <p class="account-copy" data-i18n="settingsChangeAvatarHint"></p>
             <div class="settings-selected-file" id="settingsSelectedFile" aria-live="polite"></div>
           </div>
-        </div>
-      </article>
-
-      <article class="dashboard-card settings-form-card">
-        <div class="settings-card-head">
-          <div class="section-subtitle" data-i18n="settingsTitle">Account Settings</div>
-          <p class="dashboard-panel-copy" data-i18n="settingsChangeAvatarHint"></p>
-        </div>
-        <form id="settingsForm" class="account-form stacked-form settings-form">
-          <label for="settingsUsername" data-i18n="settingsUsernameLabel">Username</label>
-          <input id="settingsUsername" name="username" type="text" required minlength="3" maxlength="50" />
-
-          <label for="settingsAvatarInput" data-i18n="settingsAvatarLabel">Profile picture</label>
-          <input id="settingsAvatarInput" name="avatar" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
-
-          <div class="form-message" id="settingsMessage"></div>
-
-          <div class="settings-actions">
-            <button type="submit" class="form-submit" data-i18n="settingsSaveButton">Save changes</button>
-            <a href="profile.html" class="result-btn secondary" data-i18n="settingsBackToProfile">Back to Profile</a>
+          <div class="settings-overview-grid">
+            <article class="settings-overview-item">
+              <span class="settings-overview-label" data-i18n="authEmailLabel">Email</span>
+              <strong id="settingsOverviewEmail">—</strong>
+            </article>
+            <article class="settings-overview-item">
+              <span class="settings-overview-label" data-i18n="profileMemberSince">Member since</span>
+              <strong id="settingsOverviewMemberSince">—</strong>
+            </article>
+            <article class="settings-overview-item">
+              <span class="settings-overview-label" data-i18n="settingsAccessLabel">Access</span>
+              <strong id="settingsOverviewRole">—</strong>
+            </article>
           </div>
-        </form>
+          <div class="settings-quick-links">
+            <a href="profile.html" class="result-btn secondary" data-i18n="navProfile">Profile</a>
+            <a href="quiz.html" class="result-btn primary" data-i18n="profileStartQuiz">Start Practice</a>
+            <a href="competition.html" class="result-btn secondary" data-i18n="modeCompetition">Competition</a>
+            <a href="admin.html" class="result-btn secondary" id="settingsAdminShortcut" style="display:none" data-i18n="navAdmin">Admin</a>
+          </div>
+        </div>
       </article>
+
+      <section class="settings-stack">
+        <article class="dashboard-card settings-form-card">
+          <div class="settings-card-head">
+            <div class="section-subtitle" data-i18n="settingsTitle">Account Settings</div>
+            <p class="dashboard-panel-copy" data-i18n="settingsAccountHint">Update your public profile details and avatar here.</p>
+          </div>
+          <form id="settingsForm" class="account-form stacked-form settings-form">
+            <label for="settingsUsername" data-i18n="settingsUsernameLabel">Username</label>
+            <input id="settingsUsername" name="username" type="text" required minlength="3" maxlength="50" autocomplete="username" />
+
+            <label for="settingsEmail" data-i18n="authEmailLabel">Email</label>
+            <input id="settingsEmail" name="email" type="email" readonly />
+            <p class="account-copy settings-field-note" data-i18n="settingsEmailHint">Email changes are not available yet.</p>
+
+            <label for="settingsAvatarInput" data-i18n="settingsAvatarLabel">Profile picture</label>
+            <input id="settingsAvatarInput" name="avatar" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+
+            <div class="form-message" id="settingsMessage"></div>
+
+            <div class="settings-actions">
+              <button type="submit" class="form-submit" data-i18n="settingsSaveButton">Save changes</button>
+              <a href="profile.html" class="result-btn secondary" data-i18n="settingsBackToProfile">Back to Profile</a>
+            </div>
+          </form>
+        </article>
+
+        <article class="dashboard-card settings-preferences-card">
+          <div class="settings-card-head">
+            <div class="section-subtitle" data-i18n="settingsPreferencesTitle">Preferences</div>
+            <p class="dashboard-panel-copy" data-i18n="settingsPreferencesHint">Language updates instantly and stays saved on this browser.</p>
+          </div>
+          <div class="settings-preferences-grid">
+            <div class="settings-preference-item">
+              <label for="settingsLanguage" data-i18n="settingsLanguageLabel">Language</label>
+              <select id="settingsLanguage" name="language" data-language-select>
+                <option value="en" data-i18n="settingsLanguageEnglish">English</option>
+                <option value="uz" data-i18n="settingsLanguageUzbek">O'zbek</option>
+              </select>
+              <p class="account-copy settings-field-note" data-i18n="settingsLanguageHint">We moved language controls here to keep the navbar cleaner on smaller screens.</p>
+            </div>
+          </div>
+          <div class="form-message" id="settingsPreferenceMessage"></div>
+        </article>
+
+        <article class="dashboard-card settings-danger-card">
+          <div class="settings-card-head">
+            <div class="section-subtitle danger-subtitle" data-i18n="settingsDangerTitle">Danger zone</div>
+            <p class="dashboard-panel-copy" data-i18n="settingsDangerHint">Deleting your account permanently removes your profile, scores, and progress history.</p>
+          </div>
+          <div class="settings-danger-actions">
+            <button type="button" class="danger-inline-btn settings-delete-btn" id="deleteAccountBtn" data-i18n="settingsDeleteButton">Delete account</button>
+          </div>
+          <div class="form-message" id="settingsDangerMessage"></div>
+        </article>
+      </section>
     </section>
   </main>
 

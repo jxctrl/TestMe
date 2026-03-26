@@ -176,7 +176,10 @@ const TRANSLATIONS = {
     navLogout: "Log Out",
     dashboardOverview: "Overview",
     settingsTitle: "Account Settings",
+    settingsOverviewTitle: "Account overview",
+    settingsAccountHint: "Update your public profile details and avatar here.",
     settingsUsernameLabel: "Username",
+    settingsEmailHint: "Email changes are not available yet.",
     settingsAvatarLabel: "Profile picture",
     settingsChangeAvatarHint: "Optional. Upload an image to update your avatar.",
     settingsSaveButton: "Save changes",
@@ -184,6 +187,24 @@ const TRANSLATIONS = {
     settingsSaving: "Saving...",
     settingsSaved: "Settings updated ✓",
     settingsSaveFailed: "Could not save your changes.",
+    settingsPreferencesTitle: "Preferences",
+    settingsPreferencesHint: "Language updates instantly and stays saved on this browser.",
+    settingsLanguageLabel: "Language",
+    settingsLanguageEnglish: "English",
+    settingsLanguageUzbek: "O'zbek",
+    settingsLanguageHint: "We moved language controls here to keep the navbar cleaner on smaller screens.",
+    settingsLanguageSaved: "Language updated ✓",
+    settingsAccessLabel: "Access",
+    settingsRoleAdmin: "Admin access",
+    settingsRoleMember: "Member access",
+    settingsUsernameTooShort: "Username must be at least 3 characters.",
+    settingsImageReadFailed: "Failed to read selected image.",
+    settingsDangerTitle: "Danger zone",
+    settingsDangerHint: "Deleting your account permanently removes your profile, scores, and progress history.",
+    settingsDeleteButton: "Delete account",
+    settingsDeleting: "Deleting...",
+    settingsDeleteConfirm: "Delete your account permanently? This cannot be undone.",
+    settingsDeleteFailed: "Could not delete your account.",
     quizAuthTitle: "Log in to start a real quiz.",
     quizAuthDesc: "Your account is required so your scores and leaderboard progress can be saved.",
     quizAuthLogin: "Log In",
@@ -480,7 +501,10 @@ const TRANSLATIONS = {
     navLogout: "Chiqish",
     dashboardOverview: "Umumiy",
     settingsTitle: "Akkaunt sozlamalari",
+    settingsOverviewTitle: "Akkaunt ma'lumotlari",
+    settingsAccountHint: "Profil ma'lumotlaringiz va avataringizni shu yerda yangilang.",
     settingsUsernameLabel: "Foydalanuvchi nomi",
+    settingsEmailHint: "Email manzilini hozircha o'zgartirib bo'lmaydi.",
     settingsAvatarLabel: "Profil rasmi",
     settingsChangeAvatarHint: "Ixtiyoriy. Avatarni yangilash uchun rasm yuklang.",
     settingsSaveButton: "O'zgarishlarni saqlash",
@@ -488,6 +512,24 @@ const TRANSLATIONS = {
     settingsSaving: "Saqlanmoqda...",
     settingsSaved: "Sozlamalar yangilandi ✓",
     settingsSaveFailed: "O'zgarishlarni saqlab bo'lmadi.",
+    settingsPreferencesTitle: "Moslamalar",
+    settingsPreferencesHint: "Til darhol yangilanadi va shu brauzerda saqlanib qoladi.",
+    settingsLanguageLabel: "Til",
+    settingsLanguageEnglish: "English",
+    settingsLanguageUzbek: "O'zbek",
+    settingsLanguageHint: "Kichik ekranlarda navbar toza ko'rinishi uchun til boshqaruvini shu yerga ko'chirdik.",
+    settingsLanguageSaved: "Til yangilandi ✓",
+    settingsAccessLabel: "Ruxsat",
+    settingsRoleAdmin: "Admin ruxsati",
+    settingsRoleMember: "Foydalanuvchi ruxsati",
+    settingsUsernameTooShort: "Foydalanuvchi nomi kamida 3 ta belgidan iborat bo'lishi kerak.",
+    settingsImageReadFailed: "Tanlangan rasmni o'qib bo'lmadi.",
+    settingsDangerTitle: "Xavfli zona",
+    settingsDangerHint: "Akkauntni o'chirish profilingizni, natijalaringizni va tarixingizni butunlay olib tashlaydi.",
+    settingsDeleteButton: "Akkauntni o'chirish",
+    settingsDeleting: "O'chirilmoqda...",
+    settingsDeleteConfirm: "Akkauntingizni butunlay o'chirasizmi? Buni qaytarib bo'lmaydi.",
+    settingsDeleteFailed: "Akkauntni o'chirib bo'lmadi.",
     quizAuthTitle: "Haqiqiy testni boshlash uchun kiring.",
     quizAuthDesc: "Natijalaringiz va reytingdagi o'rningiz saqlanishi uchun akkaunt kerak bo'ladi.",
     quizAuthLogin: "Kirish",
@@ -627,9 +669,9 @@ function setLanguage(lang) {
     const key = el.getAttribute('data-i18n');
     el.textContent = t(key);
   });
-  // Update toggle button text
-  const btn = document.getElementById('langBtn');
-  if (btn) btn.textContent = lang === 'en' ? "🇺🇿 O'Z" : "🇬🇧 EN";
+  document.querySelectorAll('[data-language-select]').forEach((select) => {
+    select.value = lang;
+  });
 
   if (typeof handleLanguageChange === 'function') {
     handleLanguageChange();

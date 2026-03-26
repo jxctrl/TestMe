@@ -34,7 +34,9 @@
     flex-wrap: wrap;
     justify-content: flex-end;
   }
-  .nav-user-links { justify-content: flex-end; }
+  .nav-user-links { justify-content: flex-end; flex: 0 1 auto; }
+  .user-menu-name { display: none; }
+  .user-menu-trigger { padding-right: 10px; }
   .nav-actions .lang-btn { margin-right: 0; }
   .mobile-menu { display: none; }
 
@@ -67,6 +69,7 @@
 
 @media (max-width: 520px) {
   nav { padding: 10px 14px; }
+  .user-menu-panel { width: min(240px, calc(100vw - 24px)); }
   .hero { padding: 80px 12px 56px; }
   .hero-badge { font-size: 11px; padding: 5px 10px; }
   .hero h1 { line-height: 1.1; }

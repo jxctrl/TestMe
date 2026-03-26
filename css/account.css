@@ -10,14 +10,12 @@
   justify-content: center;
 }
 
-.dashboard-main {
-  max-width: 80%;
+.dashboard-main,
+.settings-main {
+  max-width: 90%;
   margin: 0 auto;
 }
 
-.settings-main {
-  max-width: 1160px;
-}
 
 /* .dashboard-theme {
   position: relative;
@@ -207,6 +205,11 @@
   align-items: stretch;
 }
 
+.settings-stack {
+  display: grid;
+  gap: 20px;
+}
+
 .settings-preview-card,
 .settings-form-card {
   display: flex;
@@ -268,6 +271,51 @@
 
 .settings-selected-file.visible {
   display: inline-flex;
+}
+
+.settings-overview-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.settings-overview-item {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(92, 110, 170, 0.16);
+  background: rgba(12, 18, 34, 0.68);
+  text-align: center;
+}
+
+.settings-overview-label {
+  color: #7f91bf;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.settings-overview-item strong {
+  color: #f1f4ff;
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.settings-quick-links {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.settings-quick-links .result-btn {
+  min-width: 160px;
+  text-align: center;
 }
 
 .settings-card-head {
@@ -430,7 +478,8 @@
 }
 
 .account-form label,
-.stacked-form label {
+.stacked-form label,
+.settings-preference-item label {
   font-size: 13px;
   color: #d5ddf5;
   font-weight: 600;
@@ -441,7 +490,8 @@
 .account-form select,
 .stacked-form input,
 .stacked-form textarea,
-.stacked-form select {
+.stacked-form select,
+.settings-preference-item select {
   width: 100%;
   border: 1px solid rgba(88, 105, 163, 0.28);
   border-radius: 14px;
@@ -458,7 +508,8 @@
 .account-form select:focus,
 .stacked-form input:focus,
 .stacked-form textarea:focus,
-.stacked-form select:focus {
+.stacked-form select:focus,
+.settings-preference-item select:focus {
   border-color: rgba(124, 132, 255, 0.52);
   box-shadow: 0 0 0 4px rgba(116, 124, 255, 0.14);
 }
@@ -487,6 +538,12 @@
   margin-top: 0;
 }
 
+.settings-form input[readonly] {
+  color: #97a5c8;
+  cursor: not-allowed;
+  opacity: 0.88;
+}
+
 .settings-form input[type="file"] {
   padding: 10px 12px;
   color: #a9b6d5;
@@ -510,6 +567,32 @@
 .settings-form input[type="file"]::file-selector-button:hover {
   border-color: rgba(141, 151, 255, 0.42);
   transform: translateY(-1px);
+}
+
+.settings-field-note {
+  margin-top: -4px;
+}
+
+.settings-preferences-grid,
+.settings-danger-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.settings-preference-item {
+  display: grid;
+  gap: 12px;
+}
+
+.settings-delete-btn {
+  width: fit-content;
+  min-width: 180px;
+  min-height: 46px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.danger-subtitle {
+  color: #ff9baa;
 }
 
 .account-switch {
@@ -1083,6 +1166,10 @@
     justify-content: flex-start;
   }
 
+  .settings-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
   .history-item {
     grid-template-columns: 1fr;
     align-items: start;
@@ -1131,6 +1218,15 @@
 
   .settings-preview-copy h1 {
     font-size: 32px;
+  }
+
+  .settings-quick-links {
+    flex-direction: column;
+  }
+
+  .settings-quick-links .result-btn,
+  .settings-delete-btn {
+    width: 100%;
   }
 
   .dashboard-stat-value {

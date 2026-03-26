@@ -1,6 +1,7 @@
 (function () {
   const TOKEN_KEY = 'quizarena_token';
   const USER_KEY = 'quizarena_user';
+  let menuListenersAttached = false;
 
   function getToken() {
     return localStorage.getItem(TOKEN_KEY);
@@ -107,6 +108,135 @@
     return `<a href="${href}" class="${className}">${label}</a>`;
   }
 
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function getAvatarUrl(user) {
+    return user?.avatar_url || user?.avatarUrl || user?.avatar || null;
+  }
+
+  function getUserInitial(user) {
+    return (user?.username || 'U').trim().charAt(0).toUpperCase() || 'U';
+  }
+
+  function closeAllUserMenus(exceptMenu = null) {
+    document.querySelectorAll('.user-menu').forEach((menu) => {
+      if (menu === exceptMenu) return;
+      menu.classList.remove('open');
+      const trigger = menu.querySelector('.user-menu-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  function ensureMenuListeners() {
+    if (menuListenersAttached) return;
+    menuListenersAttached = true;
+
+    document.addEventListener('click', (event) => {
+      const activeMenu = event.target.closest('.user-menu');
+      if (!activeMenu) {
+        closeAllUserMenus();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeAllUserMenus();
+      }
+    });
+  }
+
+  function createUserMenuMarkup(elementId, user) {
+    const avatarUrl = getAvatarUrl(user);
+    const initial = getUserInitial(user);
+    const menuId = `${elementId}Menu`;
+    const triggerId = `${elementId}Trigger`;
+    const logoutId = `${elementId}Logout`;
+    const practiceLabel = t('profileStartQuiz');
+    const competitionLabel = t('modeCompetition');
+    const safeUsername = escapeHtml(user.username);
+    const safeEmail = escapeHtml(user.email || '');
+
+    return `
+      <div class="user-menu" id="${menuId}">
+        <button
+          type="button"
+          class="user-menu-trigger"
+          id="${triggerId}"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label="${t('navProfile')}"
+        >
+          <span class="user-menu-avatar" aria-hidden="true">
+            ${avatarUrl
+              ? `<img src="${avatarUrl}" alt="" class="user-menu-avatar-image" />`
+              : `<span class="user-menu-avatar-initial">${initial}</span>`}
+          </span>
+          <span class="user-menu-name">${safeUsername}</span>
+          <span class="user-menu-caret" aria-hidden="true">▾</span>
+        </button>
+
+        <div class="user-menu-panel" role="menu" aria-labelledby="${triggerId}">
+          <div class="user-menu-head">
+            <span class="user-menu-avatar user-menu-avatar-large" aria-hidden="true">
+              ${avatarUrl
+                ? `<img src="${avatarUrl}" alt="" class="user-menu-avatar-image" />`
+                : `<span class="user-menu-avatar-initial">${initial}</span>`}
+            </span>
+            <div class="user-menu-meta">
+              <strong>${safeUsername}</strong>
+              <span>${safeEmail}</span>
+            </div>
+          </div>
+
+          <a href="profile.html" class="user-menu-link" role="menuitem">${t('navProfile')}</a>
+          <a href="settings.html" class="user-menu-link" role="menuitem">${t('navSettings')}</a>
+          <a href="quiz.html" class="user-menu-link" role="menuitem">${practiceLabel}</a>
+          <a href="competition.html" class="user-menu-link" role="menuitem">${competitionLabel}</a>
+          ${user.is_admin ? `<a href="admin.html" class="user-menu-link" role="menuitem">${t('navAdmin')}</a>` : ''}
+          <button type="button" class="user-menu-link user-menu-logout" role="menuitem" id="${logoutId}">${t('navLogout')}</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function attachUserMenu(elementId) {
+    const menu = document.getElementById(`${elementId}Menu`);
+    if (!menu) return;
+
+    ensureMenuListeners();
+
+    const trigger = document.getElementById(`${elementId}Trigger`);
+    const logoutButton = document.getElementById(`${elementId}Logout`);
+
+    if (trigger) {
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const willOpen = !menu.classList.contains('open');
+        closeAllUserMenus(menu);
+        menu.classList.toggle('open', willOpen);
+        trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    }
+
+    menu.querySelectorAll('.user-menu-link[href]').forEach((link) => {
+      link.addEventListener('click', () => closeAllUserMenus());
+    });
+
+    if (logoutButton) {
+      logoutButton.addEventListener('click', () => {
+        closeAllUserMenus();
+        logout();
+      });
+    }
+  }
+
   function renderUserActions(elementId, { compact = false } = {}) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -120,17 +250,8 @@
       return;
     }
 
-    const links = [
-      createLink(user.username, 'profile.html', compact ? 'nav-user-pill' : 'nav-user-link'),
-      user.is_admin ? createLink(t('navAdmin'), 'admin.html') : '',
-      `<button type="button" class="nav-user-link nav-user-button" id="${elementId}Logout">${t('navLogout')}</button>`
-    ].join('');
-
-    element.innerHTML = links;
-    const logoutButton = document.getElementById(`${elementId}Logout`);
-    if (logoutButton) {
-      logoutButton.addEventListener('click', logout);
-    }
+    element.innerHTML = createUserMenuMarkup(elementId, user, compact);
+    attachUserMenu(elementId);
   }
 
   window.authClient = {
