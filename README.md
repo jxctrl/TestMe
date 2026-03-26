@@ -51,8 +51,10 @@ It runs fully in the browser with no backend yet. A Python/FastAPI backend with 
 ## Tech Stack
 
 **Current (frontend)**
-- HTML, CSS, JavaScript — no frameworks, no dependencies
-- Custom i18n system using `localStorage` for language persistence
+- Static HTML, CSS, JavaScript pages for the original site
+- New React + Vite app under `frontend/` for the API-driven experience
+- Shared browser auth state via `localStorage`
+- Custom i18n system on the legacy pages using `localStorage` for language persistence
 
 **Planned (backend)**
 - Python + FastAPI
@@ -67,18 +69,13 @@ It runs fully in the browser with no backend yet. A Python/FastAPI backend with 
 
 ```
 QuizArena/
-├── index.html          # Landing page
-├── quiz.html           # Practice mode
-├── competition.html    # Competition mode
+├── index.html          # Legacy landing page
+├── quiz.html           # Legacy practice mode
+├── competition.html    # Legacy competition mode
+├── frontend/           # React + Vite SPA for the FastAPI backend
+├── backend/            # FastAPI app, routers, models, schemas
 ├── css/
-│   ├── style.css       # Main styles
-│   ├── quiz.css        # Quiz and competition UI
-│   └── media.css       # Responsive breakpoints
 ├── js/
-│   ├── app.js          # Loader, navbar, contact form
-│   ├── lang.js         # Translation system (EN/UZ)
-│   ├── quiz.js         # Quiz logic + all question data
-│   └── competition.js  # Competition logic + timer
 └── favicon/
 ```
 
@@ -97,6 +94,20 @@ QuizArena/
 - [ ] Leaderboard (all-time + weekly)
 - [ ] Admin panel for managing questions
 - [x] Deploy publicly
+
+## Running The Full Stack
+
+**Backend**
+- `uvicorn app.main:app --app-dir backend --reload`
+
+**React frontend**
+- `cd frontend`
+- `npm install`
+- `npm run dev`
+
+The Vite dev server proxies API calls to `http://127.0.0.1:8000`.
+In development the React app runs at `http://127.0.0.1:5173/`.
+When you build the React app with `npm run build`, FastAPI serves it from `/app`.
 
 ---
 

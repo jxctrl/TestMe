@@ -55,12 +55,14 @@
 
     try {
       const profile = await window.apiClient.get('/users/me', { auth: true });
+      const avatarUrl = profile.avatar_url || profile.avatarUrl || profile.avatar || null;
       setUser({
         id: profile.id,
         username: profile.username,
         email: profile.email,
         created_at: profile.created_at,
-        is_admin: profile.is_admin
+        is_admin: profile.is_admin,
+        avatar_url: avatarUrl
       });
       return profile;
     } catch (error) {

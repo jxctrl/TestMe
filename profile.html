@@ -22,65 +22,134 @@
     </div>
   </header>
 
-  <main class="dashboard-main">
-    <section class="dashboard-hero">
-      <div class="profile-hero-left">
-        <div class="profile-avatar" id="profileAvatar" aria-hidden="true">?</div>
-        <div class="profile-hero-meta">
-          <div class="account-kicker" data-i18n="navProfile">Profile</div>
-          <h1 id="profileUsername">...</h1>
-          <p class="account-copy"><span id="profileEmail"></span> • <span data-i18n="profileMemberSince">Member since</span> <span id="profileMemberSince"></span></p>
-          <div class="profile-level-row">
-            <span class="profile-level-badge" id="profileLevel">Newcomer</span>
-            <span class="profile-top-subject" id="profileTopSubject">No stats yet</span>
+  <main class="dashboard-main dashboard-theme">
+    <section class="dashboard-shell">
+      <section class="dashboard-hero profile-dashboard-hero">
+        <div class="dashboard-toolbar">
+          <div class="profile-hero-left">
+            <div class="profile-avatar" id="profileAvatar" aria-hidden="true">
+              <img id="profileAvatarImage" class="profile-avatar-img" alt="" />
+              <span id="profileAvatarInitial">?</span>
+            </div>
+            <div class="profile-hero-meta">
+              <div class="account-kicker" data-i18n="navProfile">Profile</div>
+              <h1 id="profileUsername">...</h1>
+              <p class="account-copy"><span id="profileEmail"></span> • <span data-i18n="profileMemberSince">Member since</span> <span id="profileMemberSince"></span></p>
+              <div class="profile-level-row">
+                <span class="profile-level-badge" id="profileLevel">Newcomer</span>
+                <span class="profile-top-subject" id="profileTopSubject">No stats yet</span>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard-actions">
+            <a href="quiz.html" class="result-btn primary" data-i18n="profileStartQuiz">Start Practice</a>
+            <a href="settings.html" class="result-btn secondary" data-i18n="navSettings">Settings</a>
+            <a href="admin.html" class="result-btn secondary" id="profileAdminLink" style="display:none" data-i18n="navAdmin">Admin</a>
+          </div>
+        </div>
+
+        <div class="dashboard-nav-strip">
+          <a href="#profileOverviewPanel" class="dashboard-tab active" data-i18n="dashboardOverview">Overview</a>
+          <a href="#profilePerformancePanel" class="dashboard-tab" data-i18n="profilePerformanceTab">Performance</a>
+          <a href="#profileHistoryPanel" class="dashboard-tab" data-i18n="profileHistory">Score history</a>
+        </div>
+      </section>
+
+      <section class="dashboard-stat-grid" id="profileOverviewPanel">
+        <article class="dashboard-stat-card">
+          <div class="stat-caption" data-i18n="profileTotalQuizzes">Total quizzes taken</div>
+          <div class="dashboard-stat-value" id="totalQuizzesCount">0</div>
+          <div class="dashboard-stat-note" id="profileLevelSummary">-</div>
+        </article>
+
+        <article class="dashboard-stat-card dashboard-stat-card-accent">
+          <div class="stat-caption" data-i18n="profileBestResult">Best result</div>
+          <div class="dashboard-stat-value" id="profileBestScoreValue">-</div>
+          <div class="dashboard-stat-note" id="profileBestScoreNote">-</div>
+        </article>
+
+        <article class="dashboard-stat-card dashboard-stat-card-purple">
+          <div class="stat-caption" data-i18n="profileBadgesUnlocked">Badges unlocked</div>
+          <div class="dashboard-stat-value" id="profileBadgeCount">0</div>
+          <div class="dashboard-stat-note" id="profileBadgeNote">-</div>
+        </article>
+
+        <article class="dashboard-stat-card dashboard-stat-card-cyan">
+          <div class="stat-caption" data-i18n="profileFavoriteMode">Favorite mode</div>
+          <div class="dashboard-stat-value dashboard-stat-value-small" id="profileFavoriteModeValue">-</div>
+          <div class="dashboard-stat-note" id="profileFavoriteModeNote">-</div>
+        </article>
+      </section>
+
+      <section class="dashboard-chart-grid profile-primary-charts" id="profilePerformancePanel">
+        <article class="dashboard-card dashboard-panel chart-panel chart-panel-wide">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="profileTrendTitle">Score trend</div>
+              <p class="dashboard-panel-copy" id="profileTrendSummary">Track how your last runs are moving.</p>
+            </div>
+            <div class="dashboard-chip" id="profileTrendBadge">--</div>
           </div>
 
-          <div class="profile-progress">
+          <div class="chart-stage line-chart-stage" id="profileTrendChart"></div>
+        </article>
+
+        <article class="dashboard-card dashboard-panel chart-panel">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="profileSubjectFocus">Subject focus</div>
+              <p class="dashboard-panel-copy" id="profileTopSubjectPanel">No stats yet</p>
+            </div>
+          </div>
+
+          <div class="donut-stage">
+            <div class="donut-chart" id="profileSubjectDonut"></div>
+            <div class="donut-legend" id="profileSubjectLegend"></div>
+          </div>
+
+          <div class="profile-progress-shell">
             <div class="progress-track" aria-label="Progress to next level">
               <div class="progress-fill" id="profileProgressFill" style="width: 0%;"></div>
             </div>
             <p class="progress-text" id="profileProgressText">Complete your first quiz to level up!</p>
           </div>
+
+          <div class="best-scores-grid compact-best-scores" id="bestScoresList"></div>
+        </article>
+      </section>
+
+      <section class="dashboard-chart-grid profile-secondary-charts">
+        <article class="dashboard-card dashboard-panel chart-panel">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="profileActivityTitle">Weekly activity</div>
+              <p class="dashboard-panel-copy" id="profileActivitySummary">See how active you have been over the last seven days.</p>
+            </div>
+          </div>
+
+          <div class="bar-chart-stage" id="profileActivityChart"></div>
+        </article>
+
+        <article class="dashboard-card dashboard-panel">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="profileRecentBadges">Recent badges earned</div>
+              <p class="dashboard-panel-copy" data-i18n="profileNoBadges">No badges yet. Complete quizzes to start unlocking them.</p>
+            </div>
+          </div>
+          <div class="badge-grid compact-badge-grid" id="recentBadgesList"></div>
+        </article>
+      </section>
+
+      <section class="dashboard-card dashboard-panel full-width" id="profileHistoryPanel">
+        <div class="dashboard-card-head">
+          <div>
+            <div class="section-subtitle" data-i18n="profileHistory">Score history</div>
+            <p class="dashboard-panel-copy" data-i18n="profileNoScores">No scores yet. Finish a quiz to start building your history.</p>
+          </div>
         </div>
-      </div>
-      <div class="dashboard-actions">
-        <a href="quiz.html" class="result-btn primary" data-i18n="profileStartQuiz">Start Practice</a>
-        <a href="admin.html" class="result-btn secondary" id="profileAdminLink" style="display:none" data-i18n="navAdmin">Admin</a>
-      </div>
-    </section>
-
-    <section class="dashboard-grid">
-      <div class="dashboard-card">
-        <div class="stat-caption" data-i18n="profileTotalQuizzes">Total quizzes taken</div>
-        <div class="dashboard-value" id="totalQuizzesCount">0</div>
-      </div>
-
-      <div class="dashboard-card">
-        <div class="section-subtitle" data-i18n="profileBestScores">Best score per subject</div>
-        <div class="stat-list" id="bestScoresList"></div>
-      </div>
-    </section>
-
-    <section class="dashboard-card full-width">
-      <div class="section-subtitle" data-i18n="profileRecentBadges">Recent badges earned</div>
-      <div class="badge-grid" id="recentBadgesList"></div>
-    </section>
-
-    <section class="dashboard-card full-width">
-      <div class="section-subtitle" data-i18n="profileHistory">Score history</div>
-      <div class="table-wrap">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th data-i18n="profileSubjectHeader">Subject</th>
-              <th data-i18n="profileModeHeader">Mode</th>
-              <th data-i18n="profileScoreHeader">Score</th>
-              <th data-i18n="profileDateHeader">Completed</th>
-            </tr>
-          </thead>
-          <tbody id="historyBody"></tbody>
-        </table>
-      </div>
+        <div class="history-list" id="historyList"></div>
+      </section>
     </section>
   </main>
 

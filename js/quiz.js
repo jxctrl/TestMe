@@ -23,6 +23,13 @@ function getCurrentQuestion() {
   return questions[currentIndex];
 }
 
+function optionLetter(index) {
+  // Most quizzes use A-D, but we support any option count from the backend.
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (index >= 0 && index < alphabet.length) return alphabet[index];
+  return String(index + 1);
+}
+
 function setMessage(message, type = '') {
   const element = document.getElementById('quizMessage');
   if (!element) return;
@@ -91,8 +98,9 @@ function syncQuestionText() {
   const question = getCurrentQuestion();
   updateQuizProgress();
   document.getElementById('questionText').textContent = question.question_text;
+  const optionsArr = question.options || [];
   document.querySelectorAll('#optionsGrid .option-text').forEach((optionText, index) => {
-    optionText.textContent = question.options[index];
+    optionText.textContent = optionsArr[index] ?? '';
   });
 
   const isLast = currentIndex === questions.length - 1;
@@ -125,6 +133,8 @@ async function startQuiz(subject) {
   score = 0;
   answered = false;
   savedScoreId = null;
+  // Prevent in-flight score save from blocking the next run.
+  isSavingScore = false;
 
   try {
     await loadQuiz(subject);
@@ -150,12 +160,20 @@ function renderQuestion() {
 
   const grid = document.getElementById('optionsGrid');
   grid.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
 
-  question.options.forEach((option, index) => {
+  (question.options || []).forEach((option, index) => {
     const div = document.createElement('div');
     div.className = 'option';
-    div.innerHTML = `<div class="option-letter">${letters[index]}</div><div class="option-text">${option}</div>`;
+    const letterEl = document.createElement('div');
+    letterEl.className = 'option-letter';
+    letterEl.textContent = optionLetter(index);
+
+    const textEl = document.createElement('div');
+    textEl.className = 'option-text';
+    textEl.textContent = option;
+
+    div.appendChild(letterEl);
+    div.appendChild(textEl);
     div.addEventListener('click', () => selectAnswer(index));
     grid.appendChild(div);
   });
@@ -174,12 +192,15 @@ function selectAnswer(selected) {
   const options = document.querySelectorAll('.option');
   options.forEach((option) => option.classList.add('answered'));
 
+  const selectedEl = options[selected];
+  const correctEl = options[correct];
+
   if (selected === correct) {
-    options[selected].classList.add('correct');
+    if (selectedEl) selectedEl.classList.add('correct');
     score++;
   } else {
-    options[selected].classList.add('wrong');
-    options[correct].classList.add('correct');
+    if (selectedEl) selectedEl.classList.add('wrong');
+    if (correctEl) correctEl.classList.add('correct');
   }
 
   document.getElementById('scoreCounter').textContent = `${t('scoreLabel')} ${score}`;

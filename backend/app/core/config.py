@@ -48,14 +48,14 @@ class Settings:
     database_url: str = field(
         default_factory=lambda: os.getenv(
             "DATABASE_URL",
-            "sqlite:///./quiz_arena.db",
+            "sqlite:///./backend/quiz_arena.db",
         )
     )
     cors_origins: list[str] = field(
         default_factory=lambda: _parse_csv(
             os.getenv(
                 "CORS_ORIGINS",
-                "http://127.0.0.1:8000,http://localhost:8000,http://127.0.0.1:5500,http://localhost:5500",
+                "http://127.0.0.1:8000,http://localhost:8000,http://127.0.0.1:5500,http://localhost:5500,http://127.0.0.1:5173,http://localhost:5173",
             )
         )
     )

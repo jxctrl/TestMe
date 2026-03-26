@@ -47,6 +47,13 @@ function getCurrentQuestion() {
   return questions[currentIndex];
 }
 
+function optionLetter(index) {
+  // Support any option count from the backend.
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (index >= 0 && index < alphabet.length) return alphabet[index];
+  return String(index + 1);
+}
+
 function buildCompetitionQuery(questionIds = []) {
   const params = new URLSearchParams();
   params.set('lang', currentLang);
@@ -71,7 +78,7 @@ function syncQuestionText() {
   document.getElementById('questionText').textContent = question.question_text;
   document.getElementById('liveScore').textContent = score.toLocaleString();
   document.querySelectorAll('#optionsGrid .option-text').forEach((optionText, index) => {
-    optionText.textContent = question.options[index];
+    optionText.textContent = question.options[index] ?? '';
   });
 }
 
@@ -84,6 +91,8 @@ async function startCompetition() {
   wrongCount = 0;
   timeoutCount = 0;
   savedScoreId = null;
+  // Prevent in-flight score save from blocking the next run.
+  isSavingScore = false;
   setCompetitionMessage('');
 
   try {
@@ -108,17 +117,27 @@ function renderQuestion() {
 
   const question = getCurrentQuestion();
   document.getElementById('questionText').textContent = question.question_text;
-  document.getElementById('qCounter').textContent = `${currentIndex + 1}/10`;
+  const total = questions.length || 1;
+  document.getElementById('qCounter').textContent = `${currentIndex + 1}/${total}`;
   document.getElementById('liveScore').textContent = score.toLocaleString();
 
   const grid = document.getElementById('optionsGrid');
   grid.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
 
-  question.options.forEach((option, index) => {
+  (question.options || []).forEach((option, index) => {
     const div = document.createElement('div');
     div.className = 'option';
-    div.innerHTML = `<div class="option-letter">${letters[index]}</div><div class="option-text">${option}</div>`;
+
+    const letterEl = document.createElement('div');
+    letterEl.className = 'option-letter';
+    letterEl.textContent = optionLetter(index);
+
+    const textEl = document.createElement('div');
+    textEl.className = 'option-text';
+    textEl.textContent = option;
+
+    div.appendChild(letterEl);
+    div.appendChild(textEl);
     div.addEventListener('click', () => selectAnswer(index));
     grid.appendChild(div);
   });
@@ -161,7 +180,9 @@ function handleTimeout() {
 
   const options = document.querySelectorAll('.option');
   options.forEach((option) => option.classList.add('answered'));
-  options[getCurrentQuestion().correct_answer_index].classList.add('timeout');
+  const correct = getCurrentQuestion().correct_answer_index;
+  const correctEl = options[correct];
+  if (correctEl) correctEl.classList.add('timeout');
 
   showFlash('⏱️');
   setTimeout(advanceQuestion, 1800);
@@ -175,15 +196,17 @@ function selectAnswer(selected) {
   const correct = getCurrentQuestion().correct_answer_index;
   const options = document.querySelectorAll('.option');
   options.forEach((option) => option.classList.add('answered'));
+  const selectedEl = options[selected];
+  const correctEl = options[correct];
 
   if (selected === correct) {
-    options[selected].classList.add('correct');
+    if (selectedEl) selectedEl.classList.add('correct');
     score += 1000;
     correctCount++;
     showFlash('✅');
   } else {
-    options[selected].classList.add('wrong');
-    options[correct].classList.add('correct');
+    if (selectedEl) selectedEl.classList.add('wrong');
+    if (correctEl) correctEl.classList.add('correct');
     wrongCount++;
     showFlash('❌');
   }
@@ -238,7 +261,8 @@ function showResults() {
   document.getElementById('quizArea').style.display = 'none';
   document.getElementById('resultScreen').classList.add('visible');
 
-  document.getElementById('resultScore').textContent = `${correctCount}/10`;
+  const total = questions.length || 1;
+  document.getElementById('resultScore').textContent = `${correctCount}/${total}`;
   document.getElementById('resultPoints').textContent = score.toLocaleString();
   document.getElementById('pointsEarnedLabel').textContent = t('pointsEarned');
   document.getElementById('correctLabel').textContent = t('correctLabel');
@@ -250,7 +274,7 @@ function showResults() {
   document.getElementById('playAgainBtn').textContent = t('playAgain');
   document.getElementById('backHomeBtnComp').textContent = t('backHome');
 
-  const pct = (correctCount / 10) * 100;
+  const pct = (correctCount / total) * 100;
   let grade;
   let gradeStyle;
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizArena - Settings</title>
+  <link rel="icon" href="./favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+  <link rel="stylesheet" href="./css/account.css">
+  <script src="./js/lang.js"></script>
+</head>
+<body>
+  <header class="quiz-header">
+    <a href="index.html" class="nav-logo">Quiz<span>Arena</span></a>
+    <div class="header-right">
+      <div class="header-user-actions" id="headerUserActions"></div>
+      <button id="langBtn" onclick="toggleLanguage()" class="lang-btn">🇺🇿 O'Z</button>
+      <a href="profile.html" class="back-btn" data-i18n="settingsBackToProfile">← Back</a>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="section-subtitle" data-i18n="settingsAvatarLabel">Profile picture</div>
+        <div style="margin-top: 18px; display:flex; flex-direction:column; align-items:center; gap: 12px;">
+          <div class="profile-avatar" id="settingsAvatar" aria-hidden="true">
+            <img id="settingsAvatarImage" class="profile-avatar-img" alt="" />
+            <span id="settingsAvatarInitial">?</span>
+          </div>
+          <p class="account-copy" data-i18n="settingsChangeAvatarHint" style="text-align:center; margin: 0;"></p>
+        </div>
+      </div>
+
+      <div class="dashboard-card">
+        <div class="section-subtitle" data-i18n="settingsTitle">Account Settings</div>
+        <form id="settingsForm" class="account-form stacked-form">
+          <label for="settingsUsername" data-i18n="settingsUsernameLabel">Username</label>
+          <input id="settingsUsername" name="username" type="text" required minlength="3" maxlength="50" />
+
+          <label for="settingsAvatarInput" data-i18n="settingsAvatarLabel">Profile picture</label>
+          <input id="settingsAvatarInput" name="avatar" type="file" accept="image/*" />
+
+          <div class="form-message" id="settingsMessage"></div>
+
+          <div class="settings-actions">
+            <button type="submit" class="form-submit" data-i18n="settingsSaveButton">Save changes</button>
+            <a href="profile.html" class="result-btn secondary" data-i18n="settingsBackToProfile">Back to Profile</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/settings.js"></script>
+</body>
+</html>
+

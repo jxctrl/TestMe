@@ -4,3 +4,5 @@ __pycache__/
 *.pyc
 quiz_arena.db
 backend/.alembic_cache/
+frontend/node_modules/
+frontend/dist/

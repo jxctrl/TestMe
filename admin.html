@@ -22,67 +22,165 @@
     </div>
   </header>
 
-  <main class="dashboard-main">
-    <section class="dashboard-hero">
-      <div>
-        <div class="account-kicker" data-i18n="navAdmin">Admin</div>
-        <h1 data-i18n="adminTitle">Question and user management.</h1>
-        <p class="account-copy" data-i18n="adminDesc">Add bilingual questions, remove outdated ones, and monitor user activity from one panel.</p>
-      </div>
-    </section>
+  <main class="dashboard-main dashboard-theme">
+    <section class="dashboard-shell">
+      <section class="dashboard-hero admin-dashboard-hero">
+        <div class="dashboard-toolbar">
+          <div>
+            <div class="account-kicker" data-i18n="navAdmin">Admin</div>
+            <h1 data-i18n="adminTitle">Question and user management.</h1>
+            <p class="account-copy" data-i18n="adminDesc">Add bilingual questions, remove outdated ones, and monitor user activity from one panel.</p>
+          </div>
+          <div class="dashboard-actions">
+            <a href="profile.html" class="result-btn secondary" data-i18n="navProfile">Profile</a>
+            <a href="#adminQuestionsPanel" class="result-btn primary" data-i18n="adminQuestionBank">Question bank</a>
+          </div>
+        </div>
 
-    <section class="dashboard-grid admin-grid">
-      <div class="dashboard-card">
-        <div class="section-subtitle" data-i18n="adminAddQuestion">Add question</div>
-        <form id="questionForm" class="account-form stacked-form">
-          <label for="subject" data-i18n="adminSubjectLabel">Subject</label>
-          <select id="subject" name="subject" required>
-            <option value="mathematics">Mathematics</option>
-            <option value="english">English</option>
-            <option value="science">Science</option>
-            <option value="history">History</option>
-            <option value="geography">Geography</option>
-            <option value="cs">Computer Science</option>
-          </select>
+        <div class="dashboard-nav-strip">
+          <a href="#adminOverviewPanel" class="dashboard-tab active" data-i18n="dashboardOverview">Overview</a>
+          <a href="#adminComposerPanel" class="dashboard-tab" data-i18n="adminAddQuestion">Add question</a>
+          <a href="#adminQuestionsPanel" class="dashboard-tab" data-i18n="adminQuestionBank">Question bank</a>
+          <a href="#adminUsersPanel" class="dashboard-tab" data-i18n="adminUsersTitle">Users</a>
+        </div>
+      </section>
 
-          <label for="questionTextEn" data-i18n="adminQuestionEn">Question text (EN)</label>
-          <textarea id="questionTextEn" name="question_text_en" rows="3" required></textarea>
+      <section class="dashboard-stat-grid" id="adminOverviewPanel">
+        <article class="dashboard-stat-card dashboard-stat-card-cyan">
+          <div class="stat-caption" data-i18n="adminTotalUsers">Total users</div>
+          <div class="dashboard-stat-value" id="adminUsersCount">0</div>
+          <div class="dashboard-stat-note" id="adminUsersNote">-</div>
+        </article>
 
-          <label for="questionTextUz" data-i18n="adminQuestionUz">Question text (UZ)</label>
-          <textarea id="questionTextUz" name="question_text_uz" rows="3" required></textarea>
+        <article class="dashboard-stat-card dashboard-stat-card-accent">
+          <div class="stat-caption" data-i18n="adminQuestionsLive">Questions live</div>
+          <div class="dashboard-stat-value" id="adminQuestionCount">0</div>
+          <div class="dashboard-stat-note" id="adminQuestionNote">-</div>
+        </article>
 
-          <div class="options-columns">
+        <article class="dashboard-stat-card dashboard-stat-card-purple">
+          <div class="stat-caption" data-i18n="adminQuizRunsCount">Quiz runs</div>
+          <div class="dashboard-stat-value" id="adminRunCount">0</div>
+          <div class="dashboard-stat-note" id="adminRunNote">-</div>
+        </article>
+
+        <article class="dashboard-stat-card">
+          <div class="stat-caption" data-i18n="adminSubjectsLive">Subjects live</div>
+          <div class="dashboard-stat-value" id="adminSubjectCount">0</div>
+          <div class="dashboard-stat-note" id="adminSubjectNote">-</div>
+        </article>
+      </section>
+
+      <section class="dashboard-chart-grid admin-primary-charts">
+        <article class="dashboard-card dashboard-panel chart-panel chart-panel-wide">
+          <div class="dashboard-card-head">
             <div>
-              <label for="optionEn1" data-i18n="adminOptionsEn">Options (EN)</label>
-              <input id="optionEn1" name="option_en_1" type="text" required>
-              <input name="option_en_2" type="text" required>
-              <input name="option_en_3" type="text" required>
-              <input name="option_en_4" type="text" required>
+              <div class="section-subtitle" data-i18n="adminGrowthTitle">User growth</div>
+              <p class="dashboard-panel-copy" id="adminGrowthSummary">See how your member base is growing over time.</p>
             </div>
+            <div class="dashboard-chip" id="adminGrowthBadge">--</div>
+          </div>
+
+          <div class="chart-stage line-chart-stage" id="adminGrowthChart"></div>
+        </article>
+
+        <article class="dashboard-card dashboard-panel chart-panel">
+          <div class="dashboard-card-head">
             <div>
-              <label for="optionUz1" data-i18n="adminOptionsUz">Options (UZ)</label>
-              <input id="optionUz1" name="option_uz_1" type="text" required>
-              <input name="option_uz_2" type="text" required>
-              <input name="option_uz_3" type="text" required>
-              <input name="option_uz_4" type="text" required>
+              <div class="section-subtitle" data-i18n="adminQuestionMix">Question mix</div>
+              <p class="dashboard-panel-copy" data-i18n="adminQuestionMixDesc">See how your content is distributed across subjects.</p>
             </div>
           </div>
 
-          <label for="correctAnswer" data-i18n="adminCorrectOption">Correct answer</label>
-          <select id="correctAnswer" name="correct_answer_index" required>
-            <option value="0">A</option>
-            <option value="1">B</option>
-            <option value="2">C</option>
-            <option value="3">D</option>
-          </select>
+          <div class="donut-stage">
+            <div class="donut-chart" id="adminQuestionDonut"></div>
+            <div class="donut-legend" id="adminSubjectDistribution"></div>
+          </div>
+        </article>
+      </section>
 
-          <div class="form-message" id="adminMessage"></div>
-          <button type="submit" class="form-submit" data-i18n="adminSaveQuestion">Save Question</button>
-        </form>
-      </div>
+      <section class="dashboard-feature-grid admin-focus-grid">
+        <article class="dashboard-card dashboard-panel" id="adminComposerPanel">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="adminAddQuestion">Add question</div>
+              <p class="dashboard-panel-copy" data-i18n="adminDesc">Add bilingual questions, remove outdated ones, and monitor user activity from one panel.</p>
+            </div>
+          </div>
 
-      <div class="dashboard-card">
-        <div class="section-subtitle" data-i18n="adminQuestionBank">Question bank</div>
+          <form id="questionForm" class="account-form stacked-form">
+            <label for="subject" data-i18n="adminSubjectLabel">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="mathematics">Mathematics</option>
+              <option value="english">English</option>
+              <option value="science">Science</option>
+              <option value="history">History</option>
+              <option value="geography">Geography</option>
+              <option value="cs">Computer Science</option>
+            </select>
+
+            <label for="questionTextEn" data-i18n="adminQuestionEn">Question text (EN)</label>
+            <textarea id="questionTextEn" name="question_text_en" rows="3" required></textarea>
+
+            <label for="questionTextUz" data-i18n="adminQuestionUz">Question text (UZ)</label>
+            <textarea id="questionTextUz" name="question_text_uz" rows="3" required></textarea>
+
+            <div class="options-columns">
+              <div>
+                <label for="optionEn1" data-i18n="adminOptionsEn">Options (EN)</label>
+                <input id="optionEn1" name="option_en_1" type="text" required>
+                <input name="option_en_2" type="text" required>
+                <input name="option_en_3" type="text" required>
+                <input name="option_en_4" type="text" required>
+              </div>
+              <div>
+                <label for="optionUz1" data-i18n="adminOptionsUz">Options (UZ)</label>
+                <input id="optionUz1" name="option_uz_1" type="text" required>
+                <input name="option_uz_2" type="text" required>
+                <input name="option_uz_3" type="text" required>
+                <input name="option_uz_4" type="text" required>
+              </div>
+            </div>
+
+            <label for="correctAnswer" data-i18n="adminCorrectOption">Correct answer</label>
+            <select id="correctAnswer" name="correct_answer_index" required>
+              <option value="0">A</option>
+              <option value="1">B</option>
+              <option value="2">C</option>
+              <option value="3">D</option>
+            </select>
+
+            <div class="form-message" id="adminMessage"></div>
+            <button type="submit" class="form-submit" data-i18n="adminSaveQuestion">Save Question</button>
+          </form>
+        </article>
+
+        <article class="dashboard-card dashboard-panel admin-insights-panel">
+          <div class="dashboard-card-head">
+            <div>
+              <div class="section-subtitle" data-i18n="adminPowerUsers">Most active users</div>
+              <p class="dashboard-panel-copy" id="adminPowerUsersSummary">The highest quiz activity appears here.</p>
+            </div>
+          </div>
+
+          <div class="admin-insights-stack">
+            <div class="horizontal-bar-chart" id="adminPowerUsersChart"></div>
+
+            <section class="insight-mini-panel">
+              <div class="mini-panel-title" data-i18n="adminRecentSignups">Recent signups</div>
+              <div class="admin-recent-users" id="adminRecentUsersList"></div>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="dashboard-card dashboard-panel full-width" id="adminQuestionsPanel">
+        <div class="dashboard-card-head">
+          <div>
+            <div class="section-subtitle" data-i18n="adminQuestionBank">Question bank</div>
+            <p class="dashboard-panel-copy" data-i18n="adminNoQuestions">No questions yet.</p>
+          </div>
+        </div>
         <div class="table-wrap">
           <table class="admin-table">
             <thead>
@@ -97,25 +195,30 @@
             <tbody id="questionsBody"></tbody>
           </table>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="dashboard-card full-width">
-      <div class="section-subtitle" data-i18n="adminUsersTitle">Users</div>
-      <div class="table-wrap">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th data-i18n="adminUserHeader">User</th>
-              <th data-i18n="authEmailLabel">Email</th>
-              <th data-i18n="profileDateHeader">Created</th>
-              <th data-i18n="adminTotalQuizzes">Quizzes</th>
-              <th data-i18n="adminBestScore">Best score</th>
-            </tr>
-          </thead>
-          <tbody id="usersBody"></tbody>
-        </table>
-      </div>
+      <section class="dashboard-card dashboard-panel full-width" id="adminUsersPanel">
+        <div class="dashboard-card-head">
+          <div>
+            <div class="section-subtitle" data-i18n="adminUsersTitle">Users</div>
+            <p class="dashboard-panel-copy" data-i18n="adminNoUsers">No users yet.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th data-i18n="adminUserHeader">User</th>
+                <th data-i18n="authEmailLabel">Email</th>
+                <th data-i18n="profileDateHeader">Created</th>
+                <th data-i18n="adminTotalQuizzes">Quizzes</th>
+                <th data-i18n="adminBestScore">Best score</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </section>
     </section>
   </main>
 
