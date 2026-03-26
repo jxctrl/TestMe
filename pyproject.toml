@@ -32,4 +32,6 @@ pythonpath = [
 
 [tool.setuptools]
 package-dir = {"" = "backend"}
-packages = ["app"]
+
+[tool.setuptools.packages.find]
+where = ["backend"]
