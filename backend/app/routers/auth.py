@@ -30,6 +30,7 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)) -> TokenRe
                 "email": user.email,
                 "created_at": user.created_at,
                 "is_admin": settings.is_admin_email(user.email),
+                "avatar_url": user.avatar_url,
             }
         ),
     )
@@ -51,6 +52,7 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse
                 "email": user.email,
                 "created_at": user.created_at,
                 "is_admin": settings.is_admin_email(user.email),
+                "avatar_url": user.avatar_url,
             }
         ),
     )

@@ -22,27 +22,34 @@
     </div>
   </header>
 
-  <main class="dashboard-main">
-    <section class="dashboard-grid">
-      <div class="dashboard-card">
+  <main class="dashboard-main dashboard-theme settings-main">
+    <section class="settings-grid">
+      <article class="dashboard-card settings-preview-card">
         <div class="section-subtitle" data-i18n="settingsAvatarLabel">Profile picture</div>
-        <div style="margin-top: 18px; display:flex; flex-direction:column; align-items:center; gap: 12px;">
-          <div class="profile-avatar" id="settingsAvatar" aria-hidden="true">
+        <div class="settings-preview-stack">
+          <div class="profile-avatar settings-avatar" id="settingsAvatar" aria-hidden="true">
             <img id="settingsAvatarImage" class="profile-avatar-img" alt="" />
             <span id="settingsAvatarInitial">?</span>
           </div>
-          <p class="account-copy" data-i18n="settingsChangeAvatarHint" style="text-align:center; margin: 0;"></p>
+          <div class="settings-preview-copy">
+            <h1 id="settingsPreviewUsername">...</h1>
+            <p class="account-copy" data-i18n="settingsChangeAvatarHint"></p>
+            <div class="settings-selected-file" id="settingsSelectedFile" aria-live="polite"></div>
+          </div>
         </div>
-      </div>
+      </article>
 
-      <div class="dashboard-card">
-        <div class="section-subtitle" data-i18n="settingsTitle">Account Settings</div>
-        <form id="settingsForm" class="account-form stacked-form">
+      <article class="dashboard-card settings-form-card">
+        <div class="settings-card-head">
+          <div class="section-subtitle" data-i18n="settingsTitle">Account Settings</div>
+          <p class="dashboard-panel-copy" data-i18n="settingsChangeAvatarHint"></p>
+        </div>
+        <form id="settingsForm" class="account-form stacked-form settings-form">
           <label for="settingsUsername" data-i18n="settingsUsernameLabel">Username</label>
           <input id="settingsUsername" name="username" type="text" required minlength="3" maxlength="50" />
 
           <label for="settingsAvatarInput" data-i18n="settingsAvatarLabel">Profile picture</label>
-          <input id="settingsAvatarInput" name="avatar" type="file" accept="image/*" />
+          <input id="settingsAvatarInput" name="avatar" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
 
           <div class="form-message" id="settingsMessage"></div>
 
@@ -51,7 +58,7 @@
             <a href="profile.html" class="result-btn secondary" data-i18n="settingsBackToProfile">Back to Profile</a>
           </div>
         </form>
-      </div>
+      </article>
     </section>
   </main>
 
@@ -60,4 +67,3 @@
   <script src="./js/settings.js"></script>
 </body>
 </html>
-

@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import base64
-import os
-import uuid
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -61,7 +59,7 @@ def update_me(
 
 @router.post("/me/avatar", response_model=UserProfileResponse)
 async def upload_avatar(
-    avatar: UploadFile,
+    avatar: UploadFile = File(...),
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ) -> UserProfileResponse:
@@ -75,7 +73,6 @@ async def upload_avatar(
     if len(contents) > MAX_AVATAR_SIZE:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Avatar image must be under 2 MB.")
 
-    ext = (avatar.content_type or "image/png").split("/")[-1]
     b64 = base64.b64encode(contents).decode("utf-8")
     data_url = f"data:{avatar.content_type};base64,{b64}"
 

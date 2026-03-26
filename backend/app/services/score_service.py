@@ -104,6 +104,7 @@ def build_user_profile(db: Session, user: User, *, is_admin: bool) -> UserProfil
         email=user.email,
         created_at=user.created_at,
         is_admin=is_admin,
+        avatar_url=user.avatar_url,
         stats=UserStats(total_quizzes_taken=len(history)),
         best_scores=best_scores,
         score_history=history,

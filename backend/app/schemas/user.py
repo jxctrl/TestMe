@@ -13,6 +13,7 @@ class UserPublic(BaseModel):
     email: str
     created_at: datetime
     is_admin: bool = False
+    avatar_url: str | None = None
 
 
 class UserBestScore(BaseModel):
