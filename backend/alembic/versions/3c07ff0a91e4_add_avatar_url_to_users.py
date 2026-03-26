@@ -16,7 +16,7 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column("users", sa.Column("avatar_url", sa.String(500), nullable=True))
+    op.add_column("users", sa.Column("avatar_url", sa.Text(), nullable=True))
 
 
 def downgrade() -> None:

@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import UTC, datetime
 
+from app import db
 from sqlalchemy import case, desc, distinct, func, select
 from sqlalchemy.orm import Session
 
@@ -36,11 +37,11 @@ def get_leaderboard(db: Session, mode: str | None, limit: int) -> list[dict[str,
         .join(Score, Score.user_id == User.id)
         .group_by(User.id, User.username)
         .order_by(desc("total_score"), desc("completed_runs"), User.username.asc())
-        .limit(limit)
     )
 
     if mode:
         stmt = stmt.where(Score.mode == mode)
+    stmt = stmt.limit(limit)
 
     rows = db.execute(stmt).all()
     return [
