@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#17313D</color>
-    <color name="colorPrimaryDark">#10262F</color>
-    <color name="colorAccent">#D85F3D</color>
-    <color name="surfaceCanvas">#F4EBDE</color>
-    <color name="splashBackground">#17313D</color>
+    <color name="colorPrimary">#0A0A0F</color>
+    <color name="colorPrimaryDark">#07070B</color>
+    <color name="colorAccent">#C8F135</color>
+    <color name="surfaceCanvas">#0A0A0F</color>
+    <color name="splashBackground">#0A0A0F</color>
+    <color name="splashIconBackground">#111118</color>
 </resources>

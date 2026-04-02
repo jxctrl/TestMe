@@ -17,7 +17,7 @@ cd "$FRONTEND_DIR"
 echo -e "${YELLOW}Step 1/4: Installing frontend and Capacitor dependencies...${NC}"
 npm install
 
-echo -e "${YELLOW}Step 2/4: Building the mobile web bundle...${NC}"
+echo -e "${YELLOW}Step 2/4: Building the mobile bundle from the original QuizArena frontend...${NC}"
 npm run build:mobile
 
 echo -e "${YELLOW}Step 3/4: Ensuring the Android platform exists...${NC}"

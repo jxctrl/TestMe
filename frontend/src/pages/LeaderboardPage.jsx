@@ -30,7 +30,7 @@ export default function LeaderboardPage() {
         setEntries(response.entries || []);
       } catch (loadError) {
         if (active) {
-          setError(loadError.message);
+          setError(loadError.status === 0 ? "Leaderboard is unavailable right now. Try again in a moment." : loadError.message);
         }
       } finally {
         if (active) {

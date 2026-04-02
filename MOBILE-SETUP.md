@@ -1,14 +1,14 @@
 # QuizArena Mobile Setup
 
-This project now keeps the mobile build inside `frontend/` and uses a dedicated Capacitor bundle so the native app does not conflict with the FastAPI-served web build.
+This project keeps the Android build inside `frontend/`, but the mobile bundle now packages the original static QuizArena frontend from the repo root so the native app matches the UI you already use.
 
 ## What changed
 
 - `frontend/capacitor.config.json` is the Capacitor source of truth.
-- `npm run build` still builds the web SPA for FastAPI at `/app`.
-- `npm run build:mobile` creates a native-friendly bundle in `frontend/dist-mobile`.
-- `frontend/.env.mobile` points the native app at `https://quizarena-nrje.onrender.com`.
-- Backend CORS now allows Capacitor's localhost origins.
+- `npm run build:mobile` copies the root HTML/CSS/JS frontend into `frontend/dist-mobile`.
+- `frontend/.env.mobile` sets the API host used by the packaged mobile build.
+- Capacitor HTTP is enabled for the native app so Android requests do not rely on browser CORS.
+- `npm run build` still builds the separate React app that FastAPI serves from `/app`.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ From the repo root:
 That script will:
 
 - install frontend dependencies
-- build the mobile bundle
+- build the static mobile bundle from the original QuizArena pages
 - create `frontend/android` if needed
 - sync the latest web assets into the Android project
 
@@ -45,8 +45,8 @@ npx cap sync android
 
 ## Build output
 
-- Web deployment bundle: `frontend/dist`
-- Mobile Capacitor bundle: `frontend/dist-mobile`
+- Static mobile bundle: `frontend/dist-mobile`
+- React web bundle: `frontend/dist`
 - Android project: `frontend/android`
 
 ## Open in Android Studio
@@ -58,16 +58,15 @@ npx cap sync android
 
 ## API and CORS notes
 
-- The mobile build uses `frontend/.env.mobile`.
+- The mobile build reads `frontend/.env.mobile`.
 - If your API host changes, update `VITE_API_BASE_URL` in `frontend/.env.mobile`.
-- Capacitor Android runs from `https://localhost`, so the backend must allow that origin in `CORS_ORIGINS`.
-- If your backend is hosted on Render or another platform, update that deployment's `CORS_ORIGINS` env var too. Changing the repo `.env` alone is not enough.
+- Capacitor HTTP is enabled, so most Android API requests go through the native bridge instead of browser fetch.
+- If you rely on browser-only requests like plain web uploads, keep `https://localhost` allowed in backend `CORS_ORIGINS` too.
 
 ## Useful commands
 
 ```bash
 cd frontend
-npm run build
 npm run build:mobile
 npx cap sync android
 ```

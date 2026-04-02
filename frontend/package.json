@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:mobile": "vite build --mode mobile",
+    "build:mobile": "node ./scripts/build-mobile-static.mjs",
+    "build:mobile:react": "vite build --mode mobile",
     "preview": "vite preview"
   },
   "dependencies": {
     "@capacitor/core": "^8.3.0",
+    "@capacitor/ios": "^8.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"

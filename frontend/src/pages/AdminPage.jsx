@@ -111,7 +111,7 @@ export default function AdminPage() {
         <p className="eyebrow">Admin console</p>
         <h1>Manage question content and review player accounts.</h1>
         <p className="muted-text">
-          This page is wired to the protected admin endpoints in your FastAPI backend.
+          Review registered users, publish bilingual question sets, and keep the arena content sharp.
         </p>
       </section>
 

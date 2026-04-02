@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 
 const GOOGLE_SCRIPT_URL = "https://accounts.google.com/gsi/client";
 const GOOGLE_CLIENT_ID = (import.meta.env.VITE_GOOGLE_CLIENT_ID || "").trim();
+const GOOGLE_PLACEHOLDER = "your-google-oauth-client-id";
+
+function isGoogleConfigured() {
+  return Boolean(GOOGLE_CLIENT_ID && !GOOGLE_CLIENT_ID.includes(GOOGLE_PLACEHOLDER));
+}
 
 function loadGoogleScript() {
   if (window.google?.accounts?.id) {
@@ -34,7 +39,7 @@ export default function GoogleSignInButton({ disabled = false, onCredential, onE
   useEffect(() => {
     let cancelled = false;
 
-    if (!GOOGLE_CLIENT_ID) {
+    if (!isGoogleConfigured()) {
       return undefined;
     }
 
@@ -77,7 +82,7 @@ export default function GoogleSignInButton({ disabled = false, onCredential, onE
     };
   }, [onCredential, onError]);
 
-  if (!GOOGLE_CLIENT_ID) {
+  if (!isGoogleConfigured()) {
     return null;
   }
 
