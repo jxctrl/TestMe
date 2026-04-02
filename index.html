@@ -42,28 +42,80 @@
 </nav>
 
 <section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-badge" data-i18n="heroBadge">Now with Competition Mode</div>
-    <h1><span data-i18n="heroTitle1">Test your</span><br><em style="font-style: italic;" data-i18n="heroTitle2">knowledge.</em><br><span data-i18n="heroTitle3">Beat the clock.</span></h1>
-    <p data-i18n="heroDesc">Challenge yourself across subjects. Compete against the timer. Track your score. Built for students who want to actually prepare - not just feel like they are.</p>
-    <div class="hero-actions">
-      <a href="#subjects" class="btn-primary" data-i18n="heroBtn1">Start a Test →</a>
-      <a href="#modes" class="btn-secondary" data-i18n="heroBtn2">View Modes</a>
+  <div class="hero-shell">
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="heroBadge">Now with Competition Mode</div>
+      <h1><span data-i18n="heroTitle1">Test your</span><br><em style="font-style: italic;" data-i18n="heroTitle2">knowledge.</em><br><span data-i18n="heroTitle3">Beat the clock.</span></h1>
+      <p data-i18n="heroDesc">Challenge yourself across subjects. Compete against the timer. Track your score. Built for students who want to actually prepare - not just feel like they are.</p>
+      <div class="hero-actions">
+        <a href="#subjects" class="btn-primary" data-i18n="heroBtn1">Start a Test →</a>
+        <a href="#modes" class="btn-secondary" data-i18n="heroBtn2">View Modes</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label" data-i18n="heroStat1">Subjects</div>
+        </div>
+        <div>
+          <div class="stat-num">10s</div>
+          <div class="stat-label" data-i18n="heroStat2">Per Question</div>
+        </div>
+        <div>
+          <div class="stat-num" data-i18n="heroStat3">Free</div>
+          <div class="stat-label" data-i18n="heroStat4">Always</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num">10+</div>
-        <div class="stat-label" data-i18n="heroStat1">Subjects</div>
+
+    <aside class="hero-stage fade-in" aria-label="QuizArena live panel">
+      <div class="hero-stage-card hero-stage-primary">
+        <div class="hero-stage-topline">
+          <div class="hero-stage-label" data-i18n="heroPanelLabel">Arena Pulse</div>
+          <div class="hero-stage-chip" data-i18n="heroPanelChip">Live sync</div>
+        </div>
+
+        <div class="hero-stage-head">
+          <div class="hero-stage-kpi-block">
+            <div class="hero-stage-kpi" id="heroActivePulse">143</div>
+            <div class="hero-stage-copy" data-i18n="heroPanelActive">active today</div>
+          </div>
+
+          <div class="hero-stage-ring">
+            <span id="heroAveragePulse">78.4%</span>
+            <small data-i18n="heroPanelAccuracy">24h average</small>
+          </div>
+        </div>
+
+        <div class="hero-stage-mini-grid">
+          <div class="hero-stage-mini-card">
+            <strong id="heroTotalPulse">12,864</strong>
+            <span data-i18n="heroPanelRuns">all-time runs</span>
+          </div>
+          <div class="hero-stage-mini-card">
+            <strong data-i18n="heroPanelLanguagesValue">EN / UZ</strong>
+            <span data-i18n="heroPanelLanguages">bilingual</span>
+          </div>
+        </div>
       </div>
-      <div>
-        <div class="stat-num">10s</div>
-        <div class="stat-label" data-i18n="heroStat2">Per Question</div>
+
+      <div class="hero-stage-card hero-stage-secondary">
+        <div class="hero-route-grid">
+          <a href="quiz.html" class="hero-route-card hero-route-card-practice">
+            <span class="hero-route-label" data-i18n="heroRoutePracticeLabel">Practice Run</span>
+            <strong data-i18n="heroRoutePracticeTitle">Build your streak</strong>
+            <p data-i18n="heroRoutePracticeCopy">Pick a subject, move at your pace, and keep every result.</p>
+            <span class="hero-route-link" data-i18n="heroRoutePracticeAction">Open practice →</span>
+          </a>
+
+          <a href="competition.html" class="hero-route-card hero-route-card-compete">
+            <span class="hero-route-label" data-i18n="heroRouteCompeteLabel">Competition</span>
+            <strong data-i18n="heroRouteCompeteTitle">Chase the board</strong>
+            <p data-i18n="heroRouteCompeteCopy">10 seconds per question, ranked scores, and pure speed pressure.</p>
+            <span class="hero-route-link" data-i18n="heroRouteCompeteAction">Open competition →</span>
+          </a>
+        </div>
       </div>
-      <div>
-        <div class="stat-num" data-i18n="heroStat3">Free</div>
-        <div class="stat-label" data-i18n="heroStat4">Always</div>
-      </div>
-    </div>
+    </aside>
   </div>
 </section>
 
