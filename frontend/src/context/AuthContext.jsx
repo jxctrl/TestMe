@@ -85,6 +85,14 @@ export function AuthProvider({ children }) {
     [consumeAuthResponse]
   );
 
+  const loginWithGoogle = useCallback(
+    async (credential) => {
+      const payload = await api.post("/auth/google", { credential });
+      return consumeAuthResponse(payload);
+    },
+    [consumeAuthResponse]
+  );
+
   const logout = useCallback(() => {
     clearSessionStorage();
     setToken(null);
@@ -132,6 +140,7 @@ export function AuthProvider({ children }) {
         initialized,
         isAuthenticated: Boolean(user && token),
         login,
+        loginWithGoogle,
         logout,
         refreshProfile,
         register,

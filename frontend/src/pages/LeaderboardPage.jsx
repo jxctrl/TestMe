@@ -86,10 +86,10 @@ export default function LeaderboardPage() {
               <tbody>
                 {entries.map((entry) => (
                   <tr key={entry.user_id}>
-                    <td>{entry.rank}</td>
-                    <td>{entry.username}</td>
-                    <td>{entry.total_score}</td>
-                    <td>{entry.completed_runs}</td>
+                    <td data-label="Rank">{entry.rank}</td>
+                    <td data-label="Player">{entry.username}</td>
+                    <td data-label="Total score">{entry.total_score}</td>
+                    <td data-label="Completed runs">{entry.completed_runs}</td>
                   </tr>
                 ))}
               </tbody>

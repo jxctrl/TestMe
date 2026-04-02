@@ -62,6 +62,7 @@ class Settings:
     admin_emails: list[str] = field(
         default_factory=lambda: [email.lower() for email in _parse_csv(os.getenv("ADMIN_EMAILS", "jacsaidabror@gmail.com"))]
     )
+    google_client_id: str = field(default_factory=lambda: os.getenv("GOOGLE_CLIENT_ID", "").strip())
     auto_create_tables: bool = field(
         default_factory=lambda: os.getenv("AUTO_CREATE_TABLES", "true").lower() == "true"
     )
