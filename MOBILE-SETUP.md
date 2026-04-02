@@ -1,6 +1,6 @@
 # QuizArena Mobile Setup
 
-This project keeps the Android build inside `frontend/`, but the mobile bundle now packages the original static QuizArena frontend from the repo root so the native app matches the UI you already use.
+This project keeps the Android build inside `frontend/`, and the mobile bundle packages the original static QuizArena frontend from the repo root so the native app matches the UI you already use.
 
 ## What changed
 
@@ -8,7 +8,7 @@ This project keeps the Android build inside `frontend/`, but the mobile bundle n
 - `npm run build:mobile` copies the root HTML/CSS/JS frontend into `frontend/dist-mobile`.
 - `frontend/.env.mobile` sets the API host used by the packaged mobile build.
 - Capacitor HTTP is enabled for the native app so Android requests do not rely on browser CORS.
-- `npm run build` still builds the separate React app that FastAPI serves from `/app`.
+- `frontend/legacy-react/` keeps the old React prototype archived for reference, but it is no longer part of the active product.
 
 ## Prerequisites
 
@@ -46,7 +46,6 @@ npx cap sync android
 ## Build output
 
 - Static mobile bundle: `frontend/dist-mobile`
-- React web bundle: `frontend/dist`
 - Android project: `frontend/android`
 
 ## Open in Android Studio
@@ -59,7 +58,7 @@ npx cap sync android
 ## API and CORS notes
 
 - The mobile build reads `frontend/.env.mobile`.
-- If your API host changes, update `VITE_API_BASE_URL` in `frontend/.env.mobile`.
+- If your API host changes, update `QUIZARENA_API_BASE_URL` in `frontend/.env.mobile`.
 - Capacitor HTTP is enabled, so most Android API requests go through the native bridge instead of browser fetch.
 - If you rely on browser-only requests like plain web uploads, keep `https://localhost` allowed in backend `CORS_ORIGINS` too.
 

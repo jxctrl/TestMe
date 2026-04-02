@@ -46,10 +46,6 @@ jobs:
         run: npm ci
         working-directory: frontend
 
-      - name: Build web frontend
-        run: npm run build
-        working-directory: frontend
-
       - name: Build mobile frontend bundle
         run: npm run build:mobile
         working-directory: frontend

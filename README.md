@@ -21,10 +21,10 @@ QuizArena is a quiz platform I built for students preparing for exams. It starte
 
 ## Why this project stands out
 
-- Full-stack architecture: React + Vite frontend, FastAPI backend, SQLAlchemy models, and PostgreSQL in production.
+- Full-stack architecture: static HTML/CSS/JS frontend, FastAPI backend, SQLAlchemy models, and PostgreSQL in production.
 - Real product surface: authentication, leaderboard, admin tooling, profile management, and bilingual content.
 - Cross-platform direction: web deployment plus Capacitor-based Android packaging under `frontend/android`.
-- Quality signals: backend API tests with `pytest` and GitHub Actions CI for backend and frontend builds.
+- Quality signals: backend API tests with `pytest` and GitHub Actions CI for backend and mobile bundle checks.
 
 ---
 
@@ -50,7 +50,6 @@ QuizArena is a quiz platform I built for students preparing for exams. It starte
 
 **User Accounts**
 - Register and log in
-- Google sign-in with the Google account chooser
 - Persistent score history and leaderboard
 - Profile page with badges, stats, and progress tracking
 - Avatar upload and account settings
@@ -65,7 +64,6 @@ QuizArena is a quiz platform I built for students preparing for exams. It starte
 
 **Frontend**
 - Static HTML, CSS, JavaScript pages
-- React + Vite SPA under `frontend/` for the API-driven experience
 - Capacitor Android packaging for the mobile build
 - Custom i18n system using `localStorage` for language persistence
 
@@ -81,7 +79,7 @@ QuizArena is a quiz platform I built for students preparing for exams. It starte
 ```
 QuizArena/
 ├── index.html          # Landing page
-├── frontend/           # React + Vite SPA + Capacitor Android project
+├── frontend/           # Mobile bundle tooling + Capacitor Android project
 ├── backend/            # FastAPI app, routers, models, schemas, tests
 ├── setup-mobile.sh     # Mobile bundle + Android sync helper
 ├── MOBILE-SETUP.md     # Mobile workflow notes
@@ -118,29 +116,29 @@ QuizArena/
 python -m venv .venv
 . .venv/bin/activate
 cp .env.example .env
-cp frontend/.env.example frontend/.env.local
+cp frontend/.env.example frontend/.env.mobile
 ```
 
-Set `GOOGLE_CLIENT_ID` in `.env` and `VITE_GOOGLE_CLIENT_ID` in `frontend/.env.local` if you want Google sign-in enabled.
+Set `GOOGLE_CLIENT_ID` in `.env` only if you plan to expose Google sign-in in a future frontend.
 
-**Backend**
+**Backend + web app**
 ```bash
 python -m pip install -e ".[dev]"
 cd backend && uvicorn app.main:app --reload
 ```
 
-**React frontend**
+FastAPI serves the original static QuizArena pages from `/`, `/quiz.html`, `/competition.html`, and the other root routes.
+
+**Android build**
 ```bash
 cd frontend
 npm install
-npm run dev
+npm run build:mobile
 ```
 
-The Vite dev server proxies API calls to `http://127.0.0.1:8000`.
-When you build with `npm run build`, FastAPI serves the React app from `/app`.
-`npm run build:mobile` does something different: it packages the original static QuizArena frontend from the repo root into `frontend/dist-mobile` for the native Android app.
-If you ever want the old experimental React-based mobile bundle again, use `npm run build:mobile:react`.
+That packages the original static QuizArena frontend into `frontend/dist-mobile` for Capacitor.
 Run `./setup-mobile.sh` from the repo root to build and sync the Android project.
+The old React experiment now lives in `frontend/legacy-react/` as an archive and is not part of the active app.
 
 ---
 
@@ -154,12 +152,11 @@ python -m pytest backend/tests
 **Frontend builds**
 ```bash
 cd frontend
-npm run build
 npm run build:mobile
 ```
 
 **CI**
-- GitHub Actions runs backend tests plus web/mobile frontend builds on every push and pull request.
+- GitHub Actions runs backend tests plus the mobile frontend bundle build on every push and pull request.
 
 ---
 

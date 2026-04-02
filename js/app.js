@@ -5,6 +5,13 @@ window.addEventListener('load', () => {
   }
 });
 
+if (
+  typeof window.matchMedia === 'function' &&
+  (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches)
+) {
+  document.documentElement.classList.add('is-touch');
+}
+
 window.addEventListener('scroll', () => {
   const navbar = document.getElementById('navbar');
   if (navbar) {
@@ -131,16 +138,33 @@ function renderLeaderboard(entries) {
     .join('');
 }
 
+function setElementText(id, value) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.textContent = value;
+  }
+}
+
 async function loadLiveData() {
   try {
     const stats = await window.apiClient.get('/stats');
-    document.getElementById('liveTotalCount').textContent = stats.total_quizzes_taken.toLocaleString();
-    document.getElementById('liveAverageCount').textContent = `${stats.average_score.toFixed(1)}%`;
-    document.getElementById('liveActiveCount').textContent = stats.active_users_today.toLocaleString();
+    const totalCount = stats.total_quizzes_taken.toLocaleString();
+    const averageCount = `${stats.average_score.toFixed(1)}%`;
+    const activeCount = stats.active_users_today.toLocaleString();
+
+    setElementText('liveTotalCount', totalCount);
+    setElementText('liveAverageCount', averageCount);
+    setElementText('liveActiveCount', activeCount);
+    setElementText('heroTotalPulse', totalCount);
+    setElementText('heroAveragePulse', averageCount);
+    setElementText('heroActivePulse', activeCount);
   } catch (_error) {
-    document.getElementById('liveTotalCount').textContent = '—';
-    document.getElementById('liveAverageCount').textContent = '—';
-    document.getElementById('liveActiveCount').textContent = '—';
+    setElementText('liveTotalCount', '—');
+    setElementText('liveAverageCount', '—');
+    setElementText('liveActiveCount', '—');
+    setElementText('heroTotalPulse', '—');
+    setElementText('heroAveragePulse', '—');
+    setElementText('heroActivePulse', '—');
   }
 
   try {

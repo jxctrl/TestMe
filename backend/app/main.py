@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -20,7 +20,6 @@ from app.routers.stats import router as stats_router
 from app.routers.users import router as users_router
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 
 
 @asynccontextmanager
@@ -61,31 +60,6 @@ app.mount("/favicon", StaticFiles(directory=PROJECT_ROOT / "favicon"), name="fav
 
 def _page_response(filename: str) -> FileResponse:
     return FileResponse(PROJECT_ROOT / filename)
-
-
-def _frontend_dist_ready() -> bool:
-    return (FRONTEND_DIST / "index.html").exists()
-
-
-def _frontend_response(path: str = "") -> FileResponse:
-    if not _frontend_dist_ready():
-        raise HTTPException(
-            status_code=404,
-            detail="The React frontend is not built yet. Run `npm install && npm run build` inside /frontend first.",
-        )
-
-    requested_path = path.strip("/")
-    if requested_path:
-        candidate = (FRONTEND_DIST / requested_path).resolve()
-        try:
-            candidate.relative_to(FRONTEND_DIST)
-        except ValueError as exc:
-            raise HTTPException(status_code=404, detail="Not found.") from exc
-
-        if candidate.is_file():
-            return FileResponse(candidate)
-
-    return FileResponse(FRONTEND_DIST / "index.html")
 
 
 @app.get("/", include_in_schema=False)
@@ -131,13 +105,3 @@ def settings_page() -> FileResponse:
 @app.get("/admin.html", include_in_schema=False)
 def admin_page() -> FileResponse:
     return _page_response("admin.html")
-
-
-@app.get("/app", include_in_schema=False)
-def react_app_index() -> FileResponse:
-    return _frontend_response()
-
-
-@app.get("/app/{path:path}", include_in_schema=False)
-def react_app(path: str) -> FileResponse:
-    return _frontend_response(path)
