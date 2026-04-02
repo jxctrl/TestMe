@@ -198,10 +198,12 @@ export default function PlayPage() {
     <div className="stack-page">
       <section className="panel hero-panel">
         <div className="hero-copy">
-          <p className="eyebrow">Quiz runner</p>
-          <h1>{formatMode(mode)} mode</h1>
+          <p className="eyebrow">{isCompetition ? "Competition mode" : "Practice mode"}</p>
+          <h1>{isCompetition ? "Beat the clock." : "Sharpen your accuracy."}</h1>
           <p className="muted-text">
-            The questions in this screen come straight from the FastAPI question endpoint.
+            {isCompetition
+              ? "Every correct answer is worth 1,000 points. Stay calm, move fast, and keep the streak alive."
+              : "Ten-question runs, instant feedback, and a cleaner flow for everyday revision."}
           </p>
         </div>
 
@@ -311,7 +313,7 @@ export default function PlayPage() {
           </h2>
           <p className="muted-text">
             {isCompetition
-              ? "Competition mode stores your total points."
+              ? "Competition mode stores your total points on the ranked board."
               : "Practice mode stores your correct answers out of ten."}
           </p>
 

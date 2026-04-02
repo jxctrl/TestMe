@@ -58,10 +58,10 @@ export default function RegisterPage() {
   return (
     <section className="auth-layout">
       <div className="panel auth-panel">
-        <p className="eyebrow">Launch your account</p>
-        <h1>Create a player profile for the API-backed app.</h1>
+        <p className="eyebrow">Register</p>
+        <h1>Create your account.</h1>
         <p className="muted-text">
-          Create an account with email/password or use Google to start immediately.
+          Register once, then keep your quiz history, best scores, and competition results in one place.
         </p>
 
         <GoogleSignInButton
@@ -75,6 +75,7 @@ export default function RegisterPage() {
             <span>Username</span>
             <input
               autoComplete="username"
+              placeholder="Your name"
               type="text"
               value={formState.username}
               onChange={(event) => setFormState((current) => ({ ...current, username: event.target.value }))}
@@ -87,6 +88,7 @@ export default function RegisterPage() {
             <span>Email</span>
             <input
               autoComplete="email"
+              placeholder="you@example.com"
               type="email"
               value={formState.email}
               onChange={(event) => setFormState((current) => ({ ...current, email: event.target.value }))}
@@ -98,6 +100,7 @@ export default function RegisterPage() {
             <span>Password</span>
             <input
               autoComplete="new-password"
+              placeholder="At least 6 characters"
               type="password"
               value={formState.password}
               onChange={(event) => setFormState((current) => ({ ...current, password: event.target.value }))}
@@ -109,7 +112,7 @@ export default function RegisterPage() {
           {error ? <div className="banner error-banner">{error}</div> : null}
 
           <button className="primary-button" disabled={isSubmitting} type="submit">
-            {isSubmitting ? "Creating account..." : "Register"}
+            {isSubmitting ? "Creating account..." : "Create account"}
           </button>
         </form>
 

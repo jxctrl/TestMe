@@ -54,10 +54,10 @@ export default function LoginPage() {
   return (
     <section className="auth-layout">
       <div className="panel auth-panel">
-        <p className="eyebrow">Welcome back</p>
-        <h1>Login to continue your progress.</h1>
+        <p className="eyebrow">Log in</p>
+        <h1>Welcome back.</h1>
         <p className="muted-text">
-          Your React session uses the same storage keys as the current HTML frontend.
+          Log in to save quiz scores, compete on the leaderboard, and track your progress.
         </p>
 
         <GoogleSignInButton
@@ -71,6 +71,7 @@ export default function LoginPage() {
             <span>Email</span>
             <input
               autoComplete="email"
+              placeholder="you@example.com"
               type="email"
               value={formState.email}
               onChange={(event) => setFormState((current) => ({ ...current, email: event.target.value }))}
@@ -82,6 +83,7 @@ export default function LoginPage() {
             <span>Password</span>
             <input
               autoComplete="current-password"
+              placeholder="Enter your password"
               type="password"
               value={formState.password}
               onChange={(event) => setFormState((current) => ({ ...current, password: event.target.value }))}
@@ -92,7 +94,7 @@ export default function LoginPage() {
           {error ? <div className="banner error-banner">{error}</div> : null}
 
           <button className="primary-button" disabled={isSubmitting} type="submit">
-            {isSubmitting ? "Signing in..." : "Login"}
+            {isSubmitting ? "Signing in..." : "Sign in"}
           </button>
         </form>
 

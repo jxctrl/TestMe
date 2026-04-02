@@ -28,7 +28,7 @@ export default function HomePage() {
         setLeaders(leaderboardResponse.entries || []);
       } catch (loadError) {
         if (active) {
-          setError(loadError.message);
+          setError("Live stats are unavailable right now.");
         }
       }
     }
@@ -41,41 +41,81 @@ export default function HomePage() {
 
   return (
     <div className="stack-page">
-      <section className="hero panel hero-panel">
+      <section className="panel hero-panel home-hero-panel">
         <div className="hero-copy">
-          <p className="eyebrow">Mobile-ready study arena</p>
-          <h1>Study sharper in English or Uzbek, then bring your score into the arena.</h1>
+          <p className="eyebrow">{user ? `Welcome back, ${firstName}` : "Now with competition mode"}</p>
+          <h1>
+            {user ? (
+              <>
+                Ready for another run?
+                <span className="hero-highlight"> Climb the board again.</span>
+              </>
+            ) : (
+              <>
+                Test your knowledge.
+                <span className="hero-highlight"> Beat the clock.</span>
+              </>
+            )}
+          </h1>
           <p className="hero-text">
-            QuizArena now feels at home on Android with quick practice sessions, timed competition rounds,
-            synced progress, and a calmer phone-first layout for everyday revision.
+            Challenge yourself across subjects in English or Uzbek, switch between practice and competition,
+            and keep every score tied to one account.
           </p>
+
           <div className="hero-actions">
             <Link className="primary-button" to={user ? "/play/practice" : "/register"}>
               {user ? "Start practice" : "Create account"}
             </Link>
-            <Link className="ghost-button" to="/play/competition">
-              Jump into competition
+            <Link className="ghost-button" to={user ? "/play/competition" : "/leaderboard"}>
+              {user ? "Enter competition" : "View leaderboard"}
             </Link>
           </div>
-          <div className="hero-pill-row">
-            <span className="mini-pill">6 subjects</span>
-            <span className="mini-pill">Practice + competition</span>
-            <span className="mini-pill">English / Uzbek</span>
+
+          <div className="hero-stats-strip">
+            <article className="hero-stat-tile">
+              <span className="hero-stat-value">6+</span>
+              <span className="hero-stat-label">Subjects</span>
+            </article>
+            <article className="hero-stat-tile">
+              <span className="hero-stat-value">10</span>
+              <span className="hero-stat-label">Questions per run</span>
+            </article>
+            <article className="hero-stat-tile">
+              <span className="hero-stat-value">Live</span>
+              <span className="hero-stat-label">Leaderboard</span>
+            </article>
           </div>
         </div>
 
         <div className="hero-badge-cluster">
-          <div className="spotlight-card accent-card">
-            <span className="spotlight-label">{user ? `Welcome back, ${firstName}` : "Start your first run"}</span>
-            <strong>{user ? "Your profile, scores, and leaderboard progress stay in sync." : "Create an account and keep your quiz history across devices."}</strong>
-          </div>
-          <div className="spotlight-card">
-            <span className="spotlight-label">Arena activity</span>
-            <strong>{stats ? `${stats.total_quizzes_taken} runs recorded` : "Live stats loading..."}</strong>
-          </div>
-          <div className="spotlight-card">
-            <span className="spotlight-label">Mobile build</span>
-            <strong>Native Android wrapper, dedicated mobile bundle, and account-based progress sync.</strong>
+          <article className="spotlight-card accent-card">
+            <span className="spotlight-label">{user ? "Signed in and synced" : "Built for students"}</span>
+            <strong>
+              {user
+                ? "Your scores, history, and profile move with you across web and Android."
+                : "One place for practice, timed competition, and ranked progress."}
+            </strong>
+            <p className="muted-text">
+              {user
+                ? "Jump into a practice run or push for a higher competition score."
+                : "Create an account once and keep every finished run saved."}
+            </p>
+          </article>
+
+          <article className="spotlight-card">
+            <span className="spotlight-label">System snapshot</span>
+            <strong>{stats ? `${stats.total_quizzes_taken} total runs` : "Loading live stats..."}</strong>
+            <p className="muted-text">
+              {stats
+                ? `${stats.active_users_today} active today · ${stats.average_score}% average score`
+                : "The board, activity, and score averages update from the live backend."}
+            </p>
+          </article>
+
+          <div className="hero-pill-row">
+            <span className="mini-pill">English + Uzbek</span>
+            <span className="mini-pill">Practice + competition</span>
+            <span className="mini-pill">FastAPI + mobile sync</span>
           </div>
         </div>
       </section>
@@ -97,58 +137,40 @@ export default function HomePage() {
         </article>
       </section>
 
-      <section className="launch-grid">
-        <article className="panel launch-card">
-          <p className="launch-kicker">Practice mode</p>
-          <h2>Build confidence one question at a time.</h2>
+      <section className="action-grid">
+        <article className="panel action-card">
+          <p className="launch-kicker">Practice</p>
+          <h2>Short runs with instant feedback.</h2>
           <p className="muted-text">
-            Ten-question runs, immediate feedback, and a clean pace for daily review sessions.
+            Move question by question, learn what you missed, and build confidence without timer pressure.
           </p>
-          <Link className="ghost-button" to="/play/practice">
-            Open practice
+          <Link className="ghost-button" to={user ? "/play/practice" : "/register"}>
+            {user ? "Open practice" : "Join now"}
           </Link>
         </article>
 
-        <article className="panel launch-card">
-          <p className="launch-kicker">Competition mode</p>
-          <h2>Turn revision into a fast, timed challenge.</h2>
+        <article className="panel action-card">
+          <p className="launch-kicker">Competition</p>
+          <h2>Timed rounds built for pressure.</h2>
           <p className="muted-text">
-            Race through questions with the ten-second timer and push your total points higher.
+            Every correct answer is worth 1,000 points. Move fast, stay sharp, and chase the top spots.
           </p>
-          <Link className="ghost-button" to="/play/competition">
-            Enter competition
+          <Link className="ghost-button" to={user ? "/play/competition" : "/login"}>
+            {user ? "Enter competition" : "Login to compete"}
           </Link>
         </article>
 
-        <article className="panel launch-card">
-          <p className="launch-kicker">{user ? "Player profile" : "Account setup"}</p>
-          <h2>{user ? "Review your progress, best subjects, and history." : "Save scores, track progress, and return on any device."}</h2>
+        <article className="panel action-card">
+          <p className="launch-kicker">{user ? "Profile" : "Progress"}</p>
+          <h2>{user ? "See your history, best scores, and account details." : "Keep your scores synced across devices."}</h2>
           <p className="muted-text">
             {user
-              ? "Your profile keeps your best scores and completed runs in one place."
-              : "Create an account or continue with Google to keep your runs synced."}
+              ? "Your profile keeps recent runs, subject highs, and account details in one place."
+              : "Create an account once and come back to the same progress from any screen."}
           </p>
           <Link className="ghost-button" to={user ? "/profile" : "/register"}>
-            {user ? "Open profile" : "Create profile"}
+            {user ? "Open profile" : "Get started"}
           </Link>
-        </article>
-      </section>
-
-      <section className="feature-grid">
-        <article className="panel">
-          <p className="eyebrow">Built for study rhythm</p>
-          <h2>Short runs feel natural on a phone screen.</h2>
-          <p className="muted-text">
-            The Android-friendly layout keeps the app fast to scan, easy to tap, and ready for
-            repeat practice sessions during small breaks.
-          </p>
-        </article>
-        <article className="panel">
-          <p className="eyebrow">Progress that sticks</p>
-          <h2>Accounts, stats, and leaderboard position travel with you.</h2>
-          <p className="muted-text">
-            Sign in once, keep your profile synced, and move between web and Android without losing momentum.
-          </p>
         </article>
       </section>
 
