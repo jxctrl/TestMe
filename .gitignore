@@ -1,3 +1,4 @@
+node_modules/
 __pycache__/
 .pytest_cache/
 .venv/
@@ -6,3 +7,6 @@ quiz_arena.db
 backend/.alembic_cache/
 frontend/node_modules/
 frontend/dist/
+frontend/dist-mobile/
+frontend/android/.gradle/
+frontend/android/local.properties

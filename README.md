@@ -120,6 +120,8 @@ npm run dev
 
 The Vite dev server proxies API calls to `http://127.0.0.1:8000`.
 When you build with `npm run build`, FastAPI serves the React app from `/app`.
+When you build with `npm run build:mobile`, Capacitor uses `frontend/dist-mobile` for the native Android app.
+Run `./setup-mobile.sh` from the repo root to build and sync the Android project.
 
 ---
 
