@@ -2,6 +2,8 @@ node_modules/
 __pycache__/
 .pytest_cache/
 .venv/
+.env.local
+frontend/.env.local
 *.pyc
 quiz_arena.db
 backend/.alembic_cache/
