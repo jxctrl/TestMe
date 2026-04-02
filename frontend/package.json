@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:mobile": "vite build --mode mobile",
+    "build:mobile": "node ./scripts/build-mobile-static.mjs",
+    "build:mobile:react": "vite build --mode mobile",
     "preview": "vite preview"
   },
   "dependencies": {
