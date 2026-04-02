@@ -11,8 +11,21 @@ import PlayPage from "./pages/PlayPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 
+function normalizeRouterBasename(value) {
+  const trimmed = value.trim();
+
+  if (!trimmed || trimmed === "/") {
+    return "/";
+  }
+
+  return `/${trimmed.replace(/^\/+|\/+$/g, "")}`;
+}
+
 export default function App() {
-  const routerBasename = import.meta.env.DEV ? "/" : "/app";
+  const configuredBasePath = (import.meta.env.VITE_APP_BASE_PATH || "").trim();
+  const routerBasename = normalizeRouterBasename(
+    configuredBasePath || (import.meta.env.DEV ? "/" : "/app")
+  );
 
   return (
     <BrowserRouter basename={routerBasename}>

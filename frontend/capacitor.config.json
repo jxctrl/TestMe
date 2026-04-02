@@ -1,0 +1,9 @@
+{
+  "appId": "com.jxctrl.quizarena",
+  "appName": "QuizArena",
+  "webDir": "dist-mobile",
+  "server": {
+    "hostname": "localhost",
+    "androidScheme": "https"
+  }
+}

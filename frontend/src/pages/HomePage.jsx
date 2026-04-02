@@ -65,7 +65,7 @@ export default function HomePage() {
           </div>
           <div className="spotlight-card">
             <span className="spotlight-label">Routing</span>
-            <strong>FastAPI serves the SPA at `/app` after build</strong>
+            <strong>Web builds live at `/app`; mobile builds ship as a native bundle</strong>
           </div>
           <div className="spotlight-card">
             <span className="spotlight-label">Developer flow</span>
