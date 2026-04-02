@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -21,7 +22,15 @@ from app.routers.users import router as users_router
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 FRONTEND_DIST = PROJECT_ROOT / "frontend" / "dist"
 
-app = FastAPI(title=settings.app_name, version="1.0.0")
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    if settings.auto_create_tables:
+        Base.metadata.create_all(bind=engine)
+    yield
+
+
+app = FastAPI(title=settings.app_name, version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -38,12 +47,6 @@ app.include_router(leaderboard_router)
 app.include_router(stats_router)
 app.include_router(users_router)
 app.include_router(admin_router)
-
-
-@app.on_event("startup")
-def on_startup() -> None:
-    if settings.auto_create_tables:
-        Base.metadata.create_all(bind=engine)
 
 
 @app.get("/health", include_in_schema=False)

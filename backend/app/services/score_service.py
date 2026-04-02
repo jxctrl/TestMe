@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import UTC, datetime
 
-from app import db
 from sqlalchemy import case, desc, distinct, func, select
 from sqlalchemy.orm import Session
 
