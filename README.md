@@ -50,6 +50,7 @@ QuizArena is a quiz platform I built for students preparing for exams. It starte
 
 **User Accounts**
 - Register and log in
+- Google sign-in with the Google account chooser
 - Persistent score history and leaderboard
 - Profile page with badges, stats, and progress tracking
 - Avatar upload and account settings
@@ -119,6 +120,8 @@ python -m venv .venv
 cp .env.example .env
 cp frontend/.env.example frontend/.env.local
 ```
+
+Set `GOOGLE_CLIENT_ID` in `.env` and `VITE_GOOGLE_CLIENT_ID` in `frontend/.env.local` if you want Google sign-in enabled.
 
 **Backend**
 ```bash

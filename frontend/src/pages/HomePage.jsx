@@ -8,6 +8,7 @@ export default function HomePage() {
   const [stats, setStats] = useState(null);
   const [leaders, setLeaders] = useState([]);
   const [error, setError] = useState("");
+  const firstName = user?.username?.split(/\s+/)[0] || "Player";
 
   useEffect(() => {
     let active = true;
@@ -42,34 +43,39 @@ export default function HomePage() {
     <div className="stack-page">
       <section className="hero panel hero-panel">
         <div className="hero-copy">
-          <p className="eyebrow">Full-stack foundation</p>
-          <h1>React now has a dedicated home in QuizArena.</h1>
+          <p className="eyebrow">Mobile-ready study arena</p>
+          <h1>Study sharper in English or Uzbek, then bring your score into the arena.</h1>
           <p className="hero-text">
-            This app is wired to FastAPI routes for authentication, question delivery,
-            score submission, leaderboards, stats, and admin workflows.
+            QuizArena now feels at home on Android with quick practice sessions, timed competition rounds,
+            synced progress, and a calmer phone-first layout for everyday revision.
           </p>
           <div className="hero-actions">
             <Link className="primary-button" to={user ? "/play/practice" : "/register"}>
               {user ? "Start practice" : "Create account"}
             </Link>
-            <Link className="ghost-button" to="/leaderboard">
-              View leaderboard
+            <Link className="ghost-button" to="/play/competition">
+              Jump into competition
             </Link>
+          </div>
+          <div className="hero-pill-row">
+            <span className="mini-pill">6 subjects</span>
+            <span className="mini-pill">Practice + competition</span>
+            <span className="mini-pill">English / Uzbek</span>
           </div>
         </div>
 
         <div className="hero-badge-cluster">
-          <div className="spotlight-card">
-            <span className="spotlight-label">Backend coverage</span>
-            <strong>Auth, scores, stats, questions, admin</strong>
+          <div className="spotlight-card accent-card">
+            <span className="spotlight-label">{user ? `Welcome back, ${firstName}` : "Start your first run"}</span>
+            <strong>{user ? "Your profile, scores, and leaderboard progress stay in sync." : "Create an account and keep your quiz history across devices."}</strong>
           </div>
           <div className="spotlight-card">
-            <span className="spotlight-label">Routing</span>
-            <strong>Web builds live at `/app`; mobile builds ship as a native bundle</strong>
+            <span className="spotlight-label">Arena activity</span>
+            <strong>{stats ? `${stats.total_quizzes_taken} runs recorded` : "Live stats loading..."}</strong>
           </div>
           <div className="spotlight-card">
-            <span className="spotlight-label">Developer flow</span>
-            <strong>Vite dev server proxies API calls to FastAPI</strong>
+            <span className="spotlight-label">Mobile build</span>
+            <strong>Native Android wrapper, dedicated mobile bundle, and account-based progress sync.</strong>
           </div>
         </div>
       </section>
@@ -91,21 +97,57 @@ export default function HomePage() {
         </article>
       </section>
 
+      <section className="launch-grid">
+        <article className="panel launch-card">
+          <p className="launch-kicker">Practice mode</p>
+          <h2>Build confidence one question at a time.</h2>
+          <p className="muted-text">
+            Ten-question runs, immediate feedback, and a clean pace for daily review sessions.
+          </p>
+          <Link className="ghost-button" to="/play/practice">
+            Open practice
+          </Link>
+        </article>
+
+        <article className="panel launch-card">
+          <p className="launch-kicker">Competition mode</p>
+          <h2>Turn revision into a fast, timed challenge.</h2>
+          <p className="muted-text">
+            Race through questions with the ten-second timer and push your total points higher.
+          </p>
+          <Link className="ghost-button" to="/play/competition">
+            Enter competition
+          </Link>
+        </article>
+
+        <article className="panel launch-card">
+          <p className="launch-kicker">{user ? "Player profile" : "Account setup"}</p>
+          <h2>{user ? "Review your progress, best subjects, and history." : "Save scores, track progress, and return on any device."}</h2>
+          <p className="muted-text">
+            {user
+              ? "Your profile keeps your best scores and completed runs in one place."
+              : "Create an account or continue with Google to keep your runs synced."}
+          </p>
+          <Link className="ghost-button" to={user ? "/profile" : "/register"}>
+            {user ? "Open profile" : "Create profile"}
+          </Link>
+        </article>
+      </section>
+
       <section className="feature-grid">
         <article className="panel">
-          <p className="eyebrow">Player flows</p>
-          <h2>Practice and competition are API-backed.</h2>
+          <p className="eyebrow">Built for study rhythm</p>
+          <h2>Short runs feel natural on a phone screen.</h2>
           <p className="muted-text">
-            Questions load from the backend, practice scores submit as `0-10`, and
-            competition runs submit in `1000-point` increments.
+            The Android-friendly layout keeps the app fast to scan, easy to tap, and ready for
+            repeat practice sessions during small breaks.
           </p>
         </article>
         <article className="panel">
-          <p className="eyebrow">Profile support</p>
-          <h2>Session-aware pages share login state with the legacy site.</h2>
+          <p className="eyebrow">Progress that sticks</p>
+          <h2>Accounts, stats, and leaderboard position travel with you.</h2>
           <p className="muted-text">
-            The React app uses the same browser storage keys as your existing HTML pages,
-            so session state stays aligned during migration.
+            Sign in once, keep your profile synced, and move between web and Android without losing momentum.
           </p>
         </article>
       </section>
@@ -114,7 +156,7 @@ export default function HomePage() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Leaderboard preview</p>
-            <h2>Top performers</h2>
+            <h2>Top performers in the arena</h2>
           </div>
           <Link className="ghost-button" to="/leaderboard">
             Open full board

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 import { useAuth } from "../context/AuthContext";
 
 function getRedirectTarget(searchParams) {
@@ -8,7 +9,7 @@ function getRedirectTarget(searchParams) {
 }
 
 export default function LoginPage() {
-  const { initialized, isAuthenticated, login } = useAuth();
+  const { initialized, isAuthenticated, login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -36,6 +37,20 @@ export default function LoginPage() {
     }
   }
 
+  async function handleGoogleSignIn(credential) {
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      await loginWithGoogle(credential);
+      navigate(getRedirectTarget(searchParams), { replace: true });
+    } catch (submitError) {
+      setError(submitError.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section className="auth-layout">
       <div className="panel auth-panel">
@@ -44,6 +59,12 @@ export default function LoginPage() {
         <p className="muted-text">
           Your React session uses the same storage keys as the current HTML frontend.
         </p>
+
+        <GoogleSignInButton
+          disabled={isSubmitting}
+          onCredential={handleGoogleSignIn}
+          onError={(scriptError) => setError(scriptError.message)}
+        />
 
         <form className="form-grid" onSubmit={handleSubmit}>
           <label className="field">

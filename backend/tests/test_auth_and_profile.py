@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import app.routers.auth as auth_router
+from app.core.config import settings
+
 
 def register_user(client, *, username: str, email: str, password: str = "password123") -> dict[str, object]:
     response = client.post(
@@ -61,3 +64,32 @@ def test_register_login_and_profile_flow(client) -> None:
     )
     assert duplicate.status_code == 400
     assert duplicate.json()["detail"] == "A user with that email or username already exists."
+
+
+def test_google_login_creates_and_reuses_account(client, monkeypatch) -> None:
+    monkeypatch.setattr(settings, "google_client_id", "google-client-id")
+    credential = "google-id-token-value-12345"
+
+    def fake_verify_google_credential(credential: str, *, expected_client_id: str) -> dict[str, str]:
+        assert credential == "google-id-token-value-12345"
+        assert expected_client_id == "google-client-id"
+        return {
+            "email": "googleuser@example.com",
+            "name": "Google User",
+            "picture": "https://example.com/avatar.png",
+        }
+
+    monkeypatch.setattr(auth_router, "verify_google_credential", fake_verify_google_credential)
+
+    created = client.post("/auth/google", json={"credential": credential})
+    assert created.status_code == 200, created.text
+    created_payload = created.json()
+    assert created_payload["user"]["email"] == "googleuser@example.com"
+    assert created_payload["user"]["username"] == "GoogleUser"
+    assert created_payload["user"]["avatar_url"] == "https://example.com/avatar.png"
+
+    repeated = client.post("/auth/google", json={"credential": credential})
+    assert repeated.status_code == 200, repeated.text
+    repeated_payload = repeated.json()
+    assert repeated_payload["user"]["id"] == created_payload["user"]["id"]
+    assert repeated_payload["user"]["email"] == created_payload["user"]["email"]

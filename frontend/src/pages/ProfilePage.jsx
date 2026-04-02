@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { formatMode, formatScore, formatSubject } from "../lib/content";
 
+function getInitials(name) {
+  return (name || "QA")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() || "")
+    .join("");
+}
+
 export default function ProfilePage() {
   const { refreshProfile } = useAuth();
   const [profile, setProfile] = useState(null);
@@ -52,11 +61,23 @@ export default function ProfilePage() {
 
   return (
     <div className="stack-page">
-      <section className="panel hero-panel">
-        <div className="hero-copy">
-          <p className="eyebrow">Player profile</p>
-          <h1>{profile.username}</h1>
-          <p className="muted-text">{profile.email}</p>
+      <section className="panel profile-hero">
+        <div className="profile-identity">
+          {profile.avatar_url ? (
+            <img alt="" className="profile-avatar" src={profile.avatar_url} />
+          ) : (
+            <div className="profile-avatar profile-avatar-fallback">{getInitials(profile.username)}</div>
+          )}
+
+          <div className="hero-copy">
+            <p className="eyebrow">Player profile</p>
+            <h1>{profile.username}</h1>
+            <p className="muted-text">{profile.email}</p>
+            <div className="profile-meta">
+              <span className="mini-pill">{profile.is_admin ? "Admin access" : "Player account"}</span>
+              <span className="mini-pill">{profile.stats.total_quizzes_taken} runs logged</span>
+            </div>
+          </div>
         </div>
 
         <div className="hero-badge-cluster">
@@ -121,10 +142,10 @@ export default function ProfilePage() {
               <tbody>
                 {profile.score_history.map((item) => (
                   <tr key={item.id}>
-                    <td>{formatSubject(item.subject)}</td>
-                    <td>{formatMode(item.mode)}</td>
-                    <td>{formatScore(item.mode, item.score)}</td>
-                    <td>{new Date(item.completed_at).toLocaleString()}</td>
+                    <td data-label="Subject">{formatSubject(item.subject)}</td>
+                    <td data-label="Mode">{formatMode(item.mode)}</td>
+                    <td data-label="Score">{formatScore(item.mode, item.score)}</td>
+                    <td data-label="Completed">{new Date(item.completed_at).toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>

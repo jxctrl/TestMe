@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 import { useAuth } from "../context/AuthContext";
 
 function getRedirectTarget(searchParams) {
@@ -8,7 +9,7 @@ function getRedirectTarget(searchParams) {
 }
 
 export default function RegisterPage() {
-  const { initialized, isAuthenticated, register } = useAuth();
+  const { initialized, isAuthenticated, loginWithGoogle, register } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [formState, setFormState] = useState({
@@ -40,14 +41,34 @@ export default function RegisterPage() {
     }
   }
 
+  async function handleGoogleSignIn(credential) {
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      await loginWithGoogle(credential);
+      navigate(getRedirectTarget(searchParams), { replace: true });
+    } catch (submitError) {
+      setError(submitError.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <section className="auth-layout">
       <div className="panel auth-panel">
         <p className="eyebrow">Launch your account</p>
         <h1>Create a player profile for the API-backed app.</h1>
         <p className="muted-text">
-          Registration issues a backend token immediately, so new users can start a run right away.
+          Create an account with email/password or use Google to start immediately.
         </p>
+
+        <GoogleSignInButton
+          disabled={isSubmitting}
+          onCredential={handleGoogleSignIn}
+          onError={(scriptError) => setError(scriptError.message)}
+        />
 
         <form className="form-grid" onSubmit={handleSubmit}>
           <label className="field">
