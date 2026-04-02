@@ -110,7 +110,7 @@ async function writeMobileConfig() {
   const env = (await pathExists(envFile))
     ? parseEnvFile(await readFile(envFile, "utf8"))
     : {};
-  const apiBaseUrl = (env.VITE_API_BASE_URL || "").trim().replace(/\/$/, "");
+  const apiBaseUrl = (env.QUIZARENA_API_BASE_URL || env.VITE_API_BASE_URL || "").trim().replace(/\/$/, "");
   const content = [
     "window.__QUIZARENA_CONFIG__ = Object.assign({}, window.__QUIZARENA_CONFIG__, {",
     `  apiBaseUrl: ${JSON.stringify(apiBaseUrl)}`,
