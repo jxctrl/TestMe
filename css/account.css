@@ -527,6 +527,49 @@
   color: var(--muted);
 }
 
+/* Form submit buttons */
+.account-form button[type="submit"],
+.stacked-form button[type="submit"] {
+  width: 100%;
+  min-height: 52px;
+  background: var(--accent);
+  color: #0a0a0f;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.account-form button[type="submit"]:hover,
+.stacked-form button[type="submit"]:hover {
+  background: var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+.account-form button[type="submit"]:active,
+.stacked-form button[type="submit"]:active {
+  background: var(--accent-dim);
+  transform: scale(0.985);
+}
+
+/* Mobile form input font-size protection (prevent auto-zoom on iOS/Android) */
+@media (max-width: 768px) {
+  .account-form input,
+  .account-form textarea,
+  .account-form select,
+  .stacked-form input,
+  .stacked-form textarea,
+  .stacked-form select {
+    font-size: max(16px, 1rem);
+  }
+}
+
 .form-message {
   min-height: 22px;
   font-size: 14px;
@@ -1272,6 +1315,97 @@
   .admin-table {
     min-width: 620px;
   }
+}
+
+/* Profile and dashboard responsive improvements */
+@media (max-width: 640px) {
+  .dashboard-stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-stat-card {
+    min-width: 0;
+  }
+}
+
+/* Score history table scrolling on small screens */
+@media (max-width: 640px) {
+  .score-history-wrapper,
+  .history-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .score-history-table,
+  .history-table {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  .score-history-table td,
+  .history-table td {
+    white-space: nowrap;
+    padding: 10px;
+  }
+
+  .score-history-date,
+  .history-date {
+    white-space: nowrap;
+  }
+}
+
+/* Profile tab buttons horizontal scroll */
+@media (max-width: 640px) {
+  .dashboard-nav-strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+
+  .dashboard-tab {
+    scroll-snap-align: start;
+  }
+}
+
+/* Settings avatar preview sizing */
+@media (max-width: 520px) {
+  .settings-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    font-size: 48px;
+    margin: 0 auto;
+  }
+
+  .settings-selected-file {
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+/* Admin table responsive */
+@media (max-width: 640px) {
+  .admin-question-table,
+  .admin-users-table {
+    min-width: 650px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-question-table tbody td,
+  .admin-users-table tbody td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
+
+/* Admin textarea sizing */
+.admin-question-en-input,
+.admin-question-uz-input,
+.stacked-form textarea {
+  min-height: 80px;
 }
 
 @media (hover: none), (pointer: coarse) {

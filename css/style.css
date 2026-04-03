@@ -35,8 +35,9 @@ body {
   font-family: 'DM Sans', sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
   -webkit-tap-highlight-color: rgba(200, 241, 53, 0.12);
+  touch-action: manipulation;
 }
 
 /* =====================
@@ -81,7 +82,7 @@ body {
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 100;
+  z-index: 200;
   padding: calc(18px + var(--safe-top)) 48px 18px;
   display: flex;
   align-items: center;
@@ -130,6 +131,7 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   transition: background 0.2s, transform 0.2s;
+  touch-action: manipulation;
 }
 .nav-cta:hover {
   background: var(--accent-dim);
