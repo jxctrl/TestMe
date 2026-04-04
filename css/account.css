@@ -527,6 +527,40 @@
   color: var(--muted);
 }
 
+.social-auth {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+.social-auth-divider {
+  position: relative;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.social-auth-divider::before,
+.social-auth-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 34%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.social-auth-divider::before { left: 0; transform: translateY(-50%); }
+.social-auth-divider::after { right: 0; transform: translateY(-50%); }
+
+#googleButtonContainer {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
 /* Form submit buttons */
 .account-form button[type="submit"],
 .stacked-form button[type="submit"] {

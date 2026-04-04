@@ -19,10 +19,12 @@
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
   <a href="#home" data-i18n="navHome">Home</a>
   <a href="#subjects" data-i18n="navSubjects">Subjects</a>
   <a href="#modes" data-i18n="navModes">Modes</a>
   <a href="#contact" data-i18n="navContact">Contact</a>
+  <div class="nav-user-links" id="navUserActionsMobile"></div>
 </div>
 
 <nav id="navbar">
@@ -34,7 +36,7 @@
     <li><a href="#contact" data-i18n="navContact">Contact</a></li>
   </ul>
   <div class="nav-actions">
-    <div class="nav-user-links" id="navUserActions"></div>
+    <div class="nav-user-links" id="navUserActionsDesktop"></div>
     <a href="#subjects" class="nav-cta" data-i18n="navCta">Start Test →</a>
   </div>
   <div class="menu-btn" id="menuBtn" role="button" tabindex="0" aria-label="Open mobile menu" aria-expanded="false">
@@ -93,7 +95,7 @@
             <span data-i18n="heroPanelRuns">all-time runs</span>
           </div>
           <div class="hero-stage-mini-card">
-            <strong data-i18n="heroPanelLanguagesValue">EN / UZ</strong>
+            <strong id="heroPanelLanguagesValueDisplay">EN / UZ</strong>
             <span data-i18n="heroPanelLanguages">bilingual</span>
           </div>
         </div>

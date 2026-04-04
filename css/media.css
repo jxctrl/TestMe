@@ -1,59 +1,53 @@
 /* =====================
    RESPONSIVE / MEDIA
+   All breakpoints in one place, ordered large → small.
+   style.css handles desktop. This file handles everything below 1100px.
    ===================== */
 
-/* Supplemental home-page refinements layered on top of style.css. */
-@media (max-width: 1024px) {
-  .modes-grid { gap: 16px; }
-  .mode-card { padding: 36px; }
-}
-
-@media (max-width: 480px) {
-  .hero h1 { letter-spacing: -1px; }
-  .stat-num { font-size: 24px; }
-}
-
+/* ── 1100px: Tablet landscape ─────────────────────────────── */
 @media (max-width: 1100px) {
   nav { padding: 14px 22px; }
+
   .hero { padding: 100px 24px 70px; }
   .hero-shell { grid-template-columns: 1fr; gap: 24px; }
   .hero-content { max-width: 100%; }
   .hero-stage { max-width: 100%; }
+
   .section { padding: 80px 24px; }
   .contact-grid, .how-grid, .modes-grid, .live-shell { gap: 20px; }
   .subjects-grid { gap: 16px; }
 }
 
+/* ── 900px: Tablet portrait — hamburger appears ────────────── */
 @media (max-width: 900px) {
+  /* NAV becomes floating pill */
   nav {
     top: max(12px, var(--safe-top));
     left: 12px;
     right: 12px;
-    padding: 12px 14px;
+    padding: 10px 14px;
     border-radius: 22px;
     border: 1px solid rgba(73, 86, 131, 0.3);
-    background: rgba(10, 10, 15, 0.82);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+    background: rgba(10, 10, 15, 0.88);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
   nav.scrolled { border-bottom: none; }
   .nav-links { display: none; }
-  .menu-btn { display: flex; }
   .nav-cta { display: none; }
+  .menu-btn { display: flex; }
   .nav-actions {
     margin-left: auto;
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    flex-wrap: nowrap;
   }
-  .nav-user-links { justify-content: flex-end; flex: 0 1 auto; }
+  .nav-actions .nav-user-links { display: none; }
   .user-menu-name { display: none; }
   .user-menu-trigger { padding-right: 10px; }
-  .nav-actions .lang-btn { margin-right: 0; }
-  .mobile-menu { display: none; }
 
+  /* HERO */
   .hero { padding: 90px 18px 60px; }
   .hero-stats {
     display: grid;
@@ -71,44 +65,58 @@
     background: rgba(15, 19, 31, 0.78);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   }
-  .hero-stage-head { grid-template-columns: minmax(0, 1fr) 120px; }
-  .hero-stage-ring { width: 120px; height: 120px; }
+  .hero-stage-head { grid-template-columns: minmax(0, 1fr) 160px; }
+  .hero-stage-ring { width: 160px; height: 160px; }
   .hero-route-grid { grid-template-columns: 1fr 1fr; }
+
+  /* SECTIONS */
   .how-grid, .modes-grid, .live-shell { grid-template-columns: 1fr; }
   .subjects-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 24px; }
   .contact-form .form-row { grid-template-columns: 1fr; }
-  footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
   .footer-links { flex-wrap: wrap; gap: 12px; }
 }
 
+/* ── 768px: Large phones ───────────────────────────────────── */
 @media (max-width: 768px) {
   .hero h1 { font-size: clamp(34px, 10vw, 54px); }
   .hero p { font-size: 16px; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-  .hero-stage-head { grid-template-columns: 1fr; }
-  .hero-stage-ring { width: 108px; height: 108px; }
+
+  .hero-stage-head { grid-template-columns:  minmax(0, 1fr) 140px; }
+  .hero-stage-ring { width: 140px; height: 140px; }
   .hero-stage-kpi { font-size: 42px; }
   .hero-stage-mini-grid,
   .hero-route-grid { grid-template-columns: 1fr; }
   .hero-route-card { min-height: 0; }
-  .preview-wrapper, .quiz-container { width: 100%; padding: 0 12px; }
+
+  .preview-wrapper, .quiz-container { width: 100%; padding: 0; }
   .preview-options { grid-template-columns: 1fr; }
+
   .live-overview, .live-board { padding: 24px; }
   .live-metrics { grid-template-columns: 1fr; }
   .live-board-head { flex-direction: column; align-items: flex-start; }
+
   .leader-row { grid-template-columns: 42px minmax(0, 1fr) auto; padding: 12px 14px; }
   .leader-rank { width: 42px; height: 42px; }
   .leader-score-value { font-size: 24px; }
+
   .how-step, .mode-card, .subject-card { padding: 24px; }
   .how-step { min-height: auto; }
 }
 
+/* ── 520px: Common Android phones (e.g. 390px logical width) ── */
 @media (max-width: 520px) {
   nav { padding: 10px 12px; }
-  .user-menu-panel { width: min(240px, calc(100vw - 24px)); }
-  .hero { padding: 80px 12px 56px; }
+
+  .hero { padding: 90px 12px 56px; }
   .hero-badge { font-size: 11px; padding: 5px 10px; }
   .hero h1 { line-height: 1.1; }
   .hero-stage-card { border-radius: 24px; }
@@ -116,14 +124,29 @@
   .hero-stage-secondary { padding: 10px; }
   .hero-stage-topline { align-items: flex-start; flex-direction: column; }
   .hero-stage-chip { min-height: 32px; }
-  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+
   .live-section { padding-top: 16px; }
   .live-status { font-size: 10px; }
   .live-board-title { font-size: 24px; }
   .leader-name { font-size: 16px; }
+
   .subjects-grid, .modes-grid { grid-template-columns: 1fr; }
   .subject-card { padding: 20px; }
-  .contact-form .form-group input, .contact-form .form-group textarea { font-size: 14px; padding: 12px; }
-  .form-submit { padding: 14px; }
-  .mobile-menu { padding: 90px 16px 30px; }
+
+  .contact-form .form-group input,
+  .contact-form .form-group textarea { font-size: 16px; padding: 14px 12px; }
+  .form-submit { padding: 14px; min-height: 52px; font-size: 16px; }
+
+  .user-menu-panel { width: min(240px, calc(100vw - 24px)); }
+  .stat-num { font-size: 24px; }
+}
+
+/* ── 380px: Very small Androids ────────────────────────────── */
+@media (max-width: 380px) {
+  nav { padding: 10px 10px; }
+  .nav-logo { font-size: 19px; }
+  .lang-btn { padding: 8px 10px; font-size: 12px; }
+  .hero { padding: 90px 10px 48px; }
+  .hero-stats { grid-template-columns: 1fr; }
 }
