@@ -76,3 +76,8 @@ def google_auth(payload: GoogleAuthRequest, db: Session = Depends(get_db)) -> To
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
 
     return build_token_response(user)
+
+
+@router.get("/config")
+def auth_config() -> dict[str, str]:
+    return {"google_client_id": settings.google_client_id}

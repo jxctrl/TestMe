@@ -1,5 +1,5 @@
 {
   "appId": "com.jxctrl.quizarena",
   "appName": "QuizArena",
-  "webDir": "dist"
+  "webDir": "dist-mobile"
 }

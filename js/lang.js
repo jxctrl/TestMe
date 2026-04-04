@@ -238,6 +238,7 @@ const TRANSLATIONS = {
     registerDesc: "Register once, then keep your quiz history, best scores, and competition results in one place.",
     authEmailLabel: "Email",
     authPasswordLabel: "Password",
+    authOr: "or",
     authUsernameLabel: "Username",
     loginSubmit: "Log In",
     registerSubmit: "Create Account",
@@ -578,6 +579,7 @@ const TRANSLATIONS = {
     registerDesc: "Bir marta ro'yxatdan o'ting va test tarixingiz, eng yaxshi natijalaringiz hamda musobaqa ballaringizni bir joyda saqlang.",
     authEmailLabel: "Email",
     authPasswordLabel: "Parol",
+    authOr: "yoki",
     authUsernameLabel: "Foydalanuvchi nomi",
     loginSubmit: "Kirish",
     registerSubmit: "Akkaunt yaratish",
@@ -702,6 +704,11 @@ function setLanguage(lang) {
   document.querySelectorAll('[data-language-select]').forEach((select) => {
     select.value = lang;
   });
+  
+  const langDisplay = document.getElementById('heroPanelLanguagesValueDisplay');
+  if (langDisplay) {
+    langDisplay.textContent = lang === 'en' ? 'EN / UZ' : 'EN / UZ';
+  }
 
   if (typeof handleLanguageChange === 'function') {
     handleLanguageChange();
@@ -710,6 +717,23 @@ function setLanguage(lang) {
 
 function toggleLanguage() {
   setLanguage(currentLang === 'en' ? 'uz' : 'en');
+}
+
+function initLanguageToggle() {
+  const langDisplay = document.getElementById('heroPanelLanguagesValueDisplay');
+  if (langDisplay) {
+    langDisplay.style.cursor = 'pointer';
+    langDisplay.style.userSelect = 'none';
+    langDisplay.title = 'Click to change language';
+    langDisplay.addEventListener('click', toggleLanguage);
+  }
+}
+
+// Initialize language toggle on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanguageToggle);
+} else {
+  initLanguageToggle();
 }
 
 // Auto-apply on page load

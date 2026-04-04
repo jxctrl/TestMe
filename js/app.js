@@ -44,7 +44,27 @@ if (menuBtn && mobileMenu) {
       menuBtn.classList.remove('active');
       mobileMenu.classList.remove('open');
       document.body.classList.remove('no-scroll');
+      menuBtn.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', () => {
+      menuBtn.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      menuBtn.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
@@ -179,13 +199,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (window.authClient.isAuthenticated()) {
     await window.authClient.fetchCurrentUser();
   }
-  window.authClient.renderUserActions('navUserActions');
+  window.authClient.renderUserActions('navUserActionsDesktop');
+  window.authClient.renderUserActions('navUserActionsMobile');
   loadLiveData();
 });
 
 window.handleLanguageChange = function handleHomeLanguageChange() {
   resetPreviewState();
-  window.authClient.renderUserActions('navUserActions');
+  window.authClient.renderUserActions('navUserActionsDesktop');
+  window.authClient.renderUserActions('navUserActionsMobile');
   loadLiveData();
 };
 
